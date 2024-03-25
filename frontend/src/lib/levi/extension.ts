@@ -12,7 +12,16 @@ declare global {
          * removes that item and returns its former index, if it is not found, returns -1
          *
          * method added by the jsx runtime */
-        remove(item: T, fromIndex?: number): number
+        remove(item: T, fromIndex?: number): number;
+        /**
+         * does the same as the map function of the array but handles stateful arrays in a special way
+         *
+         * if this is a stateful array, returns a stateful array that updates automatically with the values of the original
+         *
+         * when the values of the original array change, the map function is called on the added values
+         *
+         * method added by the jsx runtime */
+        thenMap<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
     }
     interface Element {
         /** finds the first ancestor of an element that passes a filter
@@ -55,6 +64,7 @@ declare global {
 }
 
 Array.prototype.remove = remove;
+Array.prototype.thenMap = Array.prototype.map;
 Element.prototype.findParent = findParent;
 Element.prototype.findForward = findForward;
 Element.prototype.focusForward = focusForward;

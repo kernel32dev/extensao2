@@ -7,7 +7,7 @@ export function App(): Elems {
     const socket = new WebSocket(
         `ws://localhost:8080/start_web_socket?username=${myUsername}`,
     );
-    
+
     socket.onmessage = m => {
         const data = JSON.parse(m.data);
         switch (data.event) {
@@ -26,15 +26,15 @@ export function App(): Elems {
                 <b>Users</b>
                 <hr />
                 <div>
-                    {usernames.then(x => x.map(name => <div>{name}</div>))}
+                    {usernames.thenMap(name => <div>{name}</div>)}
                 </div>
-                <hr class="visible-xs visible-sm" />
+                <hr />
             </div>
             <div>
                 <input id="data" placeholder="send message" onKeyDown={handleEnter} />
                 <hr />
                 <div>
-                    {conversation.then(x => x.map(({username, message}) => <><b>{username}</b>: {message}<br/></>))}
+                    {conversation.thenMap(x => <><b>{x.username}</b>: {x.message}<br/></>)}
                 </div>
             </div>
         </div>

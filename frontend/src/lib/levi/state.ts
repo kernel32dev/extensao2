@@ -68,6 +68,32 @@ export class State<T> {
         });
         return derived;
     }
+    thenMap<U>(callbackfn: (value: T extends any[] ? T[number] : never, index: number, array: T) => U, thisArg?: any): State<U[]> {
+        let mapped_state = new State((this[sym_value] as T & any[]).map(callbackfn as any, thisArg)) as State<U[]>;
+        this[sym_triggers].push((source, mut) => {
+            let mapped = mapped_state[sym_value];
+            if (!Array.isArray(source)) {
+                mapped.splice(0, mapped.length);
+            } else if (mut instanceof ArrayMutation && mut.path.length === 0) {
+                let insert = Array(mut.insert.length);
+                for (let i = 0; i < insert.length; i++) {
+                    insert[i] = callbackfn.call(thisArg, source[i + mut.index], i + mut.index, source);
+                }
+                mapped.splice(mut.index, mut.remove.length, ...insert as U[]);
+            } else if (typeof mut.path[0] === "number") {
+                let index = mut.path[0];
+                let insert = callbackfn.call(thisArg, source[index], index, source);
+                mapped.splice(index, 1, insert);
+            } else {
+                let insert = Array(source.length);
+                for (let i = 0; i < source.length; i++) {
+                    insert[i] = callbackfn.call(thisArg, source[i], i, source);
+                }
+                mapped.splice(0, mapped.length, ...insert as U[]);
+            }
+        });
+        return mapped_state;
+    }
     /** removes a handler that was added with `on` or `do` */
     dont(handler: Handler<T>) {
         let handlers = this[sym_triggers];
@@ -678,6 +704,19 @@ export class StateArray<T> extends Array<T> implements StateMeta<StateArray<T>> 
         let removed = super.splice.call(unwrap_proxy(this), start, deleteCount || 0, ...items);
         trigger(this, new ArrayMutation(this, start, items, removed));
         return removed;
+    }
+
+    override thenMap<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[] {
+        let mapped = wrap(super.map.call(unwrap_proxy(this), callbackfn, thisArg), null) as StateArray<U>;
+        this[sym_triggers].push((state, mut) => {
+            if (mut instanceof ArrayMutation && mut.target === state) {
+                for (let i = mut.index; i < mut.index + mut.insert.length; i++) {
+                    mut.insert[i] = callbackfn.call(thisArg, state[i], i, state);
+                }
+                mapped.splice(mut.index, mut.remove.length, ...mut.insert as U[]);
+            }
+        });
+        return mapped;
     }
 }
 

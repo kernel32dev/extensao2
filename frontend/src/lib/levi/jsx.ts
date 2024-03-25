@@ -383,7 +383,7 @@ function jsx_apply_stateful_children(elem: Elems, state: State<Nodes>) {
                 // add new value to slot
                 let frag = document.createDocumentFragment();
                 jsx_apply_children(frag, mut.insert[i - mut.index] as Nodes);
-                update_fence_right.parentNode!.insertBefore(update_fence_right, frag);
+                update_fence_right.parentNode!.insertBefore(frag, update_fence_right);
             }
             if (mut.remove.length > mut.insert.length) {
                 // REMOVE: remove slots that were not updated
@@ -429,7 +429,7 @@ function jsx_apply_stateful_children(elem: Elems, state: State<Nodes>) {
                 }
                 let frag = document.createDocumentFragment();
                 jsx_apply_children(frag, mut.insert[i - mut.index] as Nodes);
-                update_fence_right.parentNode!.insertBefore(update_fence_right, frag);
+                update_fence_right.parentNode!.insertBefore(frag, update_fence_right);
                 throw new Error("TODO! continue here");
             */
         }
