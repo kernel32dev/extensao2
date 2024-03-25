@@ -1,3 +1,21 @@
+import "./app.css";
+import { HomePage } from "./home";
+
+export function App(): Elems {
+    let curpage = new State<Page>({type: "home"});
+    return <PickPage curpage={curpage}/>;
+}
+
+export type Page = {type: "home"};
+
+function PickPage({curpage}: {curpage: State<Page>}): Elems {
+    const table = {
+        "home": HomePage
+    };
+    return table[curpage.value.type](curpage);
+}
+
+/*
 export function App(): Elems {
     const myUsername = prompt("Please enter your name") || "Anonymous";
 
@@ -52,3 +70,4 @@ export function App(): Elems {
         }
     }
 }
+*/
