@@ -12,6 +12,7 @@ import * as STATE from "./state";
 
 declare global {
     var jsx: typeof JSX.jsx;
+    var css: typeof JSX.css;
     var ref: typeof JSX.ref;
 
     interface View extends JSX.View {}
@@ -44,9 +45,12 @@ declare global {
     interface ObjectMutation extends STATE.ObjectMutation {}
     interface StateArray<T> extends STATE.StateArray<T> {}
     interface ArrayMutation extends STATE.ArrayMutation {}
+
+    var __line: number; //babel-plugin-transform-line
 }
 
 globalThis.jsx = JSX.jsx;
+globalThis.css = JSX.css;
 globalThis.ref = JSX.ref;
 globalThis.CustomHTMLElement = JSX.CustomHTMLElement;
 globalThis.Signal = SIGNAL.Signal;

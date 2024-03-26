@@ -14,6 +14,8 @@
         "@babel/plugin-transform-react-jsx": "*",
         "@babel/preset-env": "*",
         "@babel/preset-typescript": "*",
+        "babel-plugin-transform-line": "*",
+        "babel-plugin-transform-dirname-filename": "*",
         "babel-loader": "*",
         "css-loader": "*",
         "mini-css-extract-plugin": "*",

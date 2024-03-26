@@ -8,6 +8,7 @@
 import "./react-types";
 import { State, StateArray, ArrayMutation } from "./state";
 
+
 /** the view interface, any object that implements this interface can be used in jsx expressions
  *
  * this interface consists only of a single method named view that returns elements
@@ -107,6 +108,15 @@ export function jsx(
         }
     } else if (tag === "" || tag === null) {
         elem = document.createDocumentFragment();
+    } else if (tag === "style") {
+        for (let i = 0; i < children.length; i++) {
+            if (typeof children[i] !== "string") {
+                throw new Error("jsx: the content of a style tag must be a string");
+            }
+        }
+        let style = document.createElement("style");
+        style.innerHTML = (children as string[]).join("");
+        return style;
     } else {
         let is_svg = svg_tag_names.indexOf(tag) !== -1;
         elem = !is_svg ? document.createElement(tag) : document.createElementNS("http://www.w3.org/2000/svg", tag);
@@ -452,6 +462,58 @@ function assert_fence_continuity(left: Node, right: Node) {
     for (let i: Node = left; i != right; i = i.nextSibling) {
         if (!i.nextSibling) throw new Error("Stateful jsx mutation handler assertion failed: fence comments in incorrect order");
     }
+}
+
+// CSS //
+
+export function css(strings: { raw: readonly string[] | ArrayLike<string> }, ...substitutions: any[]) {
+    let style = document.createElement("style");
+    let first = substitutions[0];
+    if (typeof first === "object" && first !== null && "__filename" in first && typeof first["__filename"] === "string" && "__line" in first && typeof first["__line"] === "number") {
+        substitutions[0] = "";
+
+        let filename = first["__filename"];
+        let line = first["__line"];
+
+        let name = filename.substring(Math.max(filename.lastIndexOf("/"), filename.lastIndexOf("\\")) + 1);
+
+        style.dataset["from"] = name + ":" + line;
+
+        style.innerHTML = add_line_numbers(String.raw(strings, ...substitutions), line, ":" + name + ":" + filename + " ");
+    } else {
+        style.innerHTML = String.raw.apply(String, arguments as any);
+    }
+    document.head.appendChild(style);
+}
+
+function add_line_numbers(styles: string, lineno: number, header: string): string {
+    if (lineno < 0 || !Number.isSafeInteger(lineno)) return styles;
+    let width = String(count_lines(styles) + lineno).length;
+    let i = -1;
+    let lined = "";
+    while (true) {
+        let n = styles.indexOf("\n", i + 1);
+        if (n === -1) {
+            lined += "/*" + String(lineno).padStart(width) + header + "*/ " + styles.substring(i + 1);
+            break;
+        }
+        lined += "/*" + String(lineno).padStart(width) + header + "*/ " + styles.substring(i + 1, n + 1);
+        i = n;
+        header = "";
+        lineno++;
+    }
+    return lined;
+}
+
+function count_lines(styles: string): number {
+    let count = 0;
+    let i = -1;
+    while (true) {
+        i = styles.indexOf("\n", i + 1);
+        if (i === -1) break;
+        count++;
+    }
+    return count;
 }
 
 // REF //

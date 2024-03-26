@@ -39,4 +39,5 @@ module.exports = {
     optimization: {
         usedExports: true,
     },
+    devtool: 'inline-source-map',
 };

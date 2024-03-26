@@ -22344,6 +22344,7 @@ declare global {
             media?: OrState<string | undefined>;
             scoped?: OrState<boolean | undefined>;
             type?: OrState<string | undefined>;
+            jsx?: OrState<boolean | undefined>;
         }
 
         interface TableHTMLAttributes<T> extends HTMLAttributes<T> {

@@ -4,6 +4,8 @@ module.exports = {
         [ "@babel/preset-typescript", { isTSX: true, allExtensions: true, dts: true } ],
     ],
     plugins: [
+        "babel-plugin-transform-line",
+        "babel-plugin-transform-dirname-filename",
         "@babel/plugin-transform-class-properties",
         "@babel/plugin-transform-object-rest-spread",
         [
