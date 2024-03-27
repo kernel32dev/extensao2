@@ -1,6 +1,4 @@
-import { Page } from "./app";
-
-export function HomePage(curpage: State<Page>): Elems {
+export function HomePage({curpage}: {curpage: State<Elems>}): Elems {
     return (
         <div class="home-page">
             <Stars count={300} />

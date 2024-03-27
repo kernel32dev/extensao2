@@ -2,17 +2,11 @@ import "./app.css";
 import { HomePage } from "./home";
 
 export function App(): Elems {
-    let curpage = new State<Page>({type: "home"});
-    return <PickPage curpage={curpage}/>;
-}
+    let curpage = new State(<></>);
 
-export type Page = {type: "home"};
+    curpage.value = <HomePage curpage={curpage} />;
 
-function PickPage({curpage}: {curpage: State<Page>}): Elems {
-    const table = {
-        "home": HomePage
-    };
-    return table[curpage.value.type](curpage);
+    return <>{curpage}</>;
 }
 
 /*

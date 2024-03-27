@@ -2,11 +2,11 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: './src/script.tsx',
+    entry: './frontend/script.tsx',
     mode: 'development',
     output: {
         filename: 'script.js',
-        path: path.resolve(__dirname, 'src'),
+        path: path.resolve(__dirname, 'frontend'),
     },
     module: {
         rules: [

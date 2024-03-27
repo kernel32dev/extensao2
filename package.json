@@ -1,0 +1,38 @@
+{
+    "name": "extensao2",
+    "version": "0.0.0",
+    "scripts": {
+        "serve": "npx ts-node backend/main.ts",
+        "serve:prod": "npx webpack --mode production && npx ts-node backend/main.ts",
+
+        "build": "npx webpack",
+        "build:prod": "npx webpack --mode production",
+
+        "watch": "run-p watch:*",
+        "watch:front": "npx webpack --watch",
+        "watch:back": "npx nodemon backend/main.ts"
+    },
+    "dependencies": {
+        "@babel/cli": "*",
+        "@babel/core": "*",
+        "@babel/plugin-transform-class-properties": "*",
+        "@babel/plugin-transform-object-rest-spread": "*",
+        "@babel/plugin-transform-react-jsx": "*",
+        "@babel/preset-env": "*",
+        "@babel/preset-typescript": "*",
+        "@types/express": "*",
+        "babel-loader": "*",
+        "babel-plugin-transform-dirname-filename": "*",
+        "babel-plugin-transform-line": "*",
+        "css-loader": "*",
+        "mini-css-extract-plugin": "*",
+        "nodemon": "*",
+        "sass-loader": "*",
+        "typescript": "*",
+        "webpack": "*",
+        "webpack-cli": "*",
+        "express": "*",
+        "npm-run-all": "*",
+        "ts-node": "*"
+    }
+}
