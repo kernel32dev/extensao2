@@ -5,6 +5,8 @@
 // por favor não remova, :D   //
 ////////////////////////////////
 
+export {};
+
 declare global {
     interface Array<T> {
         /** searches for item T in the array with the semantics of indexOf (strict equality)

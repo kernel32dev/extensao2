@@ -133,8 +133,8 @@ function jsx_apply_props(elem: HTMLElement | SVGElement, props: PropsElem) {
     for (let key of Object.keys(props)) {
         if (key === "class") {
             State.do(props["class"], classes => {
-                for (let item of elem.classList.values()) {
-                    elem.classList.remove(item);
+                for (let i = elem.classList.length - 1; i >= 0; i--) {
+                    elem.classList.remove(elem.classList[i]);
                 }
                 add_classes(elem.classList, classes);
             });
