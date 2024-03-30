@@ -13,7 +13,7 @@ e execute `npm install` para instalar os pacotes
 
 Para executar o servidor rode `npm run watch`, já que é watch, você não precisa reiniciar o servidor para ver suas mudanças, bastar recarregar a página
 
-Caso queira apenas executar e queira servir arquivos otimizados e minificados, considere executar `npm run serve:prod` que executa o serviço em produção
+Caso queira apenas executar e queira servir arquivos otimizados e minificados, considere executar `npm run build` e `npm run serve` que executa o serviço em produção
 
 Quando executando, a página estará disponível em http://127.0.0.1:8080/
 
@@ -29,6 +29,6 @@ Já que usamos **typescript**, precisamos compilar-lo em **javascript**, para is
 
 #### Backend
 
-O backend é um servidor http comum, ele serve três arquivos estáticos: `index.html`, `script.js` e `style.css`, e também oferece uma api **Websocket** para todo a lógica
+O backend é um servidor http comum, ele serve três arquivos estáticos: `index.html`, `script.js` e `style.css`, e também oferece uma api **Websocket** para toda a lógica
 
 Websocket foi usado pois permite que o servidor atualize o cliente com mais informações em tempo real

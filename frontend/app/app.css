@@ -23,3 +23,9 @@ h6 {
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/* BUTTON */
+
+button {
+    padding: 5px;
+}

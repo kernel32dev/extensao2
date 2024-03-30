@@ -1,4 +1,6 @@
-export function HomePage({curpage}: {curpage: State<Elems>}): Elems {
+import * as socket from "./socket";
+
+export function HomePage(): Elems {
     return (
         <div class="home-page">
             <Stars count={300} />
@@ -11,15 +13,29 @@ export function HomePage({curpage}: {curpage: State<Elems>}): Elems {
                     <div class="home-choice">
                         <h3>Se você for um estudante:</h3>
                         <h4>Entre na sala pelo código!</h4>
+                        <br />
+                        <input type="text" onInput={join_room} />
                     </div>
                     <div class="home-choice">
                         <h3>Se você for um professor:</h3>
                         <h4>Clique aqui para criar a sala!</h4>
+                        <br />
+                        <button onClick={open_room}>Criar sala</button>
                     </div>
                 </div>
             </div>
         </div>
     )
+    function join_room(this: HTMLInputElement, ev: InputEvent) {
+        const room_id_regex = /^[BCDFGHJKLMNPQRSTVWXYZ][AEIOU][BCDFGHJKLMNPQRSTVWXYZ]$/;
+        const value = this.value.toUpperCase();
+        if (room_id_regex.test(value)) {
+            socket.connect({mode: "join", room: value});
+        }
+    }
+    function open_room() {
+        socket.connect({mode: "open"});
+    }
 }
 
 function Stars({count}: {count: number}): Elems {
@@ -44,6 +60,7 @@ css`${{__filename, __line}}
 
 .home-page {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     height: 100vh;
     display: flex;
@@ -52,9 +69,11 @@ css`${{__filename, __line}}
     overflow: hidden;
 }
 .home-content {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 5em;
 }
 .home-game-description {
     max-width: 50vw;
@@ -62,15 +81,19 @@ css`${{__filename, __line}}
     text-align: center;
 }
 .home-choices {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
     gap: 1em;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+    align-items: stretch;
 }
 .home-choice {
     text-align: center;
     border: 1px solid black;
     padding: 1em;
+    width: 300px;
 }
 .home-stars {
     position: absolute;
