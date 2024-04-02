@@ -6,7 +6,7 @@
         "build": "npx webpack --mode production",
         "watch": "run-p watch:*",
         "watch:front": "npx webpack --watch",
-        "watch:back": "npx nodemon backend/main.ts"
+        "watch:back": "npx nodemon backend/main.ts --create-test-room LOL"
     },
     "dependencies": {
         "@babel/cli": "*",

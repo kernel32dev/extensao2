@@ -78,10 +78,18 @@ export class Rooms {
         return this.rooms.get(Room.validate_id(room_id)) ?? null;
     }
     public create_test_room(room_key: string): Room {
-        console.log("Sala de teste criada, você não quer ver isso em produção");
         const room = new Room(this);
         (room as any)["id"] = Room.validate_id(room_key);
         this.rooms.set(room.id, room);
+        console.log("=============================================\n"
+        + "Sala de teste criada, (room_id = " + room_key + ")\n"
+        + "Isso significa que o programa foi chamado com a flag --create-test-room ${room_key}\n"
+        + "Você não quer ver isso em produção\n"
+        + "\n"
+        + "Caso queira executar em produção execute:\n"
+        + "npm run build\n"
+        + "npm run serve\n"
+        + "=============================================\n");
         return room;
     }
     public connect_socket(ws: WebSocket, query: Record<string, unknown>) {

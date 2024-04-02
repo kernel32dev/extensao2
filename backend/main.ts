@@ -10,10 +10,14 @@ const port = 8080;
 // instancia as salas
 const rooms = new Rooms();
 
+// obtém o caminho para a pasta do frontend
 const frontend = path.join(__dirname, "/../frontend/");
 
-// cria a sala de teste
-rooms.create_test_room("LOL");
+// cria a sala de teste, se tiver sido pedido
+const ctr_index = process.argv.indexOf("--create-test-room");
+if (ctr_index != -1) {
+    rooms.create_test_room(process.argv[ctr_index + 1] ?? "");
+}
 
 // configura o websocket, manda as connecções para rooms
 app.ws("/connect", (ws, req) => {
