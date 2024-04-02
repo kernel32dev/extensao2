@@ -227,20 +227,24 @@ css`${{ __filename, __line }}
     width: 100%;
     height: 100%;
     background-size: 100%;
+    animation: player-img-idle 1.5s linear 0s infinite normal forwards;
 }
 .walking .player-img2 {
-    animation: player-img-transform 0.2s ease 0s 1 normal forwards;
+    animation: player-img-walk 0.2s ease 0s 1 normal forwards;
 }
 .player-character-self .walking .player-img2 {
-    animation: player-img-transform 0.2s ease 0s infinite normal forwards;
+    animation: player-img-walk 0.2s ease 0s infinite normal forwards;
 }
 
-@keyframes player-img-transform {
+@keyframes player-img-walk {
     0% { transform: translate(0%, 0%) rotate(0deg); }
     25% { transform: translate(-2%, -8%) rotate(-10deg); }
     50% { transform: translate(0%, 0%) rotate(0deg); }
     75% { transform: translate(2%, -8%) rotate(10deg); }
     100% { transform: translate(0%, 0%) rotate(0deg); }
 }
-
+@keyframes player-img-idle {
+    0% { transform: scaleX(100%) scaleY(100%) translateY(0%); }
+    50% { transform: scaleX(103%) scaleY(97%) translateY(2%); }
+}
 `
