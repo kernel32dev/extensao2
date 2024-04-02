@@ -1,16 +1,16 @@
 import "./app.css";
-import { HomePage } from "./home";
-import { LobbyPage } from "./lobby";
-
-const pages = {
-    "home": HomePage,
-    "lobby": LobbyPage,
-};
-
-const first_page: keyof typeof pages = "home";
-
-export const active_page = new State<keyof typeof pages>(first_page);
+import { game } from "./game";
+import { HomePage } from "./home_page";
+import { LobbyPage } from "./lobby_page";
 
 export function App(): Elems {
-    return <>{active_page.then(x => pages[x]())}</>;
+    return <>{
+        game.then(x =>
+            !x.connected
+            // enquanto não tiver conectado, mostra a página principal
+            ? HomePage()
+            // quando tiver conectado, mostra a página com os jogadores
+            : LobbyPage()
+        )
+    }</>;
 }

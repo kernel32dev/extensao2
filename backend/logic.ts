@@ -50,10 +50,17 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 });
                 break;
             }
+            case "SetPos": {
+                sck.member.pos = msg.pos;
+                sck.member.room.send({
+                    event: "PlayerUpdated",
+                    player: sck.member.to_shared(),
+                });
+                break;
+            }
             default:
-            // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
-            // mas só funciona se tiver mais de um comando, TODO! descomentar a linha a baixo quando tiver um segundo comando do cliente
-            //msg satisfies never;
+                // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
+                msg satisfies never;
         }
     }
 }
@@ -222,7 +229,7 @@ abstract class Member {
         }
     }
 
-    
+
     static readonly id_length = 16;
     static readonly id_regex = /^[0-9A-Fa-f]*$/;
     /** retorna o valor se ele for um identificador válido, ou seja uma string de `Member.id_length` caracteres, e no formato `Member.id_regex` */
@@ -252,13 +259,16 @@ class Owner extends Member {
 /** um jogador dentro da sala */
 class Player extends Member {
     name: string;
+    pos: Shared.Point;
     constructor(room: Room) {
         super(room);
         this.name = "Aluno #" + room.players.size;
+        this.pos = { x: Math.random(), y: Math.random() };
     }
     override to_shared(): Shared.Player {
         return {
             name: this.name,
+            pos: this.pos,
             ...super.to_shared()
         }
     }

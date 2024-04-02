@@ -1,30 +1,45 @@
-import { active_page } from "./app";
 
-export const state = new State<Game | null>(null);
 
-// bota o state no window, para podermos acessar o state do console
-(window as any).state = state;
+/** o estado do jogo, esse estado é usado para atualizar praticamente tudo do jogo
+ *
+ * as mensagens atualizam esse objeto, e as views se atualizam para refletir o novo estado do jogo */
+export const game = new State<Game>({ connected: false } satisfies GameDisconnected);
 
-export type Game = {
+/** o jogo pode estar desconectado ou conectado, note que mesmo caso haja uma queda de internet o estado do jogo continua conectado para não perdemos tudo */
+export type Game = GameDisconnected | GameConnected;
+
+/** quanto o jogo está desconectado, o objeto game só contem uma propiedade connected false */
+export type GameDisconnected = {
+    connected: false,
+};
+
+/** quando o jogo está conectador, o objeto contém todas as informações dos jogadores */
+export type GameConnected = {
+    connected: true,
+    /** o id da sala, necessário para reconectar caso a internet caia */
     room_id: string,
-    player: Shared.Player | null,
+    /** o jogador que está jogando o jogo neste navegador, ou null se esse for o dono do jogo */
+    player: State<Shared.Player> | null,
+    /** o segredo necessário para reconectar caso a internet caia */
     secret: string,
+    /** o membro que é o dono da sala */
     owner: Shared.Owner,
-    players: State<Shared.Player[]>,
+    /** os membro que são jogadores dentro da sala */
+    players: State<State<Shared.Player>[]>,
 };
 
 export function handle_server_message(msg: SvrMsg) {
     switch (msg.event) {
         case "Connected": {
-            const players = new State(msg.players);
-            state.value = {
+            const players = new State(msg.players.map(x => new State(x)));
+            game.value = {
+                connected: true,
                 room_id: msg.room_id,
-                player: players.value.find(x => x.member_id == msg.member_id) ?? null,
+                player: players.value.find(x => x.value.member_id == msg.member_id) ?? null,
                 secret: msg.secret,
                 owner: msg.owner,
                 players,
             };
-            active_page.value = "lobby";
             break;
         }
         case "Disconnected": {
@@ -39,18 +54,20 @@ export function handle_server_message(msg: SvrMsg) {
             break;
         }
         case "PlayerUpdated": {
-            const players = state.value!.players.value;
-            const index = players.findIndex(x => x.member_id == msg.player.member_id);
+            if (!game.value.connected) break;
+            const players = game.value.players.value;
+            const index = players.findIndex(x => x.value.member_id == msg.player.member_id);
             if (index == -1) {
-                players.push(msg.player);
+                players.push(new State(msg.player));
             } else {
-                players[index] = msg.player;
+                players[index].value = msg.player;
             }
             break;
         }
         case "PlayerRemoved": {
-            const players = state.value!.players.value;
-            const index = players.findIndex(x => x.member_id == msg.member_id);
+            if (!game.value.connected) break;
+            const players = game.value.players.value;
+            const index = players.findIndex(x => x.value.member_id == msg.member_id);
             if (index != -1) {
                 players.splice(index, 1);
             }
@@ -61,3 +78,6 @@ export function handle_server_message(msg: SvrMsg) {
             msg satisfies never;
     }
 }
+
+// bota o game no window, para podermos acessar o state do console
+(window as any).game = game;

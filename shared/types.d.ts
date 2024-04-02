@@ -39,21 +39,31 @@ declare namespace SvrMsg {
 
 type CliMsg =
 | CliMsg.SetName
+| CliMsg.SetPos
 
 declare namespace CliMsg {
     type SetName = {
         cmd: "SetName",
         name: string,
     }
+    type SetPos = {
+        cmd: "SetPos",
+        pos: Shared.Point,
+    }
 }
 
 declare namespace Shared {
+    interface Point {
+        x: number,
+        y: number,
+    }
     interface Member {
         owner: boolean,
         member_id: string,
     }
     interface Player extends Member {
         name: string,
+        pos: Point,
     }
     interface Owner extends Member {}
 }

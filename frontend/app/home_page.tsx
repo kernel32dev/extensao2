@@ -1,5 +1,6 @@
 import * as socket from "./socket";
 
+/** a página que é mostrada quando o usuário ainda não está conectado */
 export function HomePage(): Elems {
     return (
         <div class="home-page">
@@ -30,33 +31,35 @@ export function HomePage(): Elems {
         const room_id_regex = /^[BCDFGHJKLMNPQRSTVWXYZ][AEIOU][BCDFGHJKLMNPQRSTVWXYZ]$/;
         const value = this.value.toUpperCase();
         if (room_id_regex.test(value)) {
-            socket.connect({mode: "join", room: value});
+            socket.connect({ mode: "join", room: value });
         }
     }
     function open_room() {
-        socket.connect({mode: "open"});
+        socket.connect({ mode: "open" });
     }
 }
 
-function Stars({count}: {count: number}): Elems {
+/** uma função que produz um elemento `<div class="home-stars" />` contendo vários `<div class="home-star" />` */
+function Stars({ count }: { count: number }): Elems {
     const time = 60;
-    let stars = <div class="home-stars"/>;
+    const stars = <div class="home-stars" />;
     for (let i = 0; i < count; i++) {
-        let star = <div class="home-star" /> as HTMLDivElement;
-        let angle = Math.random() * Math.PI * 2;
+        const star = <div class="home-star" /> as HTMLDivElement;
+        const angle = Math.random() * Math.PI * 2;
+        const delay = Math.random() * time;
         star.style.setProperty("--rot", angle + "rad");
         star.style.setProperty("--from-x", "50%");
         star.style.setProperty("--from-y", "50%");
         star.style.setProperty("--to-x", Math.cos(angle) * 150 + "%");
         star.style.setProperty("--to-y", Math.sin(angle) * 150 + "%");
-        star.style.setProperty("--delay", "-" + Math.random() * time + "s");
+        star.style.setProperty("--delay", "-" + delay + "s");
         star.style.setProperty("--time", time + "s");
         stars.appendChild(star);
     }
     return stars;
 }
 
-css`${{__filename, __line}}
+css`${{ __filename, __line }}
 
 .home-page {
     width: 100%;

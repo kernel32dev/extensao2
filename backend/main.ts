@@ -7,8 +7,10 @@ import { Rooms } from "./logic";
 const app = enableWs(express()).app;
 const port = 8080;
 
-// instância as salas
+// instancia as salas
 const rooms = new Rooms();
+
+const frontend = path.join(__dirname, "/../frontend/");
 
 // cria a sala de teste
 rooms.create_test_room("LOL");
@@ -20,14 +22,17 @@ app.ws("/connect", (ws, req) => {
 
 // configura os arquivos estáticos
 app.get(["", "/", "/index.html"], (_req, res) => {
-    res.sendFile(path.join(__dirname, "/../frontend/index.html"));
+    res.sendFile(path.join(frontend, "index.html"));
 });
 app.get("/script.js", (_req, res) => {
-    res.sendFile(path.join(__dirname, "/../frontend/script.js"));
+    res.sendFile(path.join(frontend, "script.js"));
 });
 app.get("/style.css", (_req, res) => {
-    res.sendFile(path.join(__dirname, "/../frontend/style.css"));
+    res.sendFile(path.join(frontend, "style.css"));
 });
+
+// serve os arquivos na pasta static
+app.use("/static", express.static(path.join(frontend, "static")));
 
 // liga o servidor
 app.listen(port, () => {
