@@ -86,6 +86,7 @@ export function LobbyPage(): Elems {
         character.style.setProperty("--flip", Math.random() < 0.5 ? "100%" : "-100%");
         character.style.setProperty("--x", p.value.pos.x * 100 + "%");
         character.style.setProperty("--y", p.value.pos.y * 100 + "%");
+        character.style.setProperty("--z", String(Math.floor(p.value.pos.y * 1000)));
 
         // faça o seguinte quando os dados do jogador mudarem
         p.on(p => {
@@ -115,6 +116,7 @@ export function LobbyPage(): Elems {
             // atualiza posição
             character.style.setProperty("--x", p.pos.x * 100 + "%");
             character.style.setProperty("--y", p.pos.y * 100 + "%");
+            character.style.setProperty("--z", String(Math.floor(p.pos.y * 1000)));
         });
         return character;
     }
@@ -204,6 +206,7 @@ css`${{ __filename, __line }}
     left: var(--x);
     top: var(--y);
     transition: left 0.1s ease, top 0.1s ease;
+    z-index: var(--z);
 }
 .player-character-self {
     transition: none;
