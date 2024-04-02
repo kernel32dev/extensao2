@@ -168,7 +168,7 @@ class Room {
     /** retorna o valor se ele for uma chave de sala válido, ou seja uma string de `Room.id_length` caracteres, e no formato `Room.id_regex` */
     static validate_id(value: unknown): string {
         if (typeof value === "string" && value.length === Room.id_length && Room.id_regex.test(value)) {
-            return value.toLowerCase();
+            return value.toUpperCase();
         }
         throw new Error(`invalid room key: "${value}"`);
     }

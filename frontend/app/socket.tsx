@@ -1,4 +1,5 @@
-import { handle_server_message } from "./game";
+import { game, handle_server_message } from "./game";
+import * as storage from "./storage";
 
 /** todos os diferentes modos que é possível conectar ao servidor */
 type ConnectionMode = {
@@ -71,9 +72,16 @@ export function connect(mode?: ConnectionMode) {
         // assume que a mensagem chegando é um `SvrMsg`
         const msg = JSON.parse(e.data.toString()) as SvrMsg;
         console.log(msg);
-        
+
         if (msg.event == "Connected") {
-            ws!.mode = {mode: "reconnect", room: msg.room_id, member: msg.member_id, secret: msg.secret};
+            const mode = {
+                mode: "reconnect" as const,
+                room: msg.room_id,
+                member: msg.member_id,
+                secret: msg.secret
+            };
+            ws!.mode = mode;
+            storage.save(JSON.stringify(mode));
             spinner.stop_spinning();
         } else if (msg.event == "BadRoomId") {
             disconnect();
@@ -101,8 +109,13 @@ export function disconnect() {
         }
         ws = null;
     }
+    game.value = { connected: false };
     queue.length = 0;
+    storage.save("");
 }
+
+/** bota o disconnect na janela enquanto não fazemos um botão de desconectar */
+(window as any).disconnect = disconnect;
 
 /** bota mais mensagens na fila e envia elas ao servidor, caso não seja possível enviar, ela continua na fila */
 export function send(...msg: CliMsg[]) {
@@ -119,6 +132,29 @@ export function send(...msg: CliMsg[]) {
         }
     }
 }
+
+/** chama storage.load e tenta auto carregar */
+function auto_connect() {
+    try {
+        const mode_json = storage.load();
+        if (mode_json == "") return;
+        let mode = JSON.parse(mode_json) as unknown;
+        if (
+            typeof mode == "object"
+            && mode != null
+            && "mode" in mode && mode.mode === "reconnect" as const
+            && "room" in mode && typeof mode.room == "string"
+            && "member" in mode && typeof mode.member == "string"
+            && "secret" in mode && typeof mode.secret == "string"
+        ) {
+            connect(mode as ConnectionMode);
+        }
+    } catch (e) {
+        console.warn("não foi possível auto conectar por causa do seguinte erro: ", e);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", auto_connect);
 
 namespace spinner {
     const spinner = (
@@ -138,7 +174,7 @@ namespace spinner {
                         c4.407,6.143,6.686,13.242,6.696,20.471V461.267z"/>
                     <path d="M271.5,337.571c-8.564-8.543-22.436-8.543-31,0l-99.155,99.166c-1.866,1.877-2.431,4.688-1.41,7.131
                         c1.009,2.442,3.397,4.037,6.034,4.037h220.062c2.637,0,5.025-1.595,6.034-4.037c1.02-2.443,0.457-5.254-1.41-7.131L271.5,337.571z"
-                        />
+                    />
                 </g>
             </svg>
             <button onClick={() => {
@@ -149,10 +185,10 @@ namespace spinner {
             </button>
         </div>
     ) as HTMLDivElement;
-    
+
     const loading_timeout_ms = 100;
     let loading_timeout_id = 0;
-    
+
     export function start_spinning() {
         if (loading_timeout_id === 0) {
             loading_timeout_id = window.setTimeout(
@@ -161,14 +197,14 @@ namespace spinner {
             );
         }
     }
-    
+
     export function stop_spinning() {
         clearTimeout(loading_timeout_id);
         loading_timeout_id = 0;
         spinner.remove();
     }
-    
-    css`${{__filename, __line}}
+
+    css`${{ __filename, __line }}
     
     .loading-screen {
         position: absolute;
@@ -209,4 +245,3 @@ namespace spinner {
     }
     `
 }
-
