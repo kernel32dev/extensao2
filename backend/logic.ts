@@ -42,6 +42,14 @@ function handle_new_socket(sck: Socket) {
 function handle_client_message(sck: Socket, msg: CliMsg) {
     if (sck.member instanceof Player) {
         switch (msg.cmd) {
+            case "Quit": {
+                sck.member.close();
+                sck.member.room.send({
+                    event: "PlayerRemoved",
+                    member_id: sck.member.id,
+                });
+                break;
+            }
             case "SetName": {
                 sck.member.name = msg.name;
                 sck.member.room.send({
@@ -58,6 +66,19 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 });
                 break;
             }
+            default:
+                // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
+                msg satisfies never;
+        }
+    } else if (sck.member instanceof Owner) {
+        switch (msg.cmd) {
+            case "Quit": {
+                sck.member.room.close();
+                break;
+            }
+            case "SetName":
+            case "SetPos":
+                throw new Error("evento exclusivo de Player");
             default:
                 // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
                 msg satisfies never;
@@ -152,6 +173,14 @@ class Room {
         if (!member) throw new Error(`Member does not exist (room_id = ${this.id}, member_id = ${member_id})`);
         return member;
     }
+    close() {
+        // TODO!
+        const players = [...this.players.values()];
+        for (let i of players) {
+            i.close();
+        }
+        this.owner.close();
+    }
     send(message: SvrMsg | string, exclude?: Socket | Member) {
         if (typeof message === "object") {
             message = JSON.stringify(message);
@@ -228,6 +257,13 @@ abstract class Member {
         }
         for (let i of this.sockets) {
             if (i !== exclude) i.send(message);
+        }
+    }
+    close() {
+        this.room.players.delete(this.id);
+        for (let i of this.sockets) {
+            i.send({event: "Disconnected"})
+            i.close();
         }
     }
     to_shared(): Shared.Member {
@@ -330,6 +366,9 @@ class Socket {
     }
     send_error(error: any) {
         this.send({ event: "Error", error: String(error) });
+    }
+    close() {
+        this.ws.close();
     }
     static send_error(ws: WebSocket, error: any) {
         ws.send(JSON.stringify({ event: "Error", error: String(error) } satisfies SvrMsg.Error));

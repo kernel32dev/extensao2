@@ -3,18 +3,34 @@ import { game as global_game } from "./game";
 
 export function LobbyPage(): Elems {
     const game = global_game.value!;
+    if (!game.connected) throw new Error("");
     return (
         <div class="lobby-page">
-            {
-                game.connected && game.player &&
-                <div class="player-config">
-                    <span>Esperando o professor começar o jogo...</span>
-                    <label>
-                        Mudar seu nome:
-                        <input type="text" maxLength={16} onInput={set_name} value={game.player.value.name} />
-                    </label>
+            <div class="lobby-header">
+                {
+                    game.player != null
+                        ? // quando for jogador
+                        <div class="player-config">
+                            <span>Esperando o professor começar o jogo...</span>
+                            <label>
+                                Mudar seu nome:
+                                <input type="text" maxLength={16} onInput={set_name} value={game.player.value.name} />
+                            </label>
+                        </div>
+                        : // quando for o dono
+                        <div class="owner-control">
+                            <button onClick={start_game}>Começar o jogo</button>
+                        </div>
+                }
+                <div class="lobby-room-id-area">
+                    <span class="lobby-room-id-label">Código da sala:</span>
+                    <br />
+                    <span class="lobby-room-id-text">{game.connected && game.room_id}</span>
                 </div>
-            }
+                <div class="lobby-leave-room">
+                    <button onClick={quit}>{game.player != null ? "Sair da sala" : "Fechar a sala"}</button>
+                </div>
+            </div>
             <div class="player-arena" onMouseMove={move_to} onTouchStart={move_to} onTouchMove={move_to}>
                 {game.connected && game.players.thenMap(render_player)}
             </div>
@@ -23,6 +39,22 @@ export function LobbyPage(): Elems {
     function set_name(this: HTMLInputElement) {
         if (this.value != "") {
             socket.send({ cmd: "SetName", name: this.value });
+        }
+    }
+    function start_game() {
+        alert("TODO! start_game()");
+    }
+    function quit() {
+        if (game.connected && game.player != null) {
+            if (confirm("Tem certeza que quer sair da sala?")) {
+                socket.send({ cmd: "Quit" });
+                socket.disconnect();
+            }
+        } else {
+            if (confirm("Tem certeza que quer fechar da sala?")) {
+                socket.send({ cmd: "Quit" });
+                socket.disconnect();
+            }
         }
     }
     function move_to(this: HTMLDivElement, e: MouseEvent | TouchEvent) {
@@ -54,7 +86,7 @@ export function LobbyPage(): Elems {
         update_position({ x, y });
     }
     function render_player(p: State<Shared.Player>): Elems {
-        
+
         const player_images = [
             "/static/among-us-cyan-768x934.webp",
             "/static/among-us-green-768x934.webp",
@@ -71,7 +103,7 @@ export function LobbyPage(): Elems {
             <div class="player-character">
                 <div ref={name} class="player-name">{p.value.name}</div>
                 <div ref={img} class="player-img">
-                    <div class="player-img2" style={{backgroundImage: `url("${player_images[player_images_index]}")`}} />
+                    <div class="player-img2" style={{ backgroundImage: `url("${player_images[player_images_index]}")` }} />
                 </div>
             </div>
         ) as HTMLDivElement;
@@ -173,14 +205,46 @@ css`${{ __filename, __line }}
     overflow: hidden;
 }
 
-.player-config {
-    display: flex;
-    flex-direction: column;
+.lobby-header {
     margin: 1em;
     padding: 1em;
     border-radius: 1em;
     box-shadow: inset #000000FF 0 0 30px -3px;
     background-color: #00000010;
+    display: flex;
+    flex-direction: row;
+}
+
+.player-config {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lobby-room-id-area {
+    text-align: center;
+}
+
+.lobby-room-id-label {
+    font-size: small;
+}
+
+.lobby-room-id-text {
+    font-size: larger;
+}
+.lobby-leave-room {
+    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.owner-control {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .player-arena {

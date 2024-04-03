@@ -83,6 +83,9 @@ export function connect(mode?: ConnectionMode) {
             ws!.mode = mode;
             storage.save(JSON.stringify(mode));
             spinner.stop_spinning();
+        } else if (msg.event == "Disconnected") {
+            disconnect();
+            spinner.stop_spinning();
         } else if (msg.event == "BadRoomId") {
             disconnect();
             spinner.stop_spinning();
@@ -98,6 +101,8 @@ export function connect(mode?: ConnectionMode) {
 
 export function disconnect() {
     if (ws) {
+        // envia as mensagens na fila
+        send();
         // tira os handlers antigos para não recebermos novas mensagens antes do novo ser conectado
         ws.onmessage = null;
         ws.onerror = null;
@@ -113,9 +118,6 @@ export function disconnect() {
     queue.length = 0;
     storage.save("");
 }
-
-/** bota o disconnect na janela enquanto não fazemos um botão de desconectar */
-(window as any).disconnect = disconnect;
 
 /** bota mais mensagens na fila e envia elas ao servidor, caso não seja possível enviar, ela continua na fila */
 export function send(...msg: CliMsg[]) {

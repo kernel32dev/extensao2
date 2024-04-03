@@ -40,6 +40,7 @@ declare namespace SvrMsg {
 type CliMsg =
 | CliMsg.SetName
 | CliMsg.SetPos
+| CliMsg.Quit
 
 declare namespace CliMsg {
     type SetName = {
@@ -49,6 +50,9 @@ declare namespace CliMsg {
     type SetPos = {
         cmd: "SetPos",
         pos: Shared.Point,
+    }
+    type Quit = {
+        cmd: "Quit",
     }
 }
 
