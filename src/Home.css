@@ -1,0 +1,73 @@
+.home-page {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.home-content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5em;
+}
+.home-game-description {
+    max-width: 50vw;
+    margin: 1em;
+    text-align: center;
+}
+.home-choices {
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+    align-items: stretch;
+}
+.home-choice {
+    text-align: center;
+    border: 1px solid black;
+    padding: 1em;
+    width: 300px;
+}
+.home-stars {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+.home-star {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    width: 10px;
+    height: 3px;
+    background-color: #00000033;
+    transform: rotate(var(--rot));
+    animation: home-shooting-star var(--time) linear var(--delay) infinite;
+}
+
+@keyframes home-shooting-star {
+    0% {
+        top: var(--from-y);
+        left: var(--from-x);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        top: var(--to-y);
+        left: var(--to-x);
+    }
+}
