@@ -1,6 +1,7 @@
 /// <reference types="../shared/types.d.ts" />
 import express from "express";
 import enableWs from "express-ws";
+import cors from "cors";
 import * as path from "path";
 import { Rooms } from "./logic";
 
@@ -19,9 +20,13 @@ if (ctr_index != -1) {
     rooms.create_test_room(process.argv[ctr_index + 1] ?? "");
 }
 
+app.use(cors({
+    origin: "http://localhost:3000"
+}));
+
 // configura o websocket, manda as connecções para rooms
 app.ws("/connect", (ws, req) => {
-    rooms.connect_socket(ws, req.query);
+    rooms.connect_socket(ws as any, req.query);
 });
 
 // configura os arquivos estáticos

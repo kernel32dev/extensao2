@@ -1,34 +1,46 @@
-Extensão 2.0
----
+# Getting Started with Create React App
 
-A versão 2.0 do projeto de extensão
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Instalando
+## Available Scripts
 
-Primeiro [instale o node](https://nodejs.org/en/download) se não já tiver instalado,
+In the project directory, you can run:
 
-e execute `npm install` para instalar os pacotes
+### `npm start`
 
-### Executando
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Para executar o servidor rode `npm run watch`, já que é watch, você não precisa reiniciar o servidor para ver suas mudanças, bastar recarregar a página
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-Caso queira apenas executar e queira servir arquivos otimizados e minificados, considere executar `npm run build` e `npm run serve` que executa o serviço em produção
+### `npm test`
 
-Quando executando, a página estará disponível em http://127.0.0.1:8080/
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Design
+### `npm run build`
 
-Isso é um site com backend que serve os arquivos e faz a lógica do servidor e um frontend que dá uma interface para que o usuário possa falar com o servidor
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-#### Frontend
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-O frontend usa uma biblioteca chamada **Levi** que te ajuda a criar elementos e atualizar eles, apesar de usarmos arquivos `.tsx` esse projeto não usa React
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Já que usamos **typescript**, precisamos compilar-lo em **javascript**, para isso usamos **Babel** para compilar em javascript, e **Webpack** para juntar os vários arquivos em apenas `script.js` e `style.css`
+### `npm run eject`
 
-#### Backend
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-O backend é um servidor http comum, ele serve três arquivos estáticos: `index.html`, `script.js` e `style.css`, e também oferece uma api **Websocket** para toda a lógica
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Websocket foi usado pois permite que o servidor atualize o cliente com mais informações em tempo real
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).

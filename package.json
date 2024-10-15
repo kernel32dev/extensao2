@@ -1,36 +1,51 @@
 {
-    "name": "extensao2",
-    "version": "0.0.0",
-    "scripts": {
-        "serve": "npx ts-node backend/main.ts",
-        "build": "npx webpack --mode production",
-        "watch": "run-p watch:*",
-        "watch:front": "npx webpack --watch",
-        "watch:back": "npx nodemon backend/main.ts --create-test-room LOL"
-    },
-    "dependencies": {
-        "@babel/cli": "*",
-        "@babel/core": "*",
-        "@babel/plugin-transform-class-properties": "*",
-        "@babel/plugin-transform-object-rest-spread": "*",
-        "@babel/plugin-transform-react-jsx": "*",
-        "@babel/preset-env": "*",
-        "@babel/preset-typescript": "*",
-        "@types/express": "*",
-        "@types/express-ws": "*",
-        "babel-loader": "*",
-        "babel-plugin-transform-dirname-filename": "*",
-        "babel-plugin-transform-line": "*",
-        "css-loader": "*",
-        "express": "*",
-        "express-ws": "*",
-        "mini-css-extract-plugin": "*",
-        "nodemon": "*",
-        "npm-run-all": "*",
-        "sass-loader": "*",
-        "ts-node": "*",
-        "typescript": "*",
-        "webpack": "*",
-        "webpack-cli": "*"
-    }
+  "name": "extensao2-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/cors": "^2.8.17",
+    "@types/express-ws": "^3.0.5",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.113",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "concurrently": "^9.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "express-ws": "^5.0.2",
+    "nodemon": "^3.1.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "sucrase": "^3.35.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "concurrently \"react-scripts start\" \"nodemon -x node -r sucrase/register backend/main.ts --create-test-room LOL\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
