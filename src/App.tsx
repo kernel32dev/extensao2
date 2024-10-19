@@ -62,11 +62,12 @@ function App() {
         break;
       }
       case "PlayerUpdated": {
+        if (!game.connected || msg.player.member_id === game.player?.member_id) break;
         setGame(game => {
           if (!game.connected) return game;
           const players = Array.from(game.players);
-          const index = players.findIndex(x => x.member_id == msg.player.member_id);
-          if (index == -1) {
+          const index = players.findIndex(x => x.member_id === msg.player.member_id);
+          if (index === -1) {
             players.push(msg.player);
           } else {
             players[index] = msg.player;
@@ -79,8 +80,8 @@ function App() {
         setGame(game => {
           if (!game.connected) return game;
           const players = Array.from(game.players);
-          const index = players.findIndex(x => x.member_id == msg.member_id);
-          if (index != -1) {
+          const index = players.findIndex(x => x.member_id === msg.member_id);
+          if (index !== -1) {
             players.splice(index, 1);
           }
           return { ...game, players };
@@ -100,6 +101,27 @@ function App() {
   return game.connected
     ? <Lobby
       game={game}
+      onMove={(pos: { x: number, y: number }) => {
+        if (game.player?.pos.x === pos.x && game.player?.pos.y === pos.y) return;
+        setGame(game => {
+          if (!game.connected || !game.player) return game;
+          const players = Array.from(game.players);
+          const index = players.findIndex(x => x.member_id === game.player!.member_id);
+          players[index] = {
+            ...game.player,
+            pos,
+          };
+          return {
+            ...game,
+            player: {
+              ...game.player,
+              pos,
+            },
+            players,
+          };
+        });
+        ws.send({ cmd: "SetPos", pos });
+      }}
       onQuit={() => ws.send({ cmd: "Quit" })}
     />
     : <Home
