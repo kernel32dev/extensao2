@@ -66,6 +66,8 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 });
                 break;
             }
+            case "Start":
+                throw new Error("comando exclusivo de Owner");
             default:
                 // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
                 msg satisfies never;
@@ -78,7 +80,10 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
             }
             case "SetName":
             case "SetPos":
-                throw new Error("evento exclusivo de Player");
+                throw new Error("comando exclusivo de Player");
+            case "Start":
+                console.log("TODO! start");
+                break;
             default:
                 // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
                 msg satisfies never;
@@ -126,15 +131,20 @@ export class Rooms {
             const member = room.new_player();
             member.add_socket(ws);
         } else if (mode === "reconnect") {
+            console.log(query);
             // sala existente, membro existente
             // valida se ele sabe o segredo
             const room = this.try_get_room(query["room"]);
+            console.log("room", room);
             if (!room) return Socket.send_bad_room_id(ws);
             const member = room.get_member(query["member"]);
+            console.log("member", member);
             const secret = Member.validate_id(query["secret"]);
+            console.log("secret", secret);
             if (member.secret_id !== secret) {
                 return Socket.send_error(ws, new Error(`Member does not exist (room_id = ${room.id}, member_id = ${member.id})`));
             }
+            console.log("success");
             member.add_socket(ws);
         } else {
             return Socket.send_error(ws, new Error(`query parameter "mode" must be specified and must be either "open", "join" or "reconnect", found: ${mode}`));
@@ -262,7 +272,7 @@ abstract class Member {
     close() {
         this.room.players.delete(this.id);
         for (let i of this.sockets) {
-            i.send({event: "Disconnected"})
+            i.send({event: "Disconnected"});
             i.close();
         }
     }
@@ -371,10 +381,12 @@ class Socket {
         this.ws.close();
     }
     static send_error(ws: WebSocket, error: any) {
+        console.log(`send_error: ${error}`);
         ws.send(JSON.stringify({ event: "Error", error: String(error) } satisfies SvrMsg.Error));
         ws.close();
     }
     static send_bad_room_id(ws: WebSocket) {
+        console.log(`bad_room_id`);
         ws.send(JSON.stringify({ event: "BadRoomId" } satisfies SvrMsg.BadRoomId));
         ws.close();
     }

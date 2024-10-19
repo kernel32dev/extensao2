@@ -23,7 +23,7 @@ export default function HomePage({onJoin, onOpen}: { onJoin(roomId: string): voi
             <h3>Se você for um estudante:</h3>
             <h4>Entre na sala pelo código!</h4>
             <br />
-            <input type="text" ref={roomInput} onInput={roomIdInputHandler} />
+            <input type="text" ref={roomInput} onInput={roomIdInputHandler} defaultValue={""} />
           </div>
           <div className="home-choice">
             <h3>Se você for um professor:</h3>

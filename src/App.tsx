@@ -34,6 +34,9 @@ export type GameConnected = {
 function App() {
   const [game, setGame] = useState<Game>({ connected: false });
   const [ws] = useState(() => new GameSocket());
+  const [lastX, setLastX] = useState(0);
+  const [lastY, setLastY] = useState(0);
+  const minimumToSend = 0.05;
   ws.handler = msg => {
     switch (msg.event) {
       case "Connected": {
@@ -62,9 +65,12 @@ function App() {
         break;
       }
       case "PlayerUpdated": {
-        if (!game.connected || msg.player.member_id === game.player?.member_id) break;
+        if (!game.connected) break;
         setGame(game => {
           if (!game.connected) return game;
+          if (msg.player.member_id === game.player?.member_id) {
+            msg.player.pos = game.player.pos;
+          }
           const players = Array.from(game.players);
           const index = players.findIndex(x => x.member_id === msg.player.member_id);
           if (index === -1) {
@@ -96,13 +102,22 @@ function App() {
   }
   useEffect(() => {
     ws.connect();
-    return () => ws.disconnect();
+    return () => {
+      console.log("useEffect: DISCONNECT DISCONNECT DISCONNECT");
+      ws.disconnect();
+    };
   }, []);
   return game.connected
     ? <Lobby
       game={game}
       onMove={(pos: { x: number, y: number }) => {
         if (game.player?.pos.x === pos.x && game.player?.pos.y === pos.y) return;
+        if ((lastX - pos.x) * (lastX - pos.x) + (lastY - pos.y) * (lastY - pos.y) > minimumToSend * minimumToSend) {
+          setLastX(pos.x);
+          setLastY(pos.y);
+          ws.send({ cmd: "SetPos", pos });
+          console.log(pos);
+        }
         setGame(game => {
           if (!game.connected || !game.player) return game;
           const players = Array.from(game.players);
@@ -120,13 +135,26 @@ function App() {
             players,
           };
         });
-        ws.send({ cmd: "SetPos", pos });
       }}
-      onQuit={() => ws.send({ cmd: "Quit" })}
+      onQuit={() => {
+        if (window.confirm(
+          game.player
+            ? "Certeza que quer sair?\nNão é possível voltar!"
+            : "Certeza que quer fechar a sala?\nNão é possível abrir novamente!"
+        )) ws.send({ cmd: "Quit" });
+      }}
+      onNameChange={(name: string) => ws.send({ cmd: "SetName", name })}
+      onGameStart={() => ws.send({ cmd: "Start" })}
     />
     : <Home
-      onJoin={roomId => ws.connect({ mode: "join", room: roomId })}
-      onOpen={() => ws.connect({ mode: "open" })}
+      onJoin={roomId => {
+        console.log("onJoin");
+        ws.connect({ mode: "join", room: roomId });
+      }}
+      onOpen={() => {
+        console.log("onOpen");
+        ws.connect({ mode: "open" });
+      }}
     />
 }
 

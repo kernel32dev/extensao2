@@ -41,6 +41,7 @@ type CliMsg =
 | CliMsg.SetName
 | CliMsg.SetPos
 | CliMsg.Quit
+| CliMsg.Start
 
 declare namespace CliMsg {
     type SetName = {
@@ -53,6 +54,9 @@ declare namespace CliMsg {
     }
     type Quit = {
         cmd: "Quit",
+    }
+    type Start = {
+        cmd: "Start",
     }
 }
 

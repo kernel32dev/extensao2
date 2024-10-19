@@ -27,12 +27,7 @@ export class GameSocket {
         }
     }
     public connect(mode?: ConnectionMode): this {
-        if (this.ws) {
-            this.ws.onmessage = null;
-            this.ws.onerror = null;
-            this.ws.onclose = null;
-            this.ws = null;
-        }
+        this.disconnect();
 
         this.mode = mode ?? this.mode;
         if (!this.mode) return this;
@@ -57,40 +52,55 @@ export class GameSocket {
         return this;
     }
     public disconnect() {
-        storage.save("");
         if (this.ws) {
             this.ws.onmessage = null;
             this.ws.onerror = null;
             this.ws.onclose = null;
+            this.ws.close();
             this.ws = null;
         }
     }
     public send(...msg: CliMsg[]) {
-        if (this.ws && this.ws.readyState == WebSocket.OPEN) {
+        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
             for (let i = 0; i < msg.length; i++) {
                 this.ws.send(JSON.stringify(msg[i]));
+                if (msg[i].cmd === "Quit") {
+                    this.quit();
+                    return;
+                }
             }
         } else {
             this.queue.push(...msg);
         }
     }
+    private quit() {
+        if (this.handler) this.handler({ event: "Disconnected" });
+        storage.save("");
+        this.mode = null;
+        this.disconnect();
+    }
     private onmessage = (msg: MessageEvent) => {
-        if (this.handler && this.ws && typeof msg.data == "string") {
+        if (this.handler && this.ws && typeof msg.data === "string") {
             const parsed = JSON.parse(msg.data) as SvrMsg;
-            if (parsed.event == "Connected") {
+            if (parsed.event === "Connected") {
                 const new_mode: ConnectionMode = {
                     mode: "reconnect",
                     member: parsed.member_id,
                     room: parsed.room_id,
                     secret: parsed.secret,
                 };
+                this.mode = new_mode;
                 storage.save(JSON.stringify(new_mode));
                 const queue = this.queue.splice(0, this.queue.length);
                 for (let i = 0; i < queue.length; i++) {
                     this.ws.send(JSON.stringify(queue[i]));
+                    if (queue[i].cmd === "Quit") {
+                        this.quit();
+                        return;
+                    }
                 }
-            } else if (parsed.event == "BadRoomId") {
-                this.disconnect();
+            } else if (parsed.event === "BadRoomId") {
+                this.quit();
             }
             this.handler(parsed);
         }

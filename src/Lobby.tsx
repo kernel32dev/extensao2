@@ -2,12 +2,15 @@ import { useRef, useState } from "react";
 import { GameConnected } from "./App";
 import "./Lobby.css";
 
-export default function Lobby({ game, onMove, onQuit }: {
+export default function Lobby({ game, onMove, onQuit, onNameChange, onGameStart }: {
   game: GameConnected,
   onMove(pos: { x: number, y: number }): void,
   onQuit(): void,
+  onNameChange(name: string): void,
+  onGameStart(): void,
 }) {
   const lobbyPlayground = useRef<HTMLDivElement>(null!);
+  const nameInput = useRef<HTMLInputElement>(null!);
   function moveHandler(ev: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>) {
     const e = ev.nativeEvent;
     let x = 0, y = 0;
@@ -52,7 +55,29 @@ export default function Lobby({ game, onMove, onQuit }: {
   return (
     <div className="lobby-page">
       <div className="lobby-header">
-
+        {
+          game.player != null
+            ? // quando for jogador
+            <div className="player-config">
+              <span>Esperando o professor começar o jogo...</span>
+              <label>
+                Mudar seu nome: &nbsp;
+                <input ref={nameInput} type="text" maxLength={16} onInput={() => onNameChange(nameInput.current.value)} defaultValue={game.player.name} />
+              </label>
+            </div>
+            : // quando for o dono
+            <div className="owner-control">
+              <button onClick={onGameStart}>Começar o jogo</button>
+            </div>
+        }
+        <div className="lobby-room-id-area">
+          <span className="lobby-room-id-label">Código da sala:</span>
+          <br />
+          <span className="lobby-room-id-text">{game.connected && game.room_id}</span>
+        </div>
+        <div className="lobby-leave-room">
+          <button onClick={onQuit}>{game.player != null ? "Sair da sala" : "Fechar a sala"}</button>
+        </div>
       </div>
       <div className="player-arena" ref={lobbyPlayground} onMouseMove={moveHandler} onTouchStart={moveHandler} onTouchMove={moveHandler}>
         {game.players.map(player => <Player key={player.member_id} player={player} />)}
@@ -88,7 +113,7 @@ function Player({ player }: { player: Shared.Player }) {
     }, 100);
   }
 
-  const cor = "#FF0000";
+  const cor = "#" + player.member_id.substring(0, 6);
   return (
     <div
       className={"player-character"}
