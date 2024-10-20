@@ -27,6 +27,7 @@ function handle_new_socket(sck: Socket) {
         secret: member.secret_id,
         owner: room.owner.to_shared(),
         players: [...room.players.values()].map(x => x.to_shared()),
+        challenge: sck.member.room.challenge && sck.member.room.challenge.serialize(sck.member),
     });
     if (sck.member instanceof Player) {
         // caso a nova coneção seja um jogador, informa todo mundo que ele chegou,
@@ -68,9 +69,28 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
             }
             case "Start":
                 throw new Error("comando exclusivo de Owner");
+            case "ChallengeQuizAnswer":
+                if (sck.member.room.challenge instanceof ChallengeQuiz) {
+                    sck.member.room.challenge.set_answer(sck.member.id, msg.index, msg.value);
+                    sck.member.room.owner.send({
+                        event: "ChallengeQuizAnswered",
+                        index: msg.index,
+                        value: sck.member.room.challenge.get_answer(sck.member.room.owner.id, msg.index),
+                        miss_count: 0,
+                    });
+                    for (const i of sck.member.room.players.values()) {
+                        i.send({
+                            event: "ChallengeQuizAnswered",
+                            index: msg.index,
+                            value: sck.member.room.challenge.get_answer(i.id, msg.index),
+                            miss_count: sck.member.room.challenge.miss_map.get(i.id) || 0,
+                        });
+                    }
+                }
+                break;
             default:
-                // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
-                msg satisfies never;
+                // a linha abaixo vai dar erro se tiver um cmd que ainda não foi tratado
+                console.error("tipo de mensagem do cliente desconhecida : " + ((msg satisfies never) as CliMsg).cmd);
         }
     } else if (sck.member instanceof Owner) {
         switch (msg.cmd) {
@@ -80,13 +100,24 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
             }
             case "SetName":
             case "SetPos":
+            case "ChallengeQuizAnswer":
                 throw new Error("comando exclusivo de Player");
             case "Start":
-                console.log("TODO! start");
+                sck.member.room.challenge = new ChallengeQuiz();
+                sck.member.send({
+                    event: "Challenge",
+                    challenge: sck.member.room.challenge.serialize(sck.member),
+                });
+                for (const i of sck.member.room.players.values()) {
+                    i.send({
+                        event: "Challenge",
+                        challenge: sck.member.room.challenge.serialize(sck.member),
+                    });
+                }
                 break;
             default:
-                // a linha abaixo vai dar erro se tiver um event que ainda não foi tratado
-                msg satisfies never;
+                // a linha abaixo vai dar erro se tiver um cmd que ainda não foi tratado
+                console.error("tipo de mensagem do cliente desconhecida : " + ((msg satisfies never) as CliMsg).cmd);
         }
     }
 }
@@ -108,14 +139,14 @@ export class Rooms {
         (room as any)["id"] = Room.validate_id(room_key);
         this.rooms.set(room.id, room);
         console.log("=============================================\n"
-        + "Sala de teste criada, (room_id = " + room_key + ")\n"
-        + "Isso significa que o programa foi chamado com a flag --create-test-room ${room_key}\n"
-        + "Você não quer ver isso em produção\n"
-        + "\n"
-        + "Caso queira executar em produção execute:\n"
-        + "npm run build\n"
-        + "npm run serve\n"
-        + "=============================================\n");
+            + "Sala de teste criada, (room_id = " + room_key + ")\n"
+            + "Isso significa que o programa foi chamado com a flag --create-test-room ${room_key}\n"
+            + "Você não quer ver isso em produção\n"
+            + "\n"
+            + "Caso queira executar em produção execute:\n"
+            + "npm run build\n"
+            + "npm run serve\n"
+            + "=============================================\n");
         return room;
     }
     public connect_socket(ws: WebSocket, query: Record<string, unknown>) {
@@ -162,6 +193,8 @@ class Room {
     readonly players = new Map<string, Player>();
     /** o dono da sala */
     readonly owner = new Owner(this);
+    /** o desafio atualemente rodando */
+    public challenge: Challenge | null = null;
 
     constructor(rooms: Rooms) {
         this.rooms = rooms;
@@ -272,7 +305,7 @@ abstract class Member {
     close() {
         this.room.players.delete(this.id);
         for (let i of this.sockets) {
-            i.send({event: "Disconnected"});
+            i.send({ event: "Disconnected" });
             i.close();
         }
     }
@@ -389,5 +422,63 @@ class Socket {
         console.log(`bad_room_id`);
         ws.send(JSON.stringify({ event: "BadRoomId" } satisfies SvrMsg.BadRoomId));
         ws.close();
+    }
+}
+
+abstract class Challenge {
+    abstract serialize(member: Member): Shared.Challenge;
+}
+
+class ChallengeQuiz extends Challenge {
+    readonly answers: number[] = [];
+    readonly answer_map = new Map<string, Set<number>>();
+    readonly miss_map = new Map<string, number>();
+    constructor(readonly question_set_id: string = "default") {
+        super();
+    }
+    override serialize(member: Member): Shared.Challenge.Quiz {
+        const member_id = member.id;
+        const set = this.answer_map.get(member_id);
+        return {
+            id: "Quiz",
+            question_set_id: this.question_set_id,
+            answers: this.answers.map((x, index) =>
+                x >= 0 // se a resposta ainda não tiver sido acertada
+                    && set?.has(index) // e você já tentou ela
+                    ? -2 // então omite dizendo que você já tentou
+                    : x // senão mostra o valor atual (seja acerto ou tentativas prévias de outros jogadores)
+            ),
+            miss_count: this.miss_map.get(member_id) || 0,
+        }
+    }
+    public get_answer(member_id: string, index: number): number {
+        const arr = this.answers;
+        return arr[index] >= 0  // se a resposta ainda não tiver sido acertada
+            && this.answer_map.get(member_id)?.has(index)  // e você já tentou ela
+            ? -2 // então omite dizendo que você já tentou
+            : arr[index]; // senão mostra o valor atual (seja acerto ou tentativas prévias de outros jogadores)
+    }
+    public set_answer(member_id: string, index: number, value: number) {
+        const max_miss_count: Shared.QuizMaxMissCount = 4;
+        const arr = this.answers;
+        if (index >= 256) throw new RangeError(`answer index: ${index} too large (>= 256)`);
+        if (value >= 30) throw new RangeError(`value index: ${value} too large (>= 30)`);
+        let set = this.answer_map.get(member_id);
+        if (!set) this.answer_map.set(member_id, set = new Set());
+        if (set.has(index)) return;
+        const miss_count = this.miss_map.get(member_id) || 0;
+        if (miss_count >= max_miss_count) return;
+        set.add(index);
+        if (index >= arr.length) {
+            const old_length = arr.length;
+            arr.length = index;
+            arr.fill(0, old_length);
+        }
+        if (arr[index] < 0 || value < 0) {
+            arr[index] = -1;
+        } else {
+            this.miss_map.set(member_id, miss_count + 1);
+            arr[index] |= 1 << value;
+        }
     }
 }

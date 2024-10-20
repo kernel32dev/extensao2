@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { GameSocket } from './socket';
 import Home from './Home';
 import Lobby from './Lobby';
+import Challenge from './Challenge';
 
 /** o estado do jogo, esse estado é usado para atualizar praticamente tudo do jogo
  *
@@ -29,9 +30,14 @@ export type GameConnected = {
   owner: Shared.Owner,
   /** os membro que são jogadores dentro da sala */
   players: Shared.Player[],
+  /** o desafio que está atualmente rodando */
+  challenge: Shared.Challenge | null,
 };
 
-function App() {
+export type GameChallenge = GameConnected & { challenge: {} };
+//export type GameChallenge = {[P in keyof GameConnected]: P extends "challenge" ? GameConnected[P] & {} : GameConnected[P]};
+
+export default function App() {
   const [game, setGame] = useState<Game>({ connected: false });
   const [ws] = useState(() => new GameSocket());
   const [lastX, setLastX] = useState(0);
@@ -47,6 +53,7 @@ function App() {
           room_id: msg.room_id,
           secret: msg.secret,
           player: msg.players.find(player => player.member_id === msg.member_id) ?? null,
+          challenge: msg.challenge,
         });
         break;
       }
@@ -94,6 +101,22 @@ function App() {
         });
         break;
       }
+      case "Challenge": {
+        setGame(game => {
+          if (!game.connected) return game;
+          return { ...game, challenge: msg.challenge };
+        });
+        break;
+      }
+      case "ChallengeQuizAnswered": {
+        setGame(game => {
+          if (!game.connected || !game.challenge || game.challenge.id !== "Quiz") return game;
+          const answers = Array.from(game.challenge.answers);
+          answers[msg.index] = msg.value;
+          return { ...game, challenge: { ...game.challenge, answers, miss_count: msg.miss_count } };
+        });
+        break;
+      }
       default:
         // se a linha abaixo der um erro de tipagem no satisfies
         // é porque algum tipo de evento não foi tratado
@@ -103,50 +126,12 @@ function App() {
   useEffect(() => {
     ws.connect();
     return () => {
-      console.log("useEffect: DISCONNECT DISCONNECT DISCONNECT");
+      console.log("useEffect: disconnect");
       ws.disconnect();
     };
-  }, []);
-  return game.connected
-    ? <Lobby
-      game={game}
-      onMove={(pos: { x: number, y: number }) => {
-        if (game.player?.pos.x === pos.x && game.player?.pos.y === pos.y) return;
-        if ((lastX - pos.x) * (lastX - pos.x) + (lastY - pos.y) * (lastY - pos.y) > minimumToSend * minimumToSend) {
-          setLastX(pos.x);
-          setLastY(pos.y);
-          ws.send({ cmd: "SetPos", pos });
-          console.log(pos);
-        }
-        setGame(game => {
-          if (!game.connected || !game.player) return game;
-          const players = Array.from(game.players);
-          const index = players.findIndex(x => x.member_id === game.player!.member_id);
-          players[index] = {
-            ...game.player,
-            pos,
-          };
-          return {
-            ...game,
-            player: {
-              ...game.player,
-              pos,
-            },
-            players,
-          };
-        });
-      }}
-      onQuit={() => {
-        if (window.confirm(
-          game.player
-            ? "Certeza que quer sair?\nNão é possível voltar!"
-            : "Certeza que quer fechar a sala?\nNão é possível abrir novamente!"
-        )) ws.send({ cmd: "Quit" });
-      }}
-      onNameChange={(name: string) => ws.send({ cmd: "SetName", name })}
-      onGameStart={() => ws.send({ cmd: "Start" })}
-    />
-    : <Home
+  }, [ws]);
+  return !game.connected
+    ? <Home
       onJoin={roomId => {
         console.log("onJoin");
         ws.connect({ mode: "join", room: roomId });
@@ -156,6 +141,49 @@ function App() {
         ws.connect({ mode: "open" });
       }}
     />
+    : !game.challenge
+      ? <Lobby
+        game={game}
+        onMove={(pos: { x: number, y: number }) => {
+          if (game.player?.pos.x === pos.x && game.player?.pos.y === pos.y) return;
+          if ((lastX - pos.x) * (lastX - pos.x) + (lastY - pos.y) * (lastY - pos.y) > minimumToSend * minimumToSend) {
+            setLastX(pos.x);
+            setLastY(pos.y);
+            ws.send({ cmd: "SetPos", pos });
+            console.log(pos);
+          }
+          setGame(game => {
+            if (!game.connected || !game.player) return game;
+            const players = Array.from(game.players);
+            const index = players.findIndex(x => x.member_id === game.player!.member_id);
+            players[index] = {
+              ...game.player,
+              pos,
+            };
+            return {
+              ...game,
+              player: {
+                ...game.player,
+                pos,
+              },
+              players,
+            };
+          });
+        }}
+        onQuit={() => {
+          if (window.confirm(
+            game.player
+              ? "Certeza que quer sair?\nNão é possível voltar!"
+              : "Certeza que quer fechar a sala?\nNão é possível abrir novamente!"
+          )) ws.send({ cmd: "Quit" });
+        }}
+        onNameChange={(name: string) => ws.send({ cmd: "SetName", name })}
+        onGameStart={() => ws.send({ cmd: "Start" })}
+      />
+      : <Challenge
+        game={game as GameChallenge}
+        onQuizAnswer={(index, value) => {
+          ws.send({ cmd: "ChallengeQuizAnswer", index, value });
+        }}
+      />
 }
-
-export default App;
