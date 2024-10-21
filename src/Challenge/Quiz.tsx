@@ -48,7 +48,7 @@ export default function Quiz({ game, onAnswer }: { game: GameChallengeQuiz, onAn
                 <br />
                 Se você errar uma pergunta outra pessoa pode tentar responder de novo!
                 <br />
-                Se você cometer erros demais você não poderá mais responder questões! Cuidado!
+                Se você cometer erros demais você não poderá mais responder questões!
                 <br />
                 Erros até agora: {game.challenge.miss_count} / {max_miss_count}
                 {

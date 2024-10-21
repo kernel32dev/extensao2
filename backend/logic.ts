@@ -59,6 +59,14 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 });
                 break;
             }
+            case "SetTeam": {
+                sck.member.team = msg.team;
+                sck.member.room.send({
+                    event: "PlayerUpdated",
+                    player: sck.member.to_shared(),
+                });
+                break;
+            }
             case "SetPos": {
                 sck.member.pos = msg.pos;
                 sck.member.room.send({
@@ -99,6 +107,7 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 break;
             }
             case "SetName":
+            case "SetTeam":
             case "SetPos":
             case "ChallengeQuizAnswer":
                 throw new Error("comando exclusivo de Player");
@@ -159,7 +168,13 @@ export class Rooms {
             // sala existente, novo jogador
             const room = this.try_get_room(query["room"]);
             if (!room) return Socket.send_bad_room_id(ws);
-            const member = room.new_player();
+            const true_team_length = Array.from(room.players.values()).filter(x => x.team).length;
+            const false_team_length = room.players.size - true_team_length;
+            const member = room.new_player(
+                true_team_length > false_team_length ? false
+                : true_team_length < false_team_length ? true
+                : Math.random() > 0.5
+            );
             member.add_socket(ws);
         } else if (mode === "reconnect") {
             console.log(query);
@@ -203,8 +218,8 @@ class Room {
         } while (rooms.rooms.has(this.id));
     }
 
-    new_player(): Player {
-        const player = new Player(this);
+    new_player(team: boolean): Player {
+        const player = new Player(this, team);
         this.players.set(player.id, player);
         return player;
     }
@@ -347,15 +362,18 @@ class Owner extends Member {
 class Player extends Member {
     name: string;
     pos: Shared.Point;
-    constructor(room: Room) {
+    team: boolean;
+    constructor(room: Room, team: boolean) {
         super(room);
         this.name = "Aluno #" + room.players.size;
         this.pos = { x: Math.random(), y: Math.random() };
+        this.team = team;
     }
     override to_shared(): Shared.Player {
         return {
             name: this.name,
             pos: this.pos,
+            team: this.team,
             ...super.to_shared()
         }
     }

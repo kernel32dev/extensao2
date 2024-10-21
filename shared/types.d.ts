@@ -54,6 +54,7 @@ declare namespace SvrMsg {
 
 type CliMsg =
 | CliMsg.SetName
+| CliMsg.SetTeam
 | CliMsg.SetPos
 | CliMsg.Quit
 | CliMsg.Start
@@ -63,6 +64,10 @@ declare namespace CliMsg {
     type SetName = {
         cmd: "SetName",
         name: string,
+    }
+    type SetTeam = {
+        cmd: "SetTeam",
+        team: boolean,
     }
     type SetPos = {
         cmd: "SetPos",
@@ -94,6 +99,7 @@ declare namespace Shared {
     interface Player extends Member {
         name: string,
         pos: Point,
+        team: boolean,
     }
     interface Owner extends Member {}
 

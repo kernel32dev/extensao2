@@ -2,17 +2,19 @@ import { useRef, useState } from "react";
 import { GameConnected } from "./App";
 import "./Lobby.css";
 
-export default function Lobby({ game, onMove, onQuit, onNameChange, onGameStart }: {
+export default function Lobby({ game, onMove, onQuit, onNameChange, onTeamChange, onGameStart }: {
   game: GameConnected,
   onMove(pos: { x: number, y: number }): void,
   onQuit(): void,
   onNameChange(name: string): void,
+  onTeamChange(team: boolean): void,
   onGameStart(): void,
 }) {
   const lobbyPlayground = useRef<HTMLDivElement>(null!);
   const nameInput = useRef<HTMLInputElement>(null!);
   function moveHandler(ev: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>) {
     const e = ev.nativeEvent;
+    ev.nativeEvent.preventDefault();
     let x = 0, y = 0;
     if (e instanceof MouseEvent) {
       if ((e.buttons & 1) === 0) return;
@@ -55,28 +57,63 @@ export default function Lobby({ game, onMove, onQuit, onNameChange, onGameStart 
   return (
     <div className="lobby-page">
       <div className="lobby-header">
+        <div className="lobby-header-row">
+          <div className="lobby-room-id-area">
+            <span className="lobby-room-id-label">Código da sala:</span>
+            <br />
+            <span className="lobby-room-id-text">{game.connected && game.room_id}</span>
+          </div>
+        </div>
+        <div className="lobby-header-row">
+          <div className="lobby-header-column">
+            <button onClick={onQuit}>{game.player != null ? "Sair da sala" : "Fechar a sala"}</button>
+          </div>
+        </div>
         {
           game.player != null
             ? // quando for jogador
-            <div className="player-config">
-              <span>Esperando o professor começar o jogo...</span>
-              <label>
-                Mudar seu nome: &nbsp;
-                <input ref={nameInput} type="text" maxLength={16} onInput={() => onNameChange(nameInput.current.value)} defaultValue={game.player.name} />
-              </label>
-            </div>
+            <>
+              <div className="lobby-header-row">
+                <div className="player-config">
+                  <span>O jogo começará em breve...</span>
+                  <label>
+                    Seu nome: &nbsp;
+                    <input ref={nameInput} type="text" maxLength={16} onInput={() => onNameChange(nameInput.current.value)} defaultValue={game.player.name} />
+                  </label>
+                </div>
+              </div>
+              <div className="lobby-header-row">
+                <div className="lobby-header-column">
+                  {
+                    game.player.team
+                      ? <>
+                        <p>Você está no time <span style={{ color: "blue" }}>Azul</span></p>
+                        <button onClick={() => onTeamChange(false)}>Ir para o time vermelho</button>
+                      </>
+                      : <>
+                        <p>Você está no time <span style={{ color: "red" }}>Vermelho</span></p>
+                        <button onClick={() => onTeamChange(true)}>Ir para o time azul</button>
+                      </>
+                  }
+                </div>
+              </div>
+            </>
             : // quando for o dono
-            <div className="owner-control">
-              <button onClick={onGameStart}>Começar o jogo</button>
+            <div className="lobby-header-row">
+              <div className="owner-control">
+                <button onClick={onGameStart}>Começar o jogo</button>
+              </div>
             </div>
         }
-        <div className="lobby-room-id-area">
-          <span className="lobby-room-id-label">Código da sala:</span>
-          <br />
-          <span className="lobby-room-id-text">{game.connected && game.room_id}</span>
-        </div>
-        <div className="lobby-leave-room">
-          <button onClick={onQuit}>{game.player != null ? "Sair da sala" : "Fechar a sala"}</button>
+        <div className="lobby-header-row">
+          <div className="lobby-header-column">
+            <p>Times:</p>
+            <p>
+              <span style={{ color: "red" }}>{game.players.filter(x => !x.team).length}</span>
+              <span>/</span>
+              <span style={{ color: "blue" }}>{game.players.filter(x => x.team).length}</span>
+            </p>
+          </div>
         </div>
       </div>
       <div className="player-arena" ref={lobbyPlayground} onMouseMove={moveHandler} onTouchStart={moveHandler} onTouchMove={moveHandler}>
@@ -125,7 +162,7 @@ function Player({ player }: { player: Shared.Player }) {
         "--z": String(Math.floor(player.pos.y * 1000)),
       } as React.CSSProperties}
     >
-      <div className="player-name">{player.name}</div>
+      <div className={"player-name " + (player.team ? "blue" : "red")}>{player.name}</div>
       <div ref={div_ref} className={"player-img" + (walking ? " walking" : "")}>
         <div className="player-img2" style={{
           backgroundImage: `url("/player.png")`,

@@ -64,7 +64,7 @@ export default function App() {
         break;
       }
       case "BadRoomId": {
-        alert("BadRoomId");
+        //alert("BadRoomId");
         break;
       }
       case "Error": {
@@ -85,7 +85,11 @@ export default function App() {
           } else {
             players[index] = msg.player;
           }
-          return { ...game, players };
+          if (msg.player.member_id === game.player?.member_id) {
+            return { ...game, players, player: msg.player };
+          } else {
+            return { ...game, players };
+          }
         });
         break;
       }
@@ -170,6 +174,7 @@ export default function App() {
             };
           });
         }}
+        onTeamChange={(team: boolean) => ws.send({ cmd: "SetTeam", team })}
         onQuit={() => {
           if (window.confirm(
             game.player

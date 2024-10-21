@@ -35,12 +35,23 @@
     background-color: #00000010;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1em;
+}
+.lobby-header-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 .player-config {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .lobby-room-id-area {
@@ -54,9 +65,10 @@
 .lobby-room-id-text {
     font-size: larger;
 }
-.lobby-leave-room {
+.lobby-header-column {
     padding: 0 1em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -98,10 +110,19 @@
     transition: none;
 }
 .player-name {
-    background-color: #00000060;
+    background-color: #00000080;
     padding: 0.1em 0.3em;
     color: white;
     white-space: pre;
+    border: 2px solid black;
+}
+.player-name.red {
+    background-color: #30000080;
+    border-color: red;
+}
+.player-name.blue {
+    background-color: #00003080;
+    border-color: blue;
 }
 .player-img {
     width: 3em;
