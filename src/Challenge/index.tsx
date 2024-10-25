@@ -1,14 +1,17 @@
 import { GameChallenge } from "../App";
-import Quiz from "./Quiz";
+import Quiz, { GameChallengeQuiz } from "./Quiz";
+import WordHunt, { GameChallengeWordHunt } from "./WordHunt";
 
-export default function Challenge({game, onQuizAnswer}: {game: GameChallenge, onQuizAnswer(index: number, value: number): void}) {
+export default function Challenge({game, onQuizAnswer, onWordHuntAnswer}: {game: GameChallenge, onQuizAnswer(index: number, value: number): void, onWordHuntAnswer(index: number): void}) {
     switch (game.challenge.id) {
         case "Quiz":
-            return <Quiz game={game} onAnswer={onQuizAnswer} />
+            return <Quiz game={game as GameChallengeQuiz} onAnswer={onQuizAnswer} />
+        case "WordHunt":
+            return <WordHunt game={game as GameChallengeWordHunt} onAnswer={onWordHuntAnswer}/>;
+            break;
         default:
             // a linha abaixo vai dar erro se tiver um challenge que ainda não foi tratado
-            // TODO! descomentar a linha abaixo quando um segundo tipo de challenge aparecer
-            //console.error("tipo de challenge do servidor desconhecida : " + ((game satisfies never) as GameChallenge).challenge.id);
+            console.error("tipo de challenge do servidor desconhecida : " + ((game.challenge satisfies never) as GameChallenge["challenge"]).id);
             return <></>;
             
     }

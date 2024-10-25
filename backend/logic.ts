@@ -30,6 +30,10 @@ function handle_new_socket(sck: Socket) {
         challenge: sck.member.room.challenge && sck.member.room.challenge.serialize(sck.member),
     });
     if (sck.member instanceof Player) {
+        console.log(sck.member.room);
+        if (sck.member.room.id == "LOL" && sck.member.room.challenge === null) {
+            sck.member.room.start_challenges();
+        }
         // caso a nova coneção seja um jogador, informa todo mundo que ele chegou,
         sck.member.room.send(
             { event: "PlayerUpdated", player: sck.member.to_shared() },
@@ -96,6 +100,17 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                     }
                 }
                 break;
+            case "ChallengeWordHuntAnswer":
+                if (sck.member.room.challenge instanceof ChallengeWordHunt) {
+                    const answer = sck.member.room.challenge.set_answer(msg.index, sck.member.team);
+                    if (!answer) break;
+                    sck.member.room.send({
+                        event: "ChallengeWordHuntAnswered",
+                        index: answer.index,
+                        team: answer.team,
+                    });
+                }
+                break;
             default:
                 // a linha abaixo vai dar erro se tiver um cmd que ainda não foi tratado
                 console.error("tipo de mensagem do cliente desconhecida : " + ((msg satisfies never) as CliMsg).cmd);
@@ -110,19 +125,10 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
             case "SetTeam":
             case "SetPos":
             case "ChallengeQuizAnswer":
+            case "ChallengeWordHuntAnswer":
                 throw new Error("comando exclusivo de Player");
             case "Start":
-                sck.member.room.challenge = new ChallengeQuiz();
-                sck.member.send({
-                    event: "Challenge",
-                    challenge: sck.member.room.challenge.serialize(sck.member),
-                });
-                for (const i of sck.member.room.players.values()) {
-                    i.send({
-                        event: "Challenge",
-                        challenge: sck.member.room.challenge.serialize(sck.member),
-                    });
-                }
+                sck.member.room.start_challenges();
                 break;
             default:
                 // a linha abaixo vai dar erro se tiver um cmd que ainda não foi tratado
@@ -172,25 +178,20 @@ export class Rooms {
             const false_team_length = room.players.size - true_team_length;
             const member = room.new_player(
                 true_team_length > false_team_length ? false
-                : true_team_length < false_team_length ? true
-                : Math.random() > 0.5
+                    : true_team_length < false_team_length ? true
+                        : Math.random() > 0.5
             );
             member.add_socket(ws);
         } else if (mode === "reconnect") {
-            console.log(query);
             // sala existente, membro existente
             // valida se ele sabe o segredo
             const room = this.try_get_room(query["room"]);
-            console.log("room", room);
             if (!room) return Socket.send_bad_room_id(ws);
             const member = room.get_member(query["member"]);
-            console.log("member", member);
             const secret = Member.validate_id(query["secret"]);
-            console.log("secret", secret);
             if (member.secret_id !== secret) {
                 return Socket.send_error(ws, new Error(`Member does not exist (room_id = ${room.id}, member_id = ${member.id})`));
             }
-            console.log("success");
             member.add_socket(ws);
         } else {
             return Socket.send_error(ws, new Error(`query parameter "mode" must be specified and must be either "open", "join" or "reconnect", found: ${mode}`));
@@ -257,6 +258,20 @@ class Room {
         }
     }
 
+    start_challenges() {
+        this.challenge = new ChallengeWordHunt();
+        this.owner.send({
+            event: "Challenge",
+            challenge: this.challenge.serialize(this.owner),
+        });
+        for (const i of this.players.values()) {
+            i.send({
+                event: "Challenge",
+                challenge: this.challenge.serialize(i),
+            });
+        }
+    }
+
     static readonly id_length = 3;
     static readonly id_regex = /^[BCDFGHJKLMNPQRSTVWXYZ][AEIOU][BCDFGHJKLMNPQRSTVWXYZ]$/;
 
@@ -271,6 +286,8 @@ class Room {
     /** retorna uma nova chave da sala, aleatória, possívelmente duplicada */
     static gen_id(): string {
         const key = gen_consonant() + gen_vowel() + gen_consonant();
+        // nunca gera o código LOL
+        if (key === "LOL") return this.gen_id();
         // valida para dar erro se tiver um erro nas funções abaixo
         return Room.validate_id(key);
 
@@ -306,7 +323,6 @@ abstract class Member {
             this,
             ws
         );
-        this.sockets.add(sck);
         return sck;
     }
     send(message: SvrMsg | string, exclude?: Socket) {
@@ -413,6 +429,7 @@ class Socket {
         };
         this.ws.onclose = close_handler;
         this.ws.onerror = close_handler;
+        member.sockets.add(this);
         try {
             handle_new_socket(this);
         } catch (e) {
@@ -498,5 +515,29 @@ class ChallengeQuiz extends Challenge {
             this.miss_map.set(member_id, miss_count + 1);
             arr[index] |= 1 << value;
         }
+    }
+}
+
+class ChallengeWordHunt extends Challenge {
+    readonly seed = String(Math.random());
+    readonly answers: { index: number, team: boolean }[] = [];
+    constructor(readonly words_set_id: string = "default") {
+        super();
+    }
+    override serialize(member: Member): Shared.Challenge {
+        return {
+            id: "WordHunt",
+            words_set_id: this.words_set_id,
+            seed: this.seed,
+            answers: this.answers,
+        }
+    }
+    public set_answer(index: number, team: boolean) {
+        if (this.answers.find(x => x.index == index)) {
+            return null;
+        }
+        const answer = { index, team };
+        this.answers.push(answer);
+        return answer;
     }
 }

@@ -1,14 +1,15 @@
 // esse arquivo é usado para compartilhar os tipos entre o front end e o back end
 
 type SvrMsg =
-| SvrMsg.Connected
-| SvrMsg.Disconnected
-| SvrMsg.BadRoomId
-| SvrMsg.Error
-| SvrMsg.PlayerUpdated
-| SvrMsg.PlayerRemoved
-| SvrMsg.Challenge
-| SvrMsg.ChallengeQuizAnswered
+    | SvrMsg.Connected
+    | SvrMsg.Disconnected
+    | SvrMsg.BadRoomId
+    | SvrMsg.Error
+    | SvrMsg.PlayerUpdated
+    | SvrMsg.PlayerRemoved
+    | SvrMsg.Challenge
+    | SvrMsg.ChallengeQuizAnswered
+    | SvrMsg.ChallengeWordHuntAnswered
 
 declare namespace SvrMsg {
     type Connected = {
@@ -50,15 +51,21 @@ declare namespace SvrMsg {
         /** o número atualizado de quantas questões você errou até agora */
         miss_count: number,
     };
+    type ChallengeWordHuntAnswered = {
+        event: "ChallengeWordHuntAnswered",
+        index: number,
+        team: boolean,
+    };
 }
 
 type CliMsg =
-| CliMsg.SetName
-| CliMsg.SetTeam
-| CliMsg.SetPos
-| CliMsg.Quit
-| CliMsg.Start
-| CliMsg.ChallengeQuizAnswer
+    | CliMsg.SetName
+    | CliMsg.SetTeam
+    | CliMsg.SetPos
+    | CliMsg.Quit
+    | CliMsg.Start
+    | CliMsg.ChallengeQuizAnswer
+    | CliMsg.ChallengeWordHuntAnswer
 
 declare namespace CliMsg {
     type SetName = {
@@ -85,6 +92,10 @@ declare namespace CliMsg {
         /** o index da alternativa errada que você quer marcar, ou -1 se você quiser acertar a resposta */
         value: number,
     }
+    type ChallengeWordHuntAnswer = {
+        cmd: "ChallengeWordHuntAnswer",
+        index: number,
+    }
 }
 
 declare namespace Shared {
@@ -101,10 +112,11 @@ declare namespace Shared {
         pos: Point,
         team: boolean,
     }
-    interface Owner extends Member {}
+    interface Owner extends Member { }
 
     type Challenge =
-    | Challenge.Quiz
+        | Challenge.Quiz
+        | Challenge.WordHunt
 
     type QuizMaxMissCount = 4;
 
@@ -122,6 +134,12 @@ declare namespace Shared {
             answers: number[],
             /** quantas vezes você errou */
             miss_count: number,
+        }
+        type WordHunt = {
+            id: "WordHunt",
+            words_set_id: string,
+            seed: string,
+            answers: { index: number, team: boolean }[],
         }
     }
 }

@@ -121,6 +121,13 @@ export default function App() {
         });
         break;
       }
+      case "ChallengeWordHuntAnswered": {
+        setGame(game => {
+          if (!game.connected || !game.challenge || game.challenge.id !== "WordHunt") return game;
+          return { ...game, challenge: { ...game.challenge, answers: [...game.challenge.answers, {index: msg.index, team: msg.team}] } };
+        });
+        break;
+      }
       default:
         // se a linha abaixo der um erro de tipagem no satisfies
         // é porque algum tipo de evento não foi tratado
@@ -189,6 +196,9 @@ export default function App() {
         game={game as GameChallenge}
         onQuizAnswer={(index, value) => {
           ws.send({ cmd: "ChallengeQuizAnswer", index, value });
+        }}
+        onWordHuntAnswer={(index: number) => {
+          ws.send({ cmd: "ChallengeWordHuntAnswer", index });
         }}
       />
 }
