@@ -3,6 +3,7 @@ import { GameSocket } from './socket';
 import Home from './Home';
 import Lobby from './Lobby';
 import Challenge from './Challenge';
+import Score from './Score';
 
 /** o estado do jogo, esse estado é usado para atualizar praticamente tudo do jogo
  *
@@ -32,6 +33,8 @@ export type GameConnected = {
   players: Shared.Player[],
   /** o desafio que está atualmente rodando */
   challenge: Shared.Challenge | null,
+  /** os pontos de cada time */
+  score: [number, number] | null,
 };
 
 export type GameChallenge = GameConnected & { challenge: {} };
@@ -54,6 +57,7 @@ export default function App() {
           secret: msg.secret,
           player: msg.players.find(player => player.member_id === msg.member_id) ?? null,
           challenge: msg.challenge,
+          score: msg.score,
         });
         break;
       }
@@ -112,6 +116,18 @@ export default function App() {
         });
         break;
       }
+      case "ChallengeRemaining": {
+        setGame(game => {
+          if (!game.connected || !game.challenge) return game;
+          return {
+            ...game, challenge: {
+              ...game.challenge,
+              remaining_ms: msg.remaining
+            }
+          };
+        });
+        break;
+      }
       case "ChallengeQuizAnswered": {
         setGame(game => {
           if (!game.connected || !game.challenge || game.challenge.id !== "Quiz") return game;
@@ -124,7 +140,14 @@ export default function App() {
       case "ChallengeWordHuntAnswered": {
         setGame(game => {
           if (!game.connected || !game.challenge || game.challenge.id !== "WordHunt") return game;
-          return { ...game, challenge: { ...game.challenge, answers: [...game.challenge.answers, {index: msg.index, team: msg.team}] } };
+          return { ...game, challenge: { ...game.challenge, answers: [...game.challenge.answers, { index: msg.index, team: msg.team }] } };
+        });
+        break;
+      }
+      case "Score": {
+        setGame(game => {
+          if (!game.connected) return game;
+          return { ...game, score: msg.score };
         });
         break;
       }
@@ -141,8 +164,8 @@ export default function App() {
       ws.disconnect();
     };
   }, [ws]);
-  return !game.connected
-    ? <Home
+  if (!game.connected) return (
+    <Home
       onJoin={roomId => {
         console.log("onJoin");
         ws.connect({ mode: "join", room: roomId });
@@ -152,53 +175,72 @@ export default function App() {
         ws.connect({ mode: "open" });
       }}
     />
-    : !game.challenge
-      ? <Lobby
-        game={game}
-        onMove={(pos: { x: number, y: number }) => {
-          if (game.player?.pos.x === pos.x && game.player?.pos.y === pos.y) return;
-          if ((lastX - pos.x) * (lastX - pos.x) + (lastY - pos.y) * (lastY - pos.y) > minimumToSend * minimumToSend) {
-            setLastX(pos.x);
-            setLastY(pos.y);
-            ws.send({ cmd: "SetPos", pos });
-            console.log(pos);
-          }
-          setGame(game => {
-            if (!game.connected || !game.player) return game;
-            const players = Array.from(game.players);
-            const index = players.findIndex(x => x.member_id === game.player!.member_id);
-            players[index] = {
+  );
+  if (game.challenge) {
+    const game_challenge = game as GameChallenge;
+    if (game.player) {
+      return (
+        <Challenge
+          game={game as GameChallenge}
+          onQuizAnswer={(index, value) => {
+            ws.send({ cmd: "ChallengeQuizAnswer", index, value });
+          }}
+          onWordHuntAnswer={(index: number) => {
+            ws.send({ cmd: "ChallengeWordHuntAnswer", index });
+          }}
+        />
+      );
+    } else {
+      return <Score
+        score={game.score}
+        remaining={game.challenge.remaining_ms}
+        onStop={() => ws.send({ cmd: "Stop" })}
+        onExtra={seconds => ws.send({ cmd: "Extra", seconds })}
+      />
+    }
+  }
+  if (game.score) {
+    // TODO! aqui é a tela de vitória, mostrar o score com confetti, com a possibilidade de voltar para o lobby
+  }
+  return (
+    <Lobby
+      game={game}
+      onMove={(pos: { x: number, y: number }) => {
+        if (game.player?.pos.x === pos.x && game.player?.pos.y === pos.y) return;
+        if ((lastX - pos.x) * (lastX - pos.x) + (lastY - pos.y) * (lastY - pos.y) > minimumToSend * minimumToSend) {
+          setLastX(pos.x);
+          setLastY(pos.y);
+          ws.send({ cmd: "SetPos", pos });
+          console.log(pos);
+        }
+        setGame(game => {
+          if (!game.connected || !game.player) return game;
+          const players = Array.from(game.players);
+          const index = players.findIndex(x => x.member_id === game.player!.member_id);
+          players[index] = {
+            ...game.player,
+            pos,
+          };
+          return {
+            ...game,
+            player: {
               ...game.player,
               pos,
-            };
-            return {
-              ...game,
-              player: {
-                ...game.player,
-                pos,
-              },
-              players,
-            };
-          });
-        }}
-        onTeamChange={(team: boolean) => ws.send({ cmd: "SetTeam", team })}
-        onQuit={() => {
-          if (window.confirm(
-            game.player
-              ? "Certeza que quer sair?\nNão é possível voltar!"
-              : "Certeza que quer fechar a sala?\nNão é possível abrir novamente!"
-          )) ws.send({ cmd: "Quit" });
-        }}
-        onNameChange={(name: string) => ws.send({ cmd: "SetName", name })}
-        onGameStart={() => ws.send({ cmd: "Start" })}
-      />
-      : <Challenge
-        game={game as GameChallenge}
-        onQuizAnswer={(index, value) => {
-          ws.send({ cmd: "ChallengeQuizAnswer", index, value });
-        }}
-        onWordHuntAnswer={(index: number) => {
-          ws.send({ cmd: "ChallengeWordHuntAnswer", index });
-        }}
-      />
+            },
+            players,
+          };
+        });
+      }}
+      onTeamChange={(team: boolean) => ws.send({ cmd: "SetTeam", team })}
+      onQuit={() => {
+        if (window.confirm(
+          game.player
+            ? "Certeza que quer sair?\nNão é possível voltar!"
+            : "Certeza que quer fechar a sala?\nNão é possível abrir novamente!"
+        )) ws.send({ cmd: "Quit" });
+      }}
+      onNameChange={(name: string) => ws.send({ cmd: "SetName", name })}
+      onGameStart={() => ws.send({ cmd: "Start" })}
+    />
+  );
 }

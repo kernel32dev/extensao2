@@ -1,0 +1,36 @@
+.home-stars {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+.home-star {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    width: 10px;
+    height: 3px;
+    background-color: #00000033;
+    transform: rotate(var(--rot));
+    animation: home-shooting-star var(--time) linear var(--delay) infinite;
+}
+
+@keyframes home-shooting-star {
+    0% {
+        top: var(--from-y);
+        left: var(--from-x);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        top: var(--to-y);
+        left: var(--to-x);
+    }
+}

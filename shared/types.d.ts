@@ -8,8 +8,10 @@ type SvrMsg =
     | SvrMsg.PlayerUpdated
     | SvrMsg.PlayerRemoved
     | SvrMsg.Challenge
+    | SvrMsg.ChallengeRemaining
     | SvrMsg.ChallengeQuizAnswered
     | SvrMsg.ChallengeWordHuntAnswered
+    | SvrMsg.Score
 
 declare namespace SvrMsg {
     type Connected = {
@@ -19,7 +21,8 @@ declare namespace SvrMsg {
         secret: string,
         owner: Shared.Owner,
         players: Shared.Player[],
-        challenge: Shared.Challenge | null
+        challenge: Shared.Challenge | null,
+        score: [number, number] | null,
     };
     type Disconnected = {
         event: "Disconnected",
@@ -43,6 +46,10 @@ declare namespace SvrMsg {
         event: "Challenge",
         challenge: Shared.Challenge | null,
     };
+    type ChallengeRemaining = {
+        event: "ChallengeRemaining",
+        remaining: number,
+    };
     type ChallengeQuizAnswered = {
         event: "ChallengeQuizAnswered",
         index: number,
@@ -56,6 +63,10 @@ declare namespace SvrMsg {
         index: number,
         team: boolean,
     };
+    type Score = {
+        event: "Score",
+        score: [number, number] | null,
+    };
 }
 
 type CliMsg =
@@ -64,6 +75,8 @@ type CliMsg =
     | CliMsg.SetPos
     | CliMsg.Quit
     | CliMsg.Start
+    | CliMsg.Stop
+    | CliMsg.Extra
     | CliMsg.ChallengeQuizAnswer
     | CliMsg.ChallengeWordHuntAnswer
 
@@ -85,6 +98,13 @@ declare namespace CliMsg {
     }
     type Start = {
         cmd: "Start",
+    }
+    type Stop = {
+        cmd: "Stop",
+    }
+    type Extra = {
+        cmd: "Extra",
+        seconds: number,
     }
     type ChallengeQuizAnswer = {
         cmd: "ChallengeQuizAnswer",
@@ -134,12 +154,16 @@ declare namespace Shared {
             answers: number[],
             /** quantas vezes você errou */
             miss_count: number,
+            /** quantos segundos faltam */
+            remaining_ms: number,
         }
         type WordHunt = {
             id: "WordHunt",
             words_set_id: string,
             seed: string,
             answers: { index: number, team: boolean }[],
+            /** quantos segundos faltam */
+            remaining_ms: number,
         }
     }
 }

@@ -28,6 +28,7 @@ function handle_new_socket(sck: Socket) {
         owner: room.owner.to_shared(),
         players: [...room.players.values()].map(x => x.to_shared()),
         challenge: sck.member.room.challenge && sck.member.room.challenge.serialize(sck.member),
+        score: room.score,
     });
     if (sck.member instanceof Player) {
         console.log(sck.member.room);
@@ -79,11 +80,9 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 });
                 break;
             }
-            case "Start":
-                throw new Error("comando exclusivo de Owner");
             case "ChallengeQuizAnswer":
                 if (sck.member.room.challenge instanceof ChallengeQuiz) {
-                    sck.member.room.challenge.set_answer(sck.member.id, msg.index, msg.value);
+                    sck.member.room.challenge.set_answer(sck.member.id, sck.member.team, msg.index, msg.value);
                     sck.member.room.owner.send({
                         event: "ChallengeQuizAnswered",
                         index: msg.index,
@@ -111,6 +110,10 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                     });
                 }
                 break;
+            case "Start":
+            case "Stop":
+            case "Extra":
+                throw new Error("comando exclusivo de Owner");
             default:
                 // a linha abaixo vai dar erro se tiver um cmd que ainda não foi tratado
                 console.error("tipo de mensagem do cliente desconhecida : " + ((msg satisfies never) as CliMsg).cmd);
@@ -130,6 +133,19 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
             case "Start":
                 sck.member.room.start_challenges();
                 break;
+            case "Stop":
+                sck.member.room.end_challenges();
+                break;
+            case "Extra": {
+                const challenge = sck.member.room.challenge;
+                if (!challenge) break;
+                challenge.clock.extra(msg.seconds * 1000);
+                const remaining = challenge.clock.remaining();
+                if (remaining !== null) sck.member.room.send({
+                    event: "ChallengeRemaining", remaining
+                });
+                break;
+            }
             default:
                 // a linha abaixo vai dar erro se tiver um cmd que ainda não foi tratado
                 console.error("tipo de mensagem do cliente desconhecida : " + ((msg satisfies never) as CliMsg).cmd);
@@ -211,6 +227,8 @@ class Room {
     readonly owner = new Owner(this);
     /** o desafio atualemente rodando */
     public challenge: Challenge | null = null;
+    /** a pontuação atual */
+    public score: [number, number] | null = null;
 
     constructor(rooms: Rooms) {
         this.rooms = rooms;
@@ -259,7 +277,13 @@ class Room {
     }
 
     start_challenges() {
-        this.challenge = new ChallengeWordHunt();
+        const clock = new Clock(() => this.end_challenges(), 300_000);
+        this.challenge = new ChallengeWordHunt(clock, team => this.add_point(team));
+        this.score = [0, 0];
+        this.send({
+            event: "Score",
+            score: this.score,
+        });
         this.owner.send({
             event: "Challenge",
             challenge: this.challenge.serialize(this.owner),
@@ -270,6 +294,24 @@ class Room {
                 challenge: this.challenge.serialize(i),
             });
         }
+    }
+    add_point(team: boolean) {
+        if (!this.score) {
+            this.score = [0, 0];
+        }
+        this.score[+team]++;
+        this.send({
+            event: "Score",
+            score: this.score,
+        });
+    }
+    end_challenges() {
+        if (!this.challenge) return;
+        this.challenge = null;
+        this.send({
+            event: "Challenge",
+            challenge: null,
+        });
     }
 
     static readonly id_length = 3;
@@ -461,6 +503,7 @@ class Socket {
 }
 
 abstract class Challenge {
+    constructor(public clock: Clock, protected on_point: (team: boolean) => void) { }
     abstract serialize(member: Member): Shared.Challenge;
 }
 
@@ -468,8 +511,8 @@ class ChallengeQuiz extends Challenge {
     readonly answers: number[] = [];
     readonly answer_map = new Map<string, Set<number>>();
     readonly miss_map = new Map<string, number>();
-    constructor(readonly question_set_id: string = "default") {
-        super();
+    constructor(clock: Clock, on_point: (team: boolean) => void, readonly question_set_id: string = "default") {
+        super(clock, on_point);
     }
     override serialize(member: Member): Shared.Challenge.Quiz {
         const member_id = member.id;
@@ -484,6 +527,7 @@ class ChallengeQuiz extends Challenge {
                     : x // senão mostra o valor atual (seja acerto ou tentativas prévias de outros jogadores)
             ),
             miss_count: this.miss_map.get(member_id) || 0,
+            remaining_ms: this.clock.remaining() || 0,
         }
     }
     public get_answer(member_id: string, index: number): number {
@@ -493,7 +537,7 @@ class ChallengeQuiz extends Challenge {
             ? -2 // então omite dizendo que você já tentou
             : arr[index]; // senão mostra o valor atual (seja acerto ou tentativas prévias de outros jogadores)
     }
-    public set_answer(member_id: string, index: number, value: number) {
+    public set_answer(member_id: string, team: boolean, index: number, value: number) {
         const max_miss_count: Shared.QuizMaxMissCount = 4;
         const arr = this.answers;
         if (index >= 256) throw new RangeError(`answer index: ${index} too large (>= 256)`);
@@ -509,8 +553,10 @@ class ChallengeQuiz extends Challenge {
             arr.length = index;
             arr.fill(0, old_length);
         }
-        if (arr[index] < 0 || value < 0) {
+        if (arr[index] < 0) return;
+        if (value < 0) {
             arr[index] = -1;
+            this.on_point(team);
         } else {
             this.miss_map.set(member_id, miss_count + 1);
             arr[index] |= 1 << value;
@@ -521,8 +567,8 @@ class ChallengeQuiz extends Challenge {
 class ChallengeWordHunt extends Challenge {
     readonly seed = String(Math.random());
     readonly answers: { index: number, team: boolean }[] = [];
-    constructor(readonly words_set_id: string = "default") {
-        super();
+    constructor(clock: Clock, on_point: (team: boolean) => void, readonly words_set_id: string = "default") {
+        super(clock, on_point);
     }
     override serialize(member: Member): Shared.Challenge {
         return {
@@ -530,14 +576,42 @@ class ChallengeWordHunt extends Challenge {
             words_set_id: this.words_set_id,
             seed: this.seed,
             answers: this.answers,
+            remaining_ms: this.clock.remaining() || 0,
         }
     }
     public set_answer(index: number, team: boolean) {
         if (this.answers.find(x => x.index == index)) {
             return null;
         }
+        this.on_point(team);
         const answer = { index, team };
         this.answers.push(answer);
         return answer;
+    }
+}
+
+class Clock {
+    private end_ms: number;
+    private timeout: NodeJS.Timeout | null;
+    constructor(private handler: () => void, duration_ms: number) {
+        this.end_ms = performance.now() + duration_ms;
+        this.timeout = setTimeout(() => this.finish(), duration_ms);
+    }
+    remaining(): number | null {
+        if (this.timeout === null) return null;
+        return Math.max(0, this.end_ms - performance.now());
+    }
+    finish(): void {
+        console.log("FINISHED");
+        if (this.timeout === null) return;
+        clearTimeout(this.timeout);
+        this.timeout = null;
+        this.handler();
+    }
+    extra(ms: number) {
+        if (this.timeout === null) return;
+        this.end_ms += ms;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => this.finish(), Math.max(0, this.end_ms - performance.now()));
     }
 }

@@ -1,0 +1,56 @@
+.score-page {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.score-bucket-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+}
+.score-bucket-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1;
+}
+.score-bucket {
+    width: min(45vh, 45vw);
+    height: min(75vh, 75vw);
+}
+.score-bucket canvas {
+    width: 100%;
+    height: 100%;
+}
+.score-bucket-title {
+    text-align: center;
+    text-decoration: underline;
+    font-size: xx-large;
+}
+.score-bucket-title.red {
+    text-decoration-color: red;
+}
+.score-bucket-title.blue {
+    text-decoration-color: blue;
+}
+.score-title {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.score-control {
+    position: absolute;
+    bottom: 8vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
