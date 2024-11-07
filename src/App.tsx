@@ -45,6 +45,7 @@ export default function App() {
   const [ws] = useState(() => new GameSocket());
   const [lastX, setLastX] = useState(0);
   const [lastY, setLastY] = useState(0);
+  const [showFinalScore, setShowFinalScore] = useState(true);
   const minimumToSend = 0.05;
   ws.handler = msg => {
     switch (msg.event) {
@@ -110,6 +111,7 @@ export default function App() {
         break;
       }
       case "Challenge": {
+        setShowFinalScore(true);
         setGame(game => {
           if (!game.connected) return game;
           return { ...game, challenge: msg.challenge };
@@ -177,7 +179,6 @@ export default function App() {
     />
   );
   if (game.challenge) {
-    const game_challenge = game as GameChallenge;
     if (game.player) {
       return (
         <Challenge
@@ -191,16 +192,24 @@ export default function App() {
         />
       );
     } else {
-      return <Score
-        score={game.score}
-        remaining={game.challenge.remaining_ms}
-        onStop={() => ws.send({ cmd: "Stop" })}
-        onExtra={seconds => ws.send({ cmd: "Extra", seconds })}
-      />
+      return (
+        <Score
+          score={game.score}
+          remaining={game.challenge.remaining_ms}
+          onStop={() => ws.send({ cmd: "Stop" })}
+          onExtra={seconds => ws.send({ cmd: "Extra", seconds })}
+        />
+      );
     }
   }
-  if (game.score) {
-    // TODO! aqui é a tela de vitória, mostrar o score com confetti, com a possibilidade de voltar para o lobby
+  if (game.score && (game.score[0] || game.score[1]) && showFinalScore) {
+    return (
+      <Score
+        victory
+        score={game.score}
+        onReturn={() => setShowFinalScore(false)}
+      />
+    );
   }
   return (
     <Lobby

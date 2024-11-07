@@ -134,7 +134,7 @@ function handle_client_message(sck: Socket, msg: CliMsg) {
                 sck.member.room.start_challenges();
                 break;
             case "Stop":
-                sck.member.room.end_challenges();
+                sck.member.room.next_challenge();
                 break;
             case "Extra": {
                 const challenge = sck.member.room.challenge;
@@ -277,23 +277,13 @@ class Room {
     }
 
     start_challenges() {
-        const clock = new Clock(() => this.end_challenges(), 300_000);
-        this.challenge = new ChallengeWordHunt(clock, team => this.add_point(team));
+        this.challenge = null;
+        this.next_challenge();
         this.score = [0, 0];
         this.send({
             event: "Score",
             score: this.score,
         });
-        this.owner.send({
-            event: "Challenge",
-            challenge: this.challenge.serialize(this.owner),
-        });
-        for (const i of this.players.values()) {
-            i.send({
-                event: "Challenge",
-                challenge: this.challenge.serialize(i),
-            });
-        }
     }
     add_point(team: boolean) {
         if (!this.score) {
@@ -305,13 +295,34 @@ class Room {
             score: this.score,
         });
     }
-    end_challenges() {
-        if (!this.challenge) return;
-        this.challenge = null;
-        this.send({
-            event: "Challenge",
-            challenge: null,
-        });
+    next_challenge() {
+        if (!this.challenge) {
+            const clock = new Clock(() => this.next_challenge(), 300_000);
+            this.challenge = new ChallengeWordHunt(clock, team => this.add_point(team));
+        } else if (this.challenge instanceof ChallengeWordHunt) {
+            this.challenge.clock.cancel();
+            const clock = new Clock(() => this.next_challenge(), 300_000);
+            this.challenge = new ChallengeQuiz(clock, team => this.add_point(team));
+        } else {
+            this.challenge = null;
+        }
+        if (!this.challenge) {
+            this.send({
+                event: "Challenge",
+                challenge: null,
+            });
+        } else {
+            this.owner.send({
+                event: "Challenge",
+                challenge: this.challenge.serialize(this.owner),
+            });
+            for (const i of this.players.values()) {
+                i.send({
+                    event: "Challenge",
+                    challenge: this.challenge.serialize(i),
+                });
+            }
+        }
     }
 
     static readonly id_length = 3;
@@ -607,6 +618,12 @@ class Clock {
         clearTimeout(this.timeout);
         this.timeout = null;
         this.handler();
+    }
+    cancel(): void {
+        if (this.timeout !== null) {
+            clearTimeout(this.timeout);
+            this.timeout = null;
+        }
     }
     extra(ms: number) {
         if (this.timeout === null) return;

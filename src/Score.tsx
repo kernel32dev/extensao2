@@ -4,19 +4,21 @@ import Stars from "./Stars";
 import Matter from 'matter-js';
 import Clock from "./Clock";
 
-export default function ScorePage({ score, remaining, onStop, onExtra, onReturn }: {
+export default function ScorePage({ score, remaining, onStop, onExtra, onReturn, victory }: {
   score: [number, number] | null,
-  remaining: number,
+  remaining?: number,
   onStop?(): void,
   onExtra?(seconds: number): void,
   onReturn?(): void,
+  victory?: true
 }) {
+  // TODO! exibir o ganhador com confetti
   const redBalls = score ? score[0] : 0;
   const blueBalls = score ? score[1] : 0;
   return (
     <div className="score-page">
       <Stars count={300} />
-      <Clock remaining_ms={remaining} />
+      {remaining != undefined && <Clock remaining_ms={remaining} />}
       <div className="score-bucket-row">
         <div className="score-bucket-col">
           <Bucket team="red" balls={redBalls} />
@@ -63,7 +65,7 @@ function Bucket({ team, balls }: { team: "red" | "blue", balls: number }) {
     // Configuração básica de renderização
     const width = 300;
     const height = 500;
-    const radius = 10;
+    const radius = 12;
 
     render.current = Render.create({
       element: sceneRef.current,
