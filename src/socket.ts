@@ -26,6 +26,9 @@ export class GameSocket {
             // ignora erros
         }
     }
+    public hasSession(): boolean {
+        return !!this.mode;
+    }
     public connect(mode?: ConnectionMode): this {
         this.disconnect();
 
@@ -83,6 +86,10 @@ export class GameSocket {
         if (this.handler && this.ws && typeof msg.data === "string") {
             const parsed = JSON.parse(msg.data) as SvrMsg;
             if (parsed.event === "Connected") {
+                console.log(parsed);
+                const url = new URL(window.location.href);
+                url.search = "";
+                window.history.replaceState(null, "", url);
                 const new_mode: ConnectionMode = {
                     mode: "reconnect",
                     member: parsed.member_id,

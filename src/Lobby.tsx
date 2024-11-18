@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GameConnected } from "./App";
 import "./Lobby.css";
 
@@ -12,6 +12,23 @@ export default function Lobby({ game, onMove, onQuit, onNameChange, onTeamChange
 }) {
   const lobbyPlayground = useRef<HTMLDivElement>(null!);
   const nameInput = useRef<HTMLInputElement>(null!);
+  const [qrcodeSrc] = useState(() => {
+    const url = new URL("/qrcode/", window.location.href);
+    url.port = "8080";
+    return url.href;
+  });
+  const [showQrCode, setShowQrCode] = useState(false);
+  useEffect(() => {
+    const url = new URL("/qrcode", window.location.href);
+    url.port = "8080";
+    fetch(url).then(x => x.json()).then(x => {
+      if (x.enabled) {
+        setShowQrCode(true);
+      } else {
+        console.error(x.reason);
+      }
+    })
+  }, []);
   function moveHandler(ev: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>) {
     const e = ev.nativeEvent;
     ev.nativeEvent.preventDefault();
@@ -116,8 +133,13 @@ export default function Lobby({ game, onMove, onQuit, onNameChange, onTeamChange
           </div>
         </div>
       </div>
-      <div className="player-arena" ref={lobbyPlayground} onMouseMove={moveHandler} onTouchStart={moveHandler} onTouchMove={moveHandler}>
-        {game.players.map(player => <Player key={player.member_id} player={player} />)}
+      <div className="player-arena-row">
+        {showQrCode && game.player == null && (
+          <div className="qrcode-area" style={{backgroundImage: `url("${qrcodeSrc + game.room_id}")`}} />
+        )}
+        <div className="player-arena" ref={lobbyPlayground} onMouseMove={moveHandler} onTouchStart={moveHandler} onTouchMove={moveHandler}>
+          {game.players.map(player => <Player key={player.member_id} player={player} />)}
+        </div>
       </div>
     </div>
   );

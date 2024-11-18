@@ -160,9 +160,17 @@ export default function App() {
     }
   }
   useEffect(() => {
-    ws.connect();
+    let room = "";
+    if (!ws.hasSession()) {
+      room = (new URLSearchParams(window.location.search).get("j") || "").toUpperCase();
+      if (!/^[BCDFGHJKLMNPQRSTVWXYZ][AEIOU][BCDFGHJKLMNPQRSTVWXYZ]$/.test(room)) {
+        room = "";
+      }
+    }
+    const mode = room ? { mode: "join" as const, room } : undefined;
+    const timeout = setTimeout(() => ws.connect(mode!), room ? 200 : 1);
     return () => {
-      console.log("useEffect: disconnect");
+      clearTimeout(timeout);
       ws.disconnect();
     };
   }, [ws]);
@@ -220,7 +228,7 @@ export default function App() {
           setLastX(pos.x);
           setLastY(pos.y);
           ws.send({ cmd: "SetPos", pos });
-          console.log(pos);
+          //console.log(pos);
         }
         setGame(game => {
           if (!game.connected || !game.player) return game;

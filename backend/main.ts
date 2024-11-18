@@ -4,6 +4,7 @@ import enableWs from "express-ws";
 import cors from "cors";
 import * as path from "path";
 import { Rooms } from "./logic";
+import { getQrCode, hasQrCode } from "./qrcode";
 
 const app = enableWs(express()).app;
 const port = 8080;
@@ -38,6 +39,27 @@ app.get("/script.js", (_req, res) => {
 });
 app.get("/style.css", (_req, res) => {
     res.sendFile(path.join(frontend, "style.css"));
+});
+
+app.get("/qrcode", (_req, res) => {
+    res.json(hasQrCode());
+});
+
+app.get("/qrcode/:roomid", (req, res) => {
+    const roomid = req.params.roomid;
+    const promise = getQrCode(roomid)
+    if (promise) {
+        promise
+            .then(qrcode => {
+                res.header("Content-Type", "image/png").send(qrcode);
+            })
+            .catch(e => {
+                console.error(e);
+                res.status(500).send();
+            });
+    } else {
+        res.status(500).send();
+    }
 });
 
 // serve os arquivos na pasta static

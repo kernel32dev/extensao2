@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./Score.css";
 import Stars from "./Stars";
 import Matter from 'matter-js';
