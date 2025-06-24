@@ -10,6 +10,7 @@ const players = [] as {
     x: number,
     y: number,
     name: string,
+    points: number,
 }[];
 
 const answers = [] as {
@@ -64,6 +65,7 @@ export function handleNewSocket(ws: WebSocket, params: Record<string, unknown>) 
                 name,
                 x: Math.random(),
                 y: Math.random(),
+                points: 0,
             };
             players.push(player);
             const text = JSON.stringify({
@@ -127,6 +129,7 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
             player.name = msg.name ?? player.name;
             player.x = msg.x ?? player.x;
             player.y = msg.y ?? player.y;
+            player.points = msg.points ?? player.points;
             const text = JSON.stringify({
                 event: "Player",
                 ...player,
@@ -143,18 +146,24 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
                     index: msg.index,
                 });
                 points[+msg.team]++;
-                const text1 = JSON.stringify({
+                const player = players.find(x => x.cid === cid);
+                const text1 = player && JSON.stringify({
+                    event: "Player",
+                    ...player,
+                } satisfies SvrMsg);
+                const text2 = JSON.stringify({
                     event: "Answer",
                     team: msg.team,
                     index: msg.index,
                 } satisfies SvrMsg);
-                const text2 = JSON.stringify({
+                const text3 = JSON.stringify({
                     event: "Points",
                     points,
                 } satisfies SvrMsg);
                 for (const conn of allConns) {
-                    conn.send(text1);
+                    if (text1) conn.send(text1);
                     conn.send(text2);
+                    conn.send(text3);
                 }
             }
             break;

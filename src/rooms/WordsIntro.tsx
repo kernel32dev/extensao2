@@ -6,7 +6,7 @@ import { Derived } from "rubedo";
 export default function WordsIntro() {
     return (
         <div class="words-intro-screen">
-            <h1>Caça Palavaras</h1>
+            <h1>Caça Palavras</h1>
             Tente encontrar as palavras antes do time inimigo
             <br />
             <br />

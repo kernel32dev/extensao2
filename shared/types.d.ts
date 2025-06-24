@@ -20,6 +20,7 @@ declare namespace SvrMsg {
         x: number,
         y: number,
         name: string,
+        points: number,
     };
     type Answer = {
         event: "Answer",
@@ -57,6 +58,7 @@ declare namespace CliMsg {
         x?: number,
         y?: number,
         name?: string,
+        points?: number,
     };
     type Answer = {
         cmd: "Answer",

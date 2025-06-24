@@ -29,6 +29,7 @@ const players = State.track([] as {
     x: number,
     y: number,
     name: string,
+    points: number,
 }[]);
 const me = new Derived<{
     team: boolean,
@@ -105,6 +106,11 @@ function onmessage(e: MessageEvent) {
         case "Points": {
             points[0] = msg.points[0];
             points[1] = msg.points[1];
+            if (msg.points[0] == 0 && msg.points[1] == 0) {
+                for (const player of players) {
+                    player.points = 0;
+                }
+            }
             break;
         }
         case "Player": {
@@ -122,6 +128,7 @@ function onmessage(e: MessageEvent) {
                     x: msg.x,
                     y: msg.y,
                     name: msg.name,
+                    points: msg.points,
                 });
             }
             break;
