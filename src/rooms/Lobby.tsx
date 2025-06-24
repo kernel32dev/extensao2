@@ -41,7 +41,7 @@ export default function Lobby({}: {}): Elems {
     function start_game() {
         client.send({
             cmd: "Room",
-            room: "words",
+            room: "quiz_intro",
         })
     }
     function move_to(this: HTMLDivElement, e: MouseEvent | TouchEvent) {

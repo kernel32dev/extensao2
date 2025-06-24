@@ -65,7 +65,7 @@ declare namespace CliMsg {
     };
     type Room = {
         cmd: "Room",
-        room: "lobby" | "quiz" | "words" | "podium",
+        room: "lobby" | "quiz_intro" | "quiz" | "words" | "words_intro" | "podium",
     };
 }
 

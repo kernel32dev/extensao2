@@ -4,6 +4,7 @@ import WordHuntBoards from "./Words.json";
 import { Derived, State } from "rubedo";
 import { Elems } from "rubedo-dom";
 import { client } from "../client";
+import Timer from "./Timer";
 
 type WordHuntBoardsType = {
     [words_set_id: string]: {
@@ -75,11 +76,14 @@ export default function Words({ }: {}) {
       const fontSize = 2.8 * 20 / size;
     return (
         <div class="wordhunt-screen">
+            <Timer />
             <h1>Caça-Palavras</h1>
             <p>
                 Encontre as palavras antes do time oposto e contribua para a vitória do seu time!
                 <br />
                 Todo mundo está olhando para o mesmo jogo.
+                <br />
+                Para pegar uma palavra, selecione a primeira letra e então toque na a última
                 <br />
                 Palavras restantes: {new Derived(() => words.length - client.answers.length)}
             </p>

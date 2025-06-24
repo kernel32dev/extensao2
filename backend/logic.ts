@@ -48,10 +48,9 @@ export function handleNewSocket(ws: WebSocket, params: Record<string, unknown>) 
     const teamTrue = players.filter(x => x.team).length;
     const teamFalse = players.filter(x => !x.team).length;
 
-    // const team = teamFalse == teamTrue
-    //     ? Math.random() < 0.5
-    //     : teamTrue < teamFalse;
-    const team = false;
+    const team = teamFalse == teamTrue
+        ? Math.random() < 0.5
+        : teamTrue < teamFalse;
 
     const name = "Jogador " + ++userNameGen;
 

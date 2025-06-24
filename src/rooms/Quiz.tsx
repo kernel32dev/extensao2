@@ -3,6 +3,7 @@ import { Elems } from "rubedo-dom";
 import "./Quiz.css";
 import QuizQuestions from "./QuizQuestions.json";
 import { client } from "../client";
+import Timer from "./Timer";
 
 type QuizContentType = { text: string };
 type QuizQuestionsType = {
@@ -41,6 +42,7 @@ export default function Quiz({ }: {}): Elems {
 
     const quiz = (
         <div class="quiz-screen">
+            <Timer />
             <h1>Quiz</h1>
             <br />
             <p>

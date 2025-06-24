@@ -22,7 +22,7 @@ function monotonic() {
 }
 
 const isHost = cid == 0;
-const points = State.track([0, 0]);
+const points = State.track([0, 0] as [number, number]);
 const players = State.track([] as {
     team: boolean,
     cid: number,
