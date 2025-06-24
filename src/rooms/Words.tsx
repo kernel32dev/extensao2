@@ -17,7 +17,7 @@ type Point = { x: number, y: number };
 type Rect = { x1: number, y1: number, x2: number, y2: number };
 
 export default function Words({ }: {}) {
-    const { size, words } = (WordHuntBoards as WordHuntBoardsType)["default"];
+    const { size, words } = (WordHuntBoards as WordHuntBoardsType)["estados"];
     const { letters, wordRects } = genLetters("semente fixa", size, words);
 
     const selectStart = new State<Point | null>(null);
