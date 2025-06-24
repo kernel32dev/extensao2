@@ -1,0 +1,36 @@
+.confetti {
+    position: absolute;
+    left: 200px;
+    top: 40px;
+    width: 1em;
+    height: 1em;
+    left: var(--fromx);
+    top: var(--fromy);
+    animation: confetti-movement var(--time) linear var(--delay) infinite, confetti-rotation var(--rot-time) linear 0s infinite;
+    user-select: none;
+    pointer-events: none;
+}
+@keyframes confetti-movement {
+    0%{
+        left: var(--fromx);
+        top: var(--fromy);
+    }
+    100% {
+        left: var(--tox);
+        top: var(--toy);
+    }
+}
+@keyframes confetti-rotation {
+    0% {
+        background-color: var(--color-fg);
+        transform: rotate(var(--rot)) rotate3d(var(--rotx), var(--roty), var(--rotz), 0deg);
+    }
+    50% {
+        background-color: var(--color-bg);
+        transform: rotate(var(--rot)) rotate3d(var(--rotx), var(--roty), var(--rotz), 180deg);
+    }
+    100% {
+        background-color: var(--color-fg);
+        transform: rotate(var(--rot)) rotate3d(var(--rotx), var(--roty), var(--rotz), 360deg);
+    }
+}

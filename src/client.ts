@@ -49,7 +49,7 @@ const answers = State.track([] as {
     team: boolean,
     index: number,
 }[]);
-const room = new State<"loading" | "lobby" | "quiz" | "words" | "podium">("loading");
+const room = new State<Shared.Room | "loading">("loading");
 
 export const client = { cid, isHost, points, players, me, answers, room, send };
 
@@ -136,6 +136,9 @@ function onmessage(e: MessageEvent) {
         case "Room": {
             answers.length = 0;
             room.set(msg.room);
+            if (msg.room != "quiz") {
+                localStorage.removeItem("misses");
+            }
             break;
         }
     }

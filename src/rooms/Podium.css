@@ -1,0 +1,15 @@
+.podium-screen {
+    width: calc(100vw - 4em);
+    height: calc(100vh - 4em);
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.red {
+    color: red;
+}
+.blue {
+    color: blue;
+}

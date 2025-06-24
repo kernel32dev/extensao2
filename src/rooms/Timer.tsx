@@ -68,7 +68,6 @@ function msToTimer(ms: number) {
 }
 
 function nextRoom() {
-    alert("Done!");
     if (client.room.now() == "quiz") {
         client.send({ cmd: "Room", room: "words_intro" });
     }
