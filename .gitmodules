@@ -1,0 +1,11 @@
+[submodule "packages/rubedo"]
+	path = packages/rubedo
+	url = https://github.com/kernel32dev/rubedo.git
+[submodule "packages/rubedo-dom"]
+	path = packages/rubedo-dom
+	url = https://github.com/kernel32dev/rubedo-dom.git
+	branch = local
+[submodule "packages/rubedo-local-storage"]
+	path = packages/rubedo-local-storage
+	url = https://github.com/kernel32dev/rubedo-local-storage.git
+	branch = local

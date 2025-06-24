@@ -1,0 +1,61 @@
+.wordhunt-screen {
+    width: calc(100vw - 4em);
+    height: calc(100vh - 4em);
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.wordhunt-screen > p {
+    text-align: center;
+}
+.wordhunt-box {
+    display: grid;
+    /*
+    estilos definidos dinamicamente no js
+    grid-template-columns:;
+    grid-template-rows:;
+    font-size:;
+    */
+    border: 1px solid black;
+    width: min(80vw, 80vh);
+    height: min(80vw, 80vh);
+}
+.wordhunt-box > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+.wordhunt-box > span.first-selected {
+    background-color: #D0D0D0;
+}
+.wordhunt-box > span.possible-second-selected {
+    background-color: #F0F0F0;
+}
+.wordhunt-box > span.red-answer {
+    background-color: #FFA0A0;
+}
+.wordhunt-box > span.blue-answer {
+    background-color: #A0A0FF;
+}
+.wordhunt-box > span.wordhunt-error {
+    animation: wordhunt-error 1s linear;
+}
+@keyframes wordhunt-error {
+    0% {
+        color: #FF0000;
+        text-shadow: 0px 0px 10px #FF0000, 0px 0px 10px #FF0000, 0px 0px 10px #FF0000, 0px 0px 10px #FF0000;
+    }
+    100% {
+        color: #000000;
+        text-shadow: 0px 0px 0px #FF0000, 0px 0px 0px #FF0000, 0px 0px 0px #FF0000, 0px 0px 0px #FF0000;
+    }
+}
+/*.wordhunt-box > span:hover {
+    background-color: #D0D0D0;
+}
+.wordhunt-box > span:active {
+    background-color: #A0A0A0;
+}*/

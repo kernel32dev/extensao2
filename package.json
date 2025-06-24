@@ -1,0 +1,33 @@
+{
+  "name": "rsbuild-rubedo-example-project",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run front-dev\" \"npm run back\"",
+    "prod": "npm run front-build && npm run back",
+    "back": "nodemon -x node -r sucrase/register backend/main.ts --create-test-room LOL",
+    "front-dev": "rsbuild dev --open",
+    "front-build": "rsbuild build",
+    "front-preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "@types/seedrandom": "^3.0.8",
+    "express": "^4.21.1",
+    "express-ws": "^5.0.2",
+    "qrcode": "^1.5.4",
+    "rubedo": "file:packages/rubedo",
+    "rubedo-dom": "file:packages/rubedo-dom",
+    "rubedo-local-storage": "file:packages/rubedo-local-storage",
+    "seedrandom": "^3.0.5"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.1.4",
+    "@types/express": "^5.0.3",
+    "@types/express-ws": "^3.0.5",
+    "@types/qrcode": "^1.5.5",
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.7",
+    "sucrase": "^3.35.0",
+    "typescript": "^5.7.2"
+  }
+}
