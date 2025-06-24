@@ -28,7 +28,7 @@ declare namespace SvrMsg {
     };
     type Room = {
         event: "Room",
-        room: "lobby" | "quiz" | "words" | "podium",
+        room: Shared.Room,
     };
 
     type Error = {
@@ -65,11 +65,12 @@ declare namespace CliMsg {
     };
     type Room = {
         cmd: "Room",
-        room: "lobby" | "quiz_intro" | "quiz" | "words" | "words_intro" | "podium",
+        room: Shared.Room,
     };
 }
 
 declare namespace Shared {
+    type Room = "lobby" | "quiz_intro" | "quiz" | "words" | "words_intro" | "podium";
     namespace Challenge {
         type Quiz = {
             id: "Quiz",

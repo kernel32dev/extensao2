@@ -76,7 +76,7 @@ export default function Words({ }: {}) {
       const fontSize = 2.8 * 20 / size;
     return (
         <div class="wordhunt-screen">
-            <Timer />
+            <Timer position="top-left" />
             <h1>Caça-Palavras</h1>
             <p>
                 Encontre as palavras antes do time oposto e contribua para a vitória do seu time!

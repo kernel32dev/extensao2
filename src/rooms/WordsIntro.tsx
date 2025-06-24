@@ -1,7 +1,8 @@
 import { client } from "../client";
-import "./QuizIntro.css";
+import "./WordsIntro.css";
 // import Words from "./Words.json";
 import { timerEnd } from "./Timer";
+import { Derived } from "rubedo";
 export default function WordsIntro() {
     return (
         <div class="words-intro-screen">
@@ -26,6 +27,14 @@ export default function WordsIntro() {
                     <button onClick={start}>Começar</button>
                 </>
             )}
+            <br />
+            <div style={{ fontSize: "xx-large" }}>
+                Pontos:
+                <br />
+                Time vermelho: {Derived.prop(client.points, "0")}
+                <br />
+                Time azul: {Derived.prop(client.points, "1")}
+            </div>
         </div>
     );
     function start() {

@@ -17,7 +17,7 @@ new Effect.Persistent(() => {
     }
 })
 
-export default function Timer() {
+export default function Timer({ position }: { position: "top-left" | "bottom-center"}) {
     if (!client.isHost) return <></>;
     const triggered = new State(false);
     const scope = new Scope().affect(() => {
@@ -29,7 +29,7 @@ export default function Timer() {
         });
     });
     return (
-        <div class="timer" scope={scope}>
+        <div class={"timer " + position} scope={scope}>
             Tempo:
             <br />
             {new Derived(() => msToTimer((timerEnd() || NaN) - Derived.Date.clock().getTime()))}
@@ -51,6 +51,13 @@ export default function Timer() {
             }}>
                 Próximo
             </button>
+            <br />
+            <br />
+            Pontos:
+            <br />
+            Time vermelho: {Derived.prop(client.points, "0")}
+            <br />
+            Time azul: {Derived.prop(client.points, "1")}
         </div>
     );
 }

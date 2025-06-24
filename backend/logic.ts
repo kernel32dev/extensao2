@@ -17,7 +17,7 @@ const answers = [] as {
     index: number,
 }[];
 
-let room = "lobby" as "lobby" | "quiz" | "words" | "podium";
+let room = "lobby" as Shared.Room;
 
 let userNameGen = 0;
 
@@ -161,6 +161,7 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
         case "Room": {
             if (room == msg.room) break;
             room = msg.room;
+            answers.length = 0;
             const text = JSON.stringify({
                 event: "Room",
                 room,

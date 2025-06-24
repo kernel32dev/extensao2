@@ -42,10 +42,10 @@ export default function Quiz({ }: {}): Elems {
 
     const quiz = (
         <div class="quiz-screen">
-            <Timer />
+            <Timer position="bottom-center" />
             <h1>Quiz</h1>
             <br />
-            <p>
+            {!client.isHost && <p>
                 Responda as questões abaixo o mais rápido possível para ajudar o seu time a ganhar!
                 <br />
                 <br />
@@ -58,12 +58,15 @@ export default function Quiz({ }: {}): Elems {
                         Espere o seu time terminar
                     </>
                 )}
-            </p>
+            </p>}
+            {client.isHost && <p>
+                Responda as questões o mais rápido possível para ajudar o seu time a ganhar!
+            </p>}
             <br />
             <hr />
             <br />
             <div class="quiz-board">
-                {pack.questions.map((_q, i) => {
+                {!client.isHost && pack.questions.map((_q, i) => {
                     const div = (
                         <div
                             class="quiz-board-question"
