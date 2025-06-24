@@ -1,7 +1,7 @@
 import "./Words.css"
 import seedrandom from "seedrandom";
 import WordHuntBoards from "./Words.json";
-import { State } from "rubedo";
+import { Derived, State } from "rubedo";
 import { Elems } from "rubedo-dom";
 import { client } from "../client";
 
@@ -17,7 +17,7 @@ type Rect = { x1: number, y1: number, x2: number, y2: number };
 
 export default function Words({ }: {}) {
     const { size, words } = (WordHuntBoards as WordHuntBoardsType)["default"];
-    const { letters, wordRects } = genLetters("aaaa", size, words);
+    const { letters, wordRects } = genLetters("semente fixa", size, words);
 
     const selectStart = new State<Point | null>(null);
     const lastError = new State<Rect | null>(null);
@@ -39,6 +39,11 @@ export default function Words({ }: {}) {
           return;
         }
         if (client.answers.find(x => x.index == index)) return;
+        client.send({
+            cmd: "Answer",
+            index,
+            team: client.me().team,
+        });
       };
       const getColorClass = (x: number, y: number) => {
         const ss = selectStart();
@@ -75,6 +80,8 @@ export default function Words({ }: {}) {
                 Encontre as palavras antes do time oposto e contribua para a vitória do seu time!
                 <br />
                 Todo mundo está olhando para o mesmo jogo.
+                <br />
+                Palavras restantes: {new Derived(() => words.length - client.answers.length)}
             </p>
             <div class="wordhunt-box" style={{
                 gridTemplateColumns: " 1fr".repeat(size),
@@ -83,7 +90,7 @@ export default function Words({ }: {}) {
             }}>
                 {eachCell((x, y, i) => (
                     <span
-                        class={`${getColorClass(x, y)} ${getErrorClass(x, y)}`}
+                        class={[new Derived(() => getColorClass(x, y)), new Derived(() => getErrorClass(x, y))]}
                         onClick={() => {
                             const ss = selectStart();
                             if (ss && ss.x == x && ss.y == y) {
