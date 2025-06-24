@@ -3,774 +3,650 @@
         "title": "Categoria #1",
         "questions": [
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Qual das palavras está correta?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Bichinho",
+                    "Bixinno",
+                    "Bixinho",
+                    "Bixinho",
+                    "Bixinu"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Qual é o plural da palavra 'lápis'?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Lápis",
+                    "Lápises",
+                    "Lápisões",
+                    "Lápiss",
+                    "Lápise"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "O que é um sujeito na frase: 'Os alunos estudaram para a prova'?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "O verbo 'estudaram'",
+                    "O predicado 'estudaram para a prova'",
+                    "Os alunos",
+                    "Para a prova",
+                    "A prova"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Qual é o antônimo de 'feliz'?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Triste",
+                    "Alegre",
+                    "Empolgado",
+                    "Animado",
+                    "Satisfeito"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Qual das frases está correta?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Ela comprou um carro novo.",
+                    "Ela compra um carro novo.",
+                    "Ela compra um carro novô.",
+                    "Ela comprou uma carro novo.",
+                    "Ela compraro um carro novo."
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Complete a frase corretamente: 'Eu ___ vou à escola amanhã.'",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "não",
+                    "nunca",
+                    "sim",
+                    "sempre",
+                    "jamais"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual a função da vírgula na frase: 'Eu gosto de estudar, ler livros e jogar futebol'?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Separar orações",
+                    "Separar elementos dentro de uma oração",
+                    "Indicar uma pausa para respirar",
+                    "Indicar uma citação",
+                    "Separar sujeito e predicado"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual palavra está no diminutivo?",
+                "answer": 3,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Livro",
+                    "Cachorro",
+                    "Menino",
+                    "Casinha",
+                    "Flor"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o adjetivo na frase: 'O cachorro é muito amigável'?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Cachorro",
+                    "Muito",
+                    "Amigável",
+                    "É",
+                    "Nenhum"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "O que significa a palavra 'voar' na frase: 'Os pássaros vão voar para o sul no inverno'?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Correr",
+                    "Nadando",
+                    "Mudar de lugar com asas",
+                    "Andar",
+                    "Caminhar"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual palavra está escrita corretamente?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Caza",
+                    "Cassa",
+                    "Casa",
+                    "Caza",
+                    "Kasa"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual dessas frases está correta?",
+                "answer": 3,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Eu vai na escola.",
+                    "Eu foi na escola.",
+                    "Eu ir na escola.",
+                    "Eu vou à escola.",
+                    "Eu irei na escola"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Qual dessas palavras é um verbo?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Pular",
+                    "Rápido",
+                    "Escola",
+                    "Bola",
+                    "Verde"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o antônimo da palavra 'triste'?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Bravo",
+                    "Alegre",
+                    "Chato",
+                    "Sério",
+                    "Feio"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Em qual frase o uso da vírgula está correto?",
+                "answer": 3,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Hoje vamos comer arroz, feijão, e salada.",
+                    "Hoje vamos, comer arroz feijão e salada.",
+                    "Hoje vamos comer, arroz, feijão e salada.",
+                    "Hoje vamos comer arroz, feijão e salada.",
+                    "Hoje, vamos comer arroz feijão e salada."
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual dessas palavras é um substantivo comum?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Ana",
+                    "Brasil",
+                    "Escola",
+                    "João",
+                    "Natal"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o aumentativo de 'casa'?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Casinha",
+                    "Casebre",
+                    "Casarão",
+                    "Casamento",
+                    "Casado"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Qual palavra completa corretamente a frase: 'O menino _____ bola no gol.'?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "chutou",
+                    "chutaram",
+                    "chutamos",
+                    "chutai",
+                    "chutarão"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual dessas palavras está no diminutivo?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Pato",
+                    "Patinho",
+                    "Patão",
+                    "Pata",
+                    "Patãozinho"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
+                "prompt": "Em qual alternativa todas as palavras estão no plural?",
                 "answer": 0,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Cadeiras, mesas, livros",
+                    "Cadeira, mesa, livro",
+                    "Cadeiras, mesa, livros",
+                    "Cadeira, mesas, livro",
+                    "Cadeiras, mesa, livro"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é a principal fonte de luz natural da Terra?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "A lua",
+                    "A lanterna",
+                    "O sol",
+                    "A estrela",
+                    "O fogo"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "O que as plantas precisam para crescer saudáveis?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Açúcar e sal",
+                    "Sol, água e terra",
+                    "Óleo e sabão",
+                    "Gelo e areia",
+                    "Som e vento"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual desses animais vive na água?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Gato",
+                    "Cachorro",
+                    "Peixe",
+                    "Cavalo",
+                    "Macaco"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o estado da água quando ela está bem quente e vira vapor?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Líquido",
+                    "Sólido",
+                    "Gasoso",
+                    "Firme",
+                    "Gelado"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual parte do corpo usamos para cheirar?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Ouvido",
+                    "Nariz",
+                    "Boca",
+                    "Olho",
+                    "Mão"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Onde as plantas fazem a fotossíntese?",
+                "answer": 3,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Na raiz",
+                    "No caule",
+                    "Nas flores",
+                    "Nas folhas",
+                    "No solo"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual desses é um alimento saudável?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Balas",
+                    "Refrigerante",
+                    "Maçã",
+                    "Sorvete",
+                    "Chocolate"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "O que acontece com a sombra quando o sol está forte?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Some",
+                    "Fica maior",
+                    "Fica menor",
+                    "Vira luz",
+                    "Desaparece"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual desses animais bota ovos?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Gato",
+                    "Vaca",
+                    "Galinha",
+                    "Cachorro",
+                    "Cavalo"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "O que devemos fazer antes das refeições?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Assistir TV",
+                    "Lavar as mãos",
+                    "Dormir",
+                    "Correr",
+                    "Escovar os dentes"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o nome do planeta onde vivemos?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Marte",
+                    "Vênus",
+                    "Terra",
+                    "Júpiter",
+                    "Saturno"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Como chamamos o lugar onde moramos com nossa família?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Escola",
+                    "Casa",
+                    "Rua",
+                    "Praça",
+                    "Cidade"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o astro que ilumina e aquece o nosso planeta?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Lua",
+                    "Estrela",
+                    "Sol",
+                    "Cometa",
+                    "Planeta"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "O que podemos encontrar em um mapa?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Receitas de bolo",
+                    "Desenhos de super-heróis",
+                    "Nomes de lugares e países",
+                    "Letras de músicas",
+                    "Histórias em quadrinhos"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual elemento é necessário para os seres vivos beberem e viverem?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Areia",
+                    "Água",
+                    "Pedra",
+                    "Vento",
+                    "Fumaça"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Qual é o nome do maior continente do planeta?",
+                "answer": 3,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "África",
+                    "América",
+                    "Europa",
+                    "Ásia",
+                    "Oceania"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Como se chama o lugar onde estudamos?",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Hospital",
+                    "Escola",
+                    "Teatro",
+                    "Shopping",
+                    "Museu"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "A cidade é um lugar com:",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Muitos animais selvagens",
+                    "Muitas casas, prédios e carros",
+                    "Somente árvores e florestas",
+                    "Nenhuma construção",
+                    "Lagoas e montanhas"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "Como chamamos os ventos muito fortes que podem causar estragos?",
+                "answer": 2,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Brisas",
+                    "Chuvas leves",
+                    "Furacões",
+                    "Relâmpagos",
+                    "Trovoadas"
                 ]
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
+                "prompt": "A floresta é um exemplo de:",
+                "answer": 1,
                 "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
+                    "Deserto",
+                    "Ambiente natural",
+                    "Construção humana",
+                    "Parque de diversões",
+                    "Praça pública"
                 ]
             },
+
+
+
+
+
+
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual dos estados abaixo faz parte da região Sudeste do Brasil?",
+                "alternatives": ["Tocantins", "Espírito Santo", "Paraíba", "Santa Catarina", "Paraná"],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual a região brasileira que apresenta a menor densidade demográfica?",
+                "alternatives": ["Norte", "Nordeste", "Sul", "Centro-Oeste", "Sudeste"],
+                "answer": 0
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual é a maior metrópole em população da região Sudeste do Brasil?",
+                "alternatives": ["Rio de Janeiro", "Brasília", "São Paulo", "Vitória", "Porto Alegre"],
+                "answer": 2
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual bioma brasileiro, marcado pela sazonalidade das cheias, é encontrado tipicamente na região Centro-Oeste do país?",
+                "alternatives": ["Araucárias", "Mata Atlântica", "Pantanal", "Mata de Cocais", "Caatinga"],
+                "answer": 2
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "As capitais dos estados da Região Sul do Brasil são:",
+                "alternatives": ["Cuiabá, Goiânia e Campo Grande", "Manaus, Belém e Porto Velho", "Rio de Janeiro, São Paulo e Vitória", "Curitiba, Florianópolis e Porto Alegre", "Salvador, Recife e Fortaleza"],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Cada estado brasileiro tem uma sigla. Por exemplo: a sigla do estado de São Paulo é SP. Elas nos ajudam a localizar rapidamente uma cidade no mapa do Brasil. Assim quando lemos \"Santana(AP)\" sabemos que esta se encontra no estado de (o):",
+                "alternatives": ["Amazonas", "Amapá", "Acre", "Alagoas", "Não existe nenhum estado brasileiro com a sigla \"AP\""],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Os estudos que fazem as estatísticas oficiais do Brasil são da responsabilidade de qual órgão?",
+                "alternatives": ["Instituto Nacional de Geografia e Estatística (INGE).", "Instituto Brasileiro de Geografia e Estatística (IBGE).", "Instituto Brasileiro de Geografia e Estudos (IBGE).", "Instituto Nacionalista de Geografia e Estatística (INGE)."],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "A divisão regional que não obedece aos limites dos estados é chamada de:",
+                "alternatives": ["Macrorregiões ou Cinco Grandes Regiões.", "Macrorregiões Geoeconômicas ou Cinco Grandes Regiões.", "Macrorregiões Geoeconômicas ou Complexos Regionais.", "Macrorregiões ou Complexos Regionais."],
+                "answer": 2
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "No âmbito econômico mundial, o Brasil é corretamente classificado como um país",
+                "alternatives": ["emergente.", "comunista.", "desenvolvido.", "planificado.", "socialista"],
+                "answer": 0
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "As alternativas abaixo apresentam alguns dos mais importantes organismos e blocos econômicos mundiais. De qual deles o Brasil faz parte?",
+                "alternatives": ["OCDE.", "G7.", "Asean.", "G8.", "Brics."],
+                "answer": 4
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Atualmente, o cenário econômico brasileiro é marcado especialmente pela",
+                "alternatives": ["importação de alimentos e minerais.", "estatização das empresas privadas.", "produção de bens de origem primária.", "exportação de eletrônicos e de chips.", "fabricação de bens de alta tecnologia."],
+                "answer": 2
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "As ilhas de calor representam um dos problemas ambientais urbanos. Esse fenômeno climático acontece devido:",
+                "alternatives": ["ao aumento das queimadas nas zonas rurais.", "a diminuição da densidade demográfica dos centros urbanos.", "ao aumento da inversão térmica nas cidades.", "a elevação das temperaturas em algumas zonas urbanas.", "aos microclimas periféricos que afetam diretamente as cidades."],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "No contexto da globalização, uma tendência crescente é a formação de blocos econômicos regionais. Esses blocos apresentam diferentes níveis de integração. Um desses níveis é a zona de livre comércio que se caracteriza pela:",
+                "alternatives": ["criação de uma moeda única a ser adotada pelos países membros.", "livre circulação de mercadorias provenientes dos países membros.", "unificação de políticas de relações internacionais entre os países membros.", "livre circulação de pessoas, serviços e capitais entre os países membros."],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "As formas de relevo resultam das grandes alterações que a superfície terrestre sofreu ao longo do tempo. São exemplos de agentes internos responsáveis por essas modificações:",
+                "alternatives": ["intemperismo, vulcanismo, deposição e compactação de sedimentos.", "vulcanismo, tectonismo e abalos sísmicos.", "erosão, sedimentação e intemperismo.", "solidificação do magma, deposição e compactação de sedimentos."],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Embora muitas vezes tempo e clima sejam utilizados como sinônimos, essas palavras possuem significados diferentes pois",
+                "alternatives": ["O clima é influenciado por fatores, como precipitação e radiação solar. Já o tempo é resultado direto da influência das massas de ar.", "O tempo se refere às condições meteorológicas momentâneas e o clima representa um padrão meteorológico observado ao longo dos anos.", "O clima de uma região é resultado de fatores geográficos e o tempo é influenciado pelas condições meteorológicas.", "O tempo se refere à temperatura e a chuva em um local, já o clima reúne informações sobre pressão atmosférica, continentalidade e maritimidade."],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual é o movimento da Terra que faz com que tenhamos o dia e a noite?",
+                "alternatives": ["Movimento de rotação", "Movimento de translação", "Movimento de oscilação", "Movimento de rolagem", "Movimento de pulsação"],
+                "answer": 0
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Essa fonte de energia muito utilizada no Brasil e no mundo é um minério fóssil que, quando processado, dá origem a vários subprodutos, como a gasolina, óleo diesel, querosene, além de gerar eletricidade nas usinas termoelétricas. A que fonte de energia refere-se o fragmento acima?",
+                "alternatives": ["Gás natural", "Cana-de-açúcar", "Carvão mineral", "Petróleo", "Xisto betuminoso"],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "As fontes não renováveis podem esgotar-se totalmente em prazos variáveis (pequeno, médio e longo prazo) de acordo com a extração, consumo e disponibilidade. Das alternativas abaixo, qual delas lista apenas fontes renováveis de energia?",
+                "alternatives": ["biocombustíveis, petróleo e carvão mineral.", "energia solar, energia eólica e urânio.", "urânio, gás natural e energia hidrelétrica.", "energia hidrelétrica, energia solar e biocombustíveis.", "gás natural, energia eólica e energia solar."],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "A região geográfica brasileira que é a segunda em número de habitantes é o:",
+                "alternatives": ["Sudeste", "Sul", "Nordeste", "Centro-Oeste"],
+                "answer": 2
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "A floresta amazônica oferece serviços ambientais fundamentais, dentre os quais inclui-se a manutenção",
+                "alternatives": ["da emissão de gases; ciclo vital e armazenamento de carbono.", "da fauna e flora; ciclo hidrológico e armazenamento de metano.", "do desmatamento; ciclo hidrológico e armazenamento de carbono.", "da biodiversidade; ciclo hidrológico e armazenamento de carbono.", "da biodegradação; ciclo hidrológico e armazenamento de carbono."],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "O espaço geográfico tem sido marcado pela expansão de objetos artificiais no meio. São exemplos desses objetos artificiais:",
+                "alternatives": ["casas, lojas e indústrias", "florestas, lagoas e casas", "montanhas, casas e lagos", "cachoeiras, rios e lagos", "indústrias, rios e animais"],
+                "answer": 0
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Quais são os dois elementos que formam o espaço geográfico?",
+                "alternatives": ["Natureza e sociedade", "Natureza e espaço", "Meio ambiente e lugar", "Paisagem e espaço", "Paisagem e território"],
+                "answer": 0
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "A modificação do espaço geográfico provoca diversas mudanças na paisagem. Em contraposição, as paisagens que conservam as suas condições naturais são corretamente chamadas de",
+                "alternatives": ["paisagem espacial", "paisagem natural.", "paisagem cultural.", "paisagem humana.", "paisagem antrópica."],
+                "answer": 0
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "A ciência natural que contempla os estudos da dinâmica do tempo e do clima, com enfoque na caracterização e distribuição dos tipos climáticos, é corretamente chamada de",
+                "alternatives": ["Astronomia.", "Hidrologia.", "Meteorologia.", "Climatologia.", "Biologia."],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "A hidrografia brasileira é composta por rios de grande magnitude. Qual o nome do maior rio brasileiro?",
+                "alternatives": ["Rio Solimões.", "Rio Paraguai.", "Rio Amazonas.", "Rio Araguaia.", "Rio Tocantins."],
+                "answer": 2
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual o nome correto da ciência que estuda os solos?",
+                "alternatives": ["Geologia.", "Pedologia.", "Geomorfologia.", "Hidrografia.", "Cartografia."],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "О quе а Віоѕfеrа?",
+                "alternatives": ["Éареnаѕ о соnјuntо dаѕ саmаdаѕ аtmоѕférісаѕ.", "É а еѕfеrа dа vіdа соrrеѕроndеndо ао соnјuntо dе tоdаѕ аѕ fоrmаѕ dе vіdа dо рlаnеtа.", "É а еѕfеrа gаѕоѕа dо рlаnеtа.", "Соrrеѕроndе ао rеlеvо dо рlаnеtа"],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Como é chamada a ciência que elabora e interpreta mapas?",
+                "alternatives": ["Geografia", "Matemática", "Sociologia", "Cartografia"],
+                "answer": 3
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Quаіѕ ѕãо оѕ quаtrо роntоѕ саrdеаіѕ?",
+                "alternatives": ["Воrеаl, ѕеtеntrіоnаl, nоrtе е роlаr", "Lеѕtе, оеѕtе, norte е ѕul", "Nоrdеѕtе, mеrіdіоnаl, оrіеntаl е ѕul", "Nоrdеѕtе, Ѕul, осіdеntе е оrіеntе"],
+                "answer": 1
             },
             {
-                "prompt": {"text": "Primeira pergunta"},
-                "answer": 0,
-                "alternatives": [
-                    {"text": "Primeira alternativa (correta)"},
-                    {"text": "Segunda alternativa"},
-                    {"text": "Terceira alternativa"},
-                    {"text": "Quarta alternativa"},
-                    {"text": "Quinta alternativa"}
-                ]
+                "prompt": "Qual o significado da palavra Geografia?",
+                "alternatives": ["Estudo da vida", "História da Terra", "Descrição da paisagem", "Estudo da Terra"],
+                "answer": 3
+            },
+            {
+                "prompt": "O instrumento utilizado para medir a quantidade de chuva é:",
+                "alternatives": ["anemógrafo", "heliógrafo", "termômetro", "pluviógrafo", "barômetro"],
+                "answer": 3
+            },
+            {
+                "prompt": "A Região do Brasil que possui a maior extensão territorial é:",
+                "alternatives": ["Norte", "Sul", "Nordeste", "Centro-Oeste", "Sudeste"],
+                "answer": 0
+            },
+            {
+                "prompt": "Como se chama a parte explicativa do mapa, que indica as cores, os significados dos símbolos e desenhos usados no mapa?",
+                "alternatives": ["legenda", "abscissa", "escala topográfica", "fonte", "orientação"],
+                "answer": 0
+            },
+            {
+                "prompt": "O título é um dos elementos obrigatórios de um mapa. A sua função é",
+                "alternatives": ["estabelecer a relação entre a distância real e a distância do mapa.", "apresentar o assunto que está sendo retratado pelo documento.", "simbolizar os elementos que estão desenhados no mapa.", "informar as fontes consultadas para a confecção do documento.", "mostrar as linhas imaginárias presentes na localidade cartografada."],
+                "answer": 1
+            },
+            {
+                "prompt": "A energia solar é um tipo de energia que está em ascensão na atualidade. Um termo que caracteriza corretamente esse tipo de energia é",
+                "alternatives": ["tradicional.", "primária.", "não renovável.", "poluente.", "renovável."],
+                "answer": 4
+            },
+            {
+                "prompt": "O Brasil é o maior país em extensão territorial da América do Sul. Ele faz fronteiras com 10 países da América do Sul, com exceção de",
+                "alternatives": ["Bolívia e Peru.", "Guiana e Chile.", "Chile e Equador.", "Argentina e Peru.", "Equador e Guiana."],
+                "answer": 2
+            },
+            {
+                "prompt": "Todo o planeta Terra é envolvido por uma camada de ar. Essa camada gasosa que envolve a Terra é chamada:",
+                "alternatives": ["hidrosfera.", "atmosfera.", "biosfera.", "litosfera."],
+                "answer": 1
+            },
+            {
+                "prompt": "É uma representação em miniatura do planeta Terra, com seu frmato esférico, representa a superfície terrestre de maneira mais fiel que o Planisfério. Sua forma é arredondada, porém, não permite a visualização de toda a superfície ao mesmo tempo.",
+                "alternatives": ["Cartas Topográficas", "Globo Terrestre", "Planisfério", "Planta", "Portulanos"],
+                "answer": 1
+            },
+            {
+                "prompt": "Região brasileira que possui o maior número de estados:",
+                "alternatives": ["Região Norte", "Região Nordeste", "Região Sul", "Região Sudeste"],
+                "answer": 1
+            },
+            {
+                "prompt": "A região Norte tem o maior território do Brasil, e é composta por 7 estados. Os estados que compõem a região Norte são",
+                "alternatives": ["Rio Grande do Norte, Amapá, Tocantins, São Paulo, Acre, Tocantins e Ceará.", "Ceará, Piauí, Rondônia, Amapá, Para, Amazonas e Roraima.", "Rondônia, Acre, Amazonas, Roraima, Pará, Amapá e Tocantins.", "Pará, Amazonas, Rio de Janeiro, São Paulo, Paraná, Goiás e Piauí."],
+                "answer": 2
             }
         ]
     }

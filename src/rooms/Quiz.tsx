@@ -5,7 +5,7 @@ import QuizQuestions from "./QuizQuestions.json";
 import { client } from "../client";
 import Timer from "./Timer";
 
-type QuizContentType = { text: string };
+type QuizContentType = { text: string } | string;
 type QuizQuestionsType = {
     [question_set_id: string]: {
         title: string;
@@ -191,5 +191,6 @@ function QuizQuestion({
 }
 
 function QuizContent({ content }: { content: QuizContentType }): Elems {
+    if (typeof content == "string") return Elems(content);
     return Elems(content.text);
 }

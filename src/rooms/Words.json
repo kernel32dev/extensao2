@@ -1,17 +1,66 @@
 {
-    "default": {
+    "portugues": {
         "size": 15,
         "words": [
-            "first",
-            "second",
-            "third",
-            "fourth",
-            "fifth",
-            "sixth",
-            "seventh",
-            "eight",
-            "nighth",
-            "tenth"
+            "Casinha",
+            "Amigavel",
+            "Chutou",
+            "Plural",
+            "Verbo",
+            "Virgula",
+            "Diminutivo",
+            "Antonimo",
+            "Lapis",
+            "Frase"
+        ]
+    },
+    "ciencias": {
+        "size": 15,
+        "words": [
+            "Fotossintese",
+            "Nariz",
+            "Folhas",
+            "Sol",
+            "Peixe",
+            "Corpo",
+            "Agua",
+            "Vapor",
+            "Galinha"
+        ]
+    },
+    "geografia": {
+        "size": 15,
+        "words": [
+            "Terra",
+            "Mapa",
+            "Asia",
+            "Cidade",
+            "Escola",
+            "Casa",
+            "Furacao",
+            "Ambiente",
+            "Continente",
+            "Planeta"
+        ]
+    },
+    "estados": {
+        "size": 20,
+        "words": [
+            "Acre",
+            "Alagoas",
+            "Amapa",
+            "Amazonas",
+            "Bahia",
+            "Ceara",
+            "Goias",
+            "Maranhao",
+            "Parana",
+            "Pernambuco",
+            "Piaui",
+            "Rondonia",
+            "Roraima",
+            "Sergipe",
+            "Tocantins"
         ]
     }
 }

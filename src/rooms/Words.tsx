@@ -134,7 +134,8 @@ function genLetters(seed: string, size: number, words: string[]) {
     for (let i = 0; i < words.length; i++) {
         while (true) {
             // TODO! não esquecer de mudar para toLocaleUpperCase quando sair do desenvolvimento
-            const word = words[i].toLocaleLowerCase();
+            // const word = words[i].toLocaleLowerCase();
+            const word = words[i].toLocaleUpperCase();
             const u = Math.floor(rng() * size);
             const v = Math.floor(rng() * (size - word.length + 1));
             const horz = rng() > 0.5;
