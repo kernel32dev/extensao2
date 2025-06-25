@@ -55,9 +55,9 @@ export default function Timer({ position }: { position: "top-left" | "bottom-cen
             <br />
             Pontos:
             <br />
-            Time vermelho: {Derived.prop(client.points, "0")}
+            Time verde: {Derived.prop(client.points, "0")}
             <br />
-            Time azul: {Derived.prop(client.points, "1")}
+            Time amarelo: {Derived.prop(client.points, "1")}
         </div>
     );
 }

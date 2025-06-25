@@ -10,7 +10,7 @@ export default function WordsIntro() {
             Tente encontrar as palavras antes do time inimigo
             <br />
             <br />
-            Cada palavra dá um ponto, o time que encontrar a palavra primeiro fica com ela
+            Cada palavra dá três pontos, o time que encontrar a palavra primeiro fica com ela
             <br />
             <br />
             Apenas uma pessoa precisa pegar a palavra

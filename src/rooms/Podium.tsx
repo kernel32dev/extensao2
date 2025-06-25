@@ -6,8 +6,12 @@ import Points from "./Points";
 
 export default function Podium({ }: {}) {
     const scope = () => {
+        document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
-        return () => document.body.style.overflow = "";
+        return () => {
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = ""
+        };
     };
     const leaderboard_players = new Derived(() => {
         return Array.from(client.players).sort((a, b) => b.points - a.points || b.cid - a.cid).filter(x => x.points != 0);
@@ -21,7 +25,9 @@ export default function Podium({ }: {}) {
             frag.append(
                 <br />,
                 <span class={player.team ? "yellow" : "green"}>&#9679;</span>,
-                player.name,
+                player.points === 1
+                    ? `(${player.points} pontos) - ${player.name}`
+                    : `(1 ponto) - ${player.name}`
             );
         }
         return frag;
@@ -47,7 +53,7 @@ export default function Podium({ }: {}) {
             &nbsp;
             &nbsp;
             <div style={{ whiteSpace: "nowrap", fontSize: "large" }}>
-                {new Derived(() => leaderboard_players().length ? "Melhores:" : "")}
+                {new Derived(() => leaderboard_players().length ? "Maiores contribuidores:" : "")}
                 {leaderboard}
             </div>
         </div>

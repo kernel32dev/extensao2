@@ -145,12 +145,15 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
                 ||
                 (room === "words" && !answers.find(x => x.index == msg.index))
             )) {
-                const points_earned = 1;
+                const points_per_quiz_question = 1;
+                const points_per_word = 3;
+                const points_earned = room === "quiz" ? points_per_quiz_question : room === "words" ? points_per_word : 0;
                 answers.push({
                     team: msg.team,
                     index: msg.index,
                 });
                 points[+msg.team] += points_earned;
+                player.points += points_earned;
                 const text1 = JSON.stringify({
                     event: "Player",
                     ...player,
