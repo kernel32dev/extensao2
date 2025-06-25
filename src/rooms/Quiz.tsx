@@ -39,6 +39,11 @@ export default function Quiz({ }: {}): Elems {
             localStorage.setItem("misses", Array.from(misses).join(","));
         });
     });
+    new Effect.Persistent(() => {
+        if (client.room() !== "loading" && client.room() !== "quiz") {
+            misses.clear();
+        }
+    });
 
     const quiz = (
         <div class="quiz-screen">
@@ -96,7 +101,7 @@ export default function Quiz({ }: {}): Elems {
                             {i + 1}
                         </div>
                     ) as HTMLDivElement;
-                    const answered_correctly = new Derived(() => client.answers.find(x => x.index === i)?.team === client.me().team);
+                    const answered_correctly = new Derived(() => !!client.answers.find(x => x.index === i && x.team === client.me().team));
                     new Effect(div, () => {
                         div.classList.remove("right","atention","wrong","blocked","available");
                         if (answered_correctly()) {

@@ -108,6 +108,7 @@ function sendFirstMessages(ws: WebSocket) {
 }
 
 function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
+    const player = players.find(x => x.cid === cid);
     switch (msg.cmd) {
         case "ResetPoints": {
             points[+false] = 0;
@@ -129,7 +130,6 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
             player.name = msg.name ?? player.name;
             player.x = msg.x ?? player.x;
             player.y = msg.y ?? player.y;
-            player.points = msg.points ?? player.points;
             const text = JSON.stringify({
                 event: "Player",
                 ...player,
@@ -140,14 +140,18 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
             break;
         }
         case "Answer":
-            if (!answers.find(x => x.index == msg.index)) {
+            if (player && (
+                (room === "quiz" && !answers.find(x => x.index == msg.index && x.team == player.team))
+                ||
+                (room === "words" && !answers.find(x => x.index == msg.index))
+            )) {
+                const points_earned = 1;
                 answers.push({
                     team: msg.team,
                     index: msg.index,
                 });
-                points[+msg.team]++;
-                const player = players.find(x => x.cid === cid);
-                const text1 = player && JSON.stringify({
+                points[+msg.team] += points_earned;
+                const text1 = JSON.stringify({
                     event: "Player",
                     ...player,
                 } satisfies SvrMsg);
@@ -161,7 +165,7 @@ function handleMessage(cid: number, msg: CliMsg, ws: WebSocket) {
                     points,
                 } satisfies SvrMsg);
                 for (const conn of allConns) {
-                    if (text1) conn.send(text1);
+                    conn.send(text1);
                     conn.send(text2);
                     conn.send(text3);
                 }

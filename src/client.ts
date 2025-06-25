@@ -143,9 +143,6 @@ function onmessage(e: MessageEvent) {
         case "Room": {
             answers.length = 0;
             room.set(msg.room);
-            if (msg.room != "quiz") {
-                localStorage.removeItem("misses");
-            }
             break;
         }
     }

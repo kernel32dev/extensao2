@@ -58,7 +58,6 @@ declare namespace CliMsg {
         x?: number,
         y?: number,
         name?: string,
-        points?: number,
     };
     type Answer = {
         cmd: "Answer",
