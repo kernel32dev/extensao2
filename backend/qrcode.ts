@@ -9,6 +9,12 @@ export function hasQrCode() {
     return !!findWiFiIPv4Address();
 }
 
+export function getUrl(): string | null {
+    const addr = findWiFiIPv4Address();
+    if (addr === null) return null;
+    return port == 80 ? `http://${addr}` : `http://${addr}:${port}`;
+}
+
 export function getQrCode(): Promise<Buffer> | null {
     const addr = findWiFiIPv4Address();
     if (!addr) return null;
@@ -41,6 +47,7 @@ function findWiFiIPv4Address() {
             if (addressInfo.family === 'IPv4' && !addressInfo.internal) {
                 console.log(`${addressInfo.address} = ${interfaceName}`);
                 if (wireless) {
+                    console.log(`ip selecionado: ${addressInfo.address}`);
                     return addressInfo.address
                 }
                 ipv4 = addressInfo.address;
@@ -48,6 +55,7 @@ function findWiFiIPv4Address() {
             }
         }
     }
+    console.log(`ip selecionado: ${ipv4}`);
     return ipv4;
 }
 

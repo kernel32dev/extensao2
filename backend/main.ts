@@ -2,13 +2,22 @@ import express from "express";
 import enableWs from "express-ws";
 import * as path from "path";
 import { handleNewSocket } from "./logic";
-import { getQrCode } from "./qrcode";
+import { getQrCode, getUrl } from "./qrcode";
 import { port } from "./config";
 
 const app = enableWs(express()).app;
 
 app.ws("/connect", (ws, req) => {
     handleNewSocket(ws as any, req.query);
+});
+
+app.get("/url", (_req, res) => {
+    const url = getUrl();
+    if (url) {
+        res.header("Content-Type", "text/plain").send(url);
+    } else {
+        res.status(500).send();
+    }
 });
 
 app.get("/qrcode", (_req, res) => {

@@ -44,7 +44,13 @@ export default function Lobby({ }: {}): Elems {
                 </div>
             </div>
             {client.isHost && (
-                <img class="lobby-qrcode" src="/qrcode" alt="" />
+                <div class="lobby-qrcode-column">
+                    <img class="lobby-qrcode" src="/qrcode" alt="" />
+                    {function(){
+                        const promise = State.track(fetch("/url").then(x => x.text()));
+                        return new Derived(() => promise.$value);
+                    }()}
+                </div>
             )}
         </div>
     )

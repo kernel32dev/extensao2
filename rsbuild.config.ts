@@ -21,6 +21,7 @@ export default defineConfig({
       '/connect': 'ws://localhost:80',
       '/qrcode': 'http://localhost:80',
       '/public': 'http://localhost:80',
+      '/url': 'http://localhost:80',
     },
   },
 });

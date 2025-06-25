@@ -32,8 +32,17 @@
     gap: 1em;
 }
 
-.lobby-qrcode {
+.lobby-qrcode-column {
     width: 50%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lobby-qrcode {
+    width: 100%;
+    align-self: stretch;
 }
 
 .lobby-qrcode {
