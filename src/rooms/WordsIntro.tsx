@@ -20,6 +20,7 @@ export default function WordsIntro() {
             <br />
             <br />
             Para pegar uma palavra, selecione a primeira letra e então toque na a última
+            <br />
             {client.isHost && (
                 <>
                     <br />
@@ -39,6 +40,6 @@ export default function WordsIntro() {
     );
     function start() {
         client.send({ cmd: "Room", room: "words" });
-        timerEnd.set(Date.now() + 300_000);
+        timerEnd.set(Date.now() + 40 * 60 * 1000); // 40 minutos
     }
 }

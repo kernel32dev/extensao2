@@ -33,6 +33,6 @@ export default function QuizIntro() {
     );
     function start() {
         client.send({ cmd: "Room", room: "quiz" });
-        timerEnd.set(Date.now() + 300_000);
+        timerEnd.set(Date.now() + 40 * 60 * 1000); // 40 minutos
     }
 }

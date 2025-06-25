@@ -1,6 +1,6 @@
 .wordhunt-screen {
     width: calc(100vw - 4em);
-    height: calc(100vh - 4em);
+    min-height: calc(100vh - 4em);
     padding: 2em;
     display: flex;
     flex-direction: column;
@@ -42,6 +42,10 @@
 }
 .wordhunt-box > span.wordhunt-error {
     animation: wordhunt-error 1s linear;
+}
+.wordhunt-remaining {
+    display: flex;
+    flex-direction: column;
 }
 @keyframes wordhunt-error {
     0% {

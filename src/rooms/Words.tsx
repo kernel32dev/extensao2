@@ -85,7 +85,6 @@ export default function Words({ }: {}) {
                 <br />
                 Para pegar uma palavra, selecione a primeira letra e então toque na a última
                 <br />
-                Palavras restantes: {new Derived(() => words.length - client.answers.length)}
             </p>
             <div class="wordhunt-box" style={{
                 gridTemplateColumns: " 1fr".repeat(size),
@@ -122,6 +121,11 @@ export default function Words({ }: {}) {
                         {letters[i]}
                     </span>
                 ))}
+            </div>
+            <br />
+            Palavras restantes: {new Derived(() => words.length - client.answers.length)}
+            <div class="wordhunt-remaining">
+                {Derived.Array.range(words.length, i => <div>{!client.answers.find(x => x.index === i) && words[i]}</div>)}
             </div>
         </div>
     );
