@@ -442,210 +442,861 @@
                     "Praça pública"
                 ]
             },
-
-
-
-
-
-
+            {
+                "prompt": "Quem é o fundador do Cristianismo?",
+                "answer": 2,
+                "alternatives": [
+                    "Buda",
+                    "Moisés",
+                    "Jesus Cristo",
+                    "Mahatma Gandhi",
+                    "Allan Kardec"
+                ]
+            },
+            {
+                "prompt": "Onde Jesus nasceu?",
+                "answer": 1,
+                "alternatives": [
+                    "Jerusalém",
+                    "Belém",
+                    "Nazaré",
+                    "Roma",
+                    "Galileia"
+                ]
+            },
+            {
+                "prompt": "Qual é o nome do livro sagrado dos cristãos?",
+                "answer": 0,
+                "alternatives": [
+                    "Bíblia",
+                    "Corão",
+                    "Vedas",
+                    "Torá",
+                    "Evangelho"
+                ]
+            },
+            {
+                "prompt": "O que é um templo para os cristãos?",
+                "answer": 1,
+                "alternatives": [
+                    "Uma escola",
+                    "Uma igreja",
+                    "Um hospital",
+                    "Uma casa",
+                    "Uma praça"
+                ]
+            },
+            {
+                "prompt": "O que significa a palavra \"Evangelho\"?",
+                "answer": 1,
+                "alternatives": [
+                    "Um tipo de comida",
+                    "Boa notícia",
+                    "Uma cidade",
+                    "Uma guerra",
+                    "Uma oração"
+                ]
+            },
+            {
+                "prompt": "Qual é o nome do profeta que partiu o mar vermelho para libertar os israelitas?",
+                "answer": 2,
+                "alternatives": [
+                    "Elias",
+                    "Noé",
+                    "Moisés",
+                    "João",
+                    "Josué"
+                ]
+            },
+            {
+                "prompt": "O que é o Natal para os cristãos?",
+                "answer": 1,
+                "alternatives": [
+                    "A morte de Jesus",
+                    "O nascimento de Jesus",
+                    "O casamento de Jesus",
+                    "A viagem de Jesus",
+                    "O batismo de Jesus"
+                ]
+            },
+            {
+                "prompt": "O que significa a palavra \"oração\"?",
+                "answer": 0,
+                "alternatives": [
+                    "Um pedido a Deus",
+                    "Um livro sagrado",
+                    "Uma festa religiosa",
+                    "Uma profissão religiosa",
+                    "Um canto religioso"
+                ]
+            },
+            {
+                "prompt": "Qual é o nome da festa que celebra a ressurreição de Jesus?",
+                "answer": 0,
+                "alternatives": [
+                    "Páscoa",
+                    "Carnaval",
+                    "Festa Junina",
+                    "Festa de Natal",
+                    "Pentecostes"
+                ]
+            },
+            {
+                "prompt": "Quem foi o primeiro homem criado por Deus, de acordo com a Bíblia?",
+                "answer": 1,
+                "alternatives": [
+                    "Noé",
+                    "Adão",
+                    "Moisés",
+                    "João",
+                    "Caim"
+                ]
+            },
+            {
+                "prompt": "O que é uma pintura?",
+                "answer": 2,
+                "alternatives": [
+                    "Um brinquedo de madeira",
+                    "Uma comida colorida",
+                    "Um desenho feito com tintas",
+                    "Uma dança típica",
+                    "Um bordado"
+                ]
+            },
+            {
+                "prompt": "Qual destas cores é primária?",
+                "answer": 3,
+                "alternatives": [
+                    "Laranja",
+                    "Roxo",
+                    "Verde",
+                    "Vermelho",
+                    "Rosa"
+                ]
+            },
+            {
+                "prompt": "Qual é o nome do artista famoso por pintar a Mona Lisa?",
+                "answer": 0,
+                "alternatives": [
+                    "Leonardo da Vinci",
+                    "Pablo Picasso",
+                    "Tarsila do Amaral",
+                    "Cândido Portinari",
+                    "Michelangelo"
+                ]
+            },
+            {
+                "prompt": "O que usamos para pintar com aquarela?",
+                "answer": 2,
+                "alternatives": [
+                    "Lápis de escrever",
+                    "Giz de cera",
+                    "Pincel e água",
+                    "Cola colorida",
+                    "Canetinha"
+                ]
+            },
+            {
+                "prompt": "O que é uma escultura?",
+                "answer": 2,
+                "alternatives": [
+                    "Uma música tocada no piano",
+                    "Um filme antigo",
+                    "Uma arte feita em 3D com materiais como barro, pedra ou madeira",
+                    "Uma brincadeira no recreio",
+                    "Um tipo de dança"
+                ]
+            },
+            {
+                "prompt": "Qual dessas palavras está relacionada à música?",
+                "answer": 1,
+                "alternatives": [
+                    "Pincel",
+                    "Ritmo",
+                    "Quadro",
+                    "Argila",
+                    "Tinta"
+                ]
+            },
+            {
+                "prompt": "Tarsila do Amaral foi uma pintora brasileira conhecida por pintar:",
+                "answer": 2,
+                "alternatives": [
+                    "Animais de estimação",
+                    "Comidas típicas",
+                    "Paisagens do sertão e figuras brasileiras",
+                    "Castelos medievais",
+                    "Frutas tropicais"
+                ]
+            },
+            {
+                "prompt": "Quando misturamos azul e amarelo, qual cor obtemos?",
+                "answer": 0,
+                "alternatives": [
+                    "Verde",
+                    "Roxo",
+                    "Laranja",
+                    "Marrom",
+                    "Cinza"
+                ]
+            },
+            {
+                "prompt": "O que é uma apresentação de teatro?",
+                "answer": 1,
+                "alternatives": [
+                    "Um desenho animado",
+                    "Pessoas contando histórias com atuação, fala e figurino",
+                    "Uma leitura em silêncio",
+                    "Um comercial de TV",
+                    "Um filme de ação"
+                ]
+            },
+            {
+                "prompt": "Qual dessas opções pode ser considerada uma forma de arte?",
+                "answer": 2,
+                "alternatives": [
+                    "Escovar os dentes",
+                    "Jogar futebol",
+                    "Pintar um quadro",
+                    "Dormir cedo",
+                    "Correr no parque"
+                ]
+            },
+            {
+                "prompt": "Qual é o nome da pessoa que estuda o passado?",
+                "answer": 1,
+                "alternatives": [
+                    "Engenheiro",
+                    "Historiador",
+                    "Médico",
+                    "Cantor",
+                    "Professor"
+                ]
+            },
+            {
+                "prompt": "O que usamos para marcar o tempo e organizar os dias, meses e anos?",
+                "answer": 2,
+                "alternatives": [
+                    "Televisão",
+                    "Mapa",
+                    "Calendário",
+                    "Régua",
+                    "Relógio"
+                ]
+            },
+            {
+                "prompt": "Como se chamam as histórias contadas pelos avós e pais sobre o passado?",
+                "answer": 3,
+                "alternatives": [
+                    "Notícias",
+                    "Contos de fadas",
+                    "Lendas urbanas",
+                    "Histórias orais",
+                    "Fofocas"
+                ]
+            },
+            {
+                "prompt": "O que é uma linha do tempo?",
+                "answer": 2,
+                "alternatives": [
+                    "Uma corda para brincar",
+                    "Uma história de ficção",
+                    "Uma maneira de organizar os acontecimentos em ordem",
+                    "Um brinquedo antigo",
+                    "Um livro mágico"
+                ]
+            },
+            {
+                "prompt": "Como as pessoas se comunicavam no passado, antes do telefone?",
+                "answer": 1,
+                "alternatives": [
+                    "Pelo WhatsApp",
+                    "Por cartas e bilhetes",
+                    "Por e-mail",
+                    "Por televisão",
+                    "Por tambores"
+                ]
+            },
+            {
+                "prompt": "Qual destes meios de transporte era usado no passado?",
+                "answer": 2,
+                "alternatives": [
+                    "Avião a jato",
+                    "Carro elétrico",
+                    "Carroça puxada por cavalos",
+                    "Patinete motorizado",
+                    "Trem-bala"
+                ]
+            },
+            {
+                "prompt": "Qual desses objetos antigos era usado para ouvir músicas?",
+                "answer": 2,
+                "alternatives": [
+                    "Celular",
+                    "MP3",
+                    "Fita cassete",
+                    "Smartwatch",
+                    "Disquete"
+                ]
+            },
+            {
+                "prompt": "O que podemos encontrar em um museu?",
+                "answer": 2,
+                "alternatives": [
+                    "Brinquedos novos",
+                    "Alimentos frescos",
+                    "Objetos antigos e históricos",
+                    "Jogos de videogame",
+                    "Roupas da moda"
+                ]
+            },
+            {
+                "prompt": "Quem foi o primeiro presidente do Brasil?",
+                "answer": 2,
+                "alternatives": [
+                    "Dom Pedro II",
+                    "Getúlio Vargas",
+                    "Deodoro da Fonseca",
+                    "Juscelino Kubitschek",
+                    "Floriano Peixoto"
+                ]
+            },
+            {
+                "prompt": "Qual é o nome do navio que trouxe os portugueses ao Brasil em 1500?",
+                "answer": 3,
+                "alternatives": [
+                    "Titanic",
+                    "Nina",
+                    "Santa Maria",
+                    "Nau Capitânia",
+                    "Pinta"
+                ]
+            },
+            {
+                "prompt": "Qual das palavras abaixo está escrita corretamente?",
+                "answer": 1,
+                "alternatives": [
+                    "kazinha",
+                    "casinha",
+                    "cazinha",
+                    "kazinhar"
+                ]
+            },
+            {
+                "prompt": "Qual é o plural de “cachorro”?",
+                "answer": 2,
+                "alternatives": [
+                    "Cachorrinhos",
+                    "Cachorra",
+                    "Cachorros",
+                    "Cachorre"
+                ]
+            },
+            {
+                "prompt": "Qual frase está correta?",
+                "answer": 3,
+                "alternatives": [
+                    "Eu gosta de brincar.",
+                    "Nós gosta de estudar.",
+                    "Ela gostam de ler.",
+                    "Nós gostamos de jogar."
+                ]
+            },
+            {
+                "prompt": "Qual é o antônimo (contrário) de “triste”?",
+                "answer": 1,
+                "alternatives": [
+                    "Forte",
+                    "Feliz",
+                    "Pequeno",
+                    "Cansado"
+                ]
+            },
+            {
+                "prompt": "Qual palavra completa corretamente a frase: \"O menino foi _____ escola.\"?",
+                "answer": 1,
+                "alternatives": [
+                    "a",
+                    "à",
+                    "ah",
+                    "há"
+                ]
+            },
+            {
+                "prompt": "Em qual das opções todas as palavras são nomes de animais?",
+                "answer": 1,
+                "alternatives": [
+                    "Gato, cadeira, pato",
+                    "Cachorro, cavalo, rato",
+                    "Sapato, cavalo, rato",
+                    "Pato, mesa, gato"
+                ]
+            },
+            {
+                "prompt": "Assinale a opção em que todas as palavras estão no diminutivo:",
+                "answer": 1,
+                "alternatives": [
+                    "Casão, portão, coração",
+                    "Casinha, portinha, florzinha",
+                    "Casa, porta, flor",
+                    "Casuda, portona, florzona"
+                ]
+            },
+            {
+                "prompt": "Qual das palavras tem som com “ch”?",
+                "answer": 0,
+                "alternatives": [
+                    "Chuva",
+                    "Suva",
+                    "Juva",
+                    "Luva"
+                ]
+            },
+            {
+                "prompt": "Em qual alternativa a palavra está no aumentativo?",
+                "answer": 1,
+                "alternatives": [
+                    "Livrinho",
+                    "Livrote",
+                    "Livro",
+                    "Livrinho"
+                ]
+            },
+            {
+                "prompt": "Qual dessas frases tem um verbo?",
+                "answer": 2,
+                "alternatives": [
+                    "O gato preto.",
+                    "A bola azul.",
+                    "O menino corre.",
+                    "A flor vermelha."
+                ]
+            },
             {
                 "prompt": "Qual dos estados abaixo faz parte da região Sudeste do Brasil?",
-                "alternatives": ["Tocantins", "Espírito Santo", "Paraíba", "Santa Catarina", "Paraná"],
+                "alternatives": [
+                    "Tocantins",
+                    "Espírito Santo",
+                    "Paraíba",
+                    "Santa Catarina",
+                    "Paraná"
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Qual a região brasileira que apresenta a menor densidade demográfica?",
-                "alternatives": ["Norte", "Nordeste", "Sul", "Centro-Oeste", "Sudeste"],
+                "alternatives": [
+                    "Norte",
+                    "Nordeste",
+                    "Sul",
+                    "Centro-Oeste",
+                    "Sudeste"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "Qual é a maior metrópole em população da região Sudeste do Brasil?",
-                "alternatives": ["Rio de Janeiro", "Brasília", "São Paulo", "Vitória", "Porto Alegre"],
+                "alternatives": [
+                    "Rio de Janeiro",
+                    "Brasília",
+                    "São Paulo",
+                    "Vitória",
+                    "Porto Alegre"
+                ],
                 "answer": 2
             },
             {
                 "prompt": "Qual bioma brasileiro, marcado pela sazonalidade das cheias, é encontrado tipicamente na região Centro-Oeste do país?",
-                "alternatives": ["Araucárias", "Mata Atlântica", "Pantanal", "Mata de Cocais", "Caatinga"],
+                "alternatives": [
+                    "Araucárias",
+                    "Mata Atlântica",
+                    "Pantanal",
+                    "Mata de Cocais",
+                    "Caatinga"
+                ],
                 "answer": 2
             },
             {
                 "prompt": "As capitais dos estados da Região Sul do Brasil são:",
-                "alternatives": ["Cuiabá, Goiânia e Campo Grande", "Manaus, Belém e Porto Velho", "Rio de Janeiro, São Paulo e Vitória", "Curitiba, Florianópolis e Porto Alegre", "Salvador, Recife e Fortaleza"],
+                "alternatives": [
+                    "Cuiabá, Goiânia e Campo Grande",
+                    "Manaus, Belém e Porto Velho",
+                    "Rio de Janeiro, São Paulo e Vitória",
+                    "Curitiba, Florianópolis e Porto Alegre",
+                    "Salvador, Recife e Fortaleza"
+                ],
                 "answer": 3
             },
             {
                 "prompt": "Cada estado brasileiro tem uma sigla. Por exemplo: a sigla do estado de São Paulo é SP. Elas nos ajudam a localizar rapidamente uma cidade no mapa do Brasil. Assim quando lemos \"Santana(AP)\" sabemos que esta se encontra no estado de (o):",
-                "alternatives": ["Amazonas", "Amapá", "Acre", "Alagoas", "Não existe nenhum estado brasileiro com a sigla \"AP\""],
+                "alternatives": [
+                    "Amazonas",
+                    "Amapá",
+                    "Acre",
+                    "Alagoas",
+                    "Não existe nenhum estado brasileiro com a sigla \"AP\""
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Os estudos que fazem as estatísticas oficiais do Brasil são da responsabilidade de qual órgão?",
-                "alternatives": ["Instituto Nacional de Geografia e Estatística (INGE).", "Instituto Brasileiro de Geografia e Estatística (IBGE).", "Instituto Brasileiro de Geografia e Estudos (IBGE).", "Instituto Nacionalista de Geografia e Estatística (INGE)."],
+                "alternatives": [
+                    "Instituto Nacional de Geografia e Estatística (INGE).",
+                    "Instituto Brasileiro de Geografia e Estatística (IBGE).",
+                    "Instituto Brasileiro de Geografia e Estudos (IBGE).",
+                    "Instituto Nacionalista de Geografia e Estatística (INGE)."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "A divisão regional que não obedece aos limites dos estados é chamada de:",
-                "alternatives": ["Macrorregiões ou Cinco Grandes Regiões.", "Macrorregiões Geoeconômicas ou Cinco Grandes Regiões.", "Macrorregiões Geoeconômicas ou Complexos Regionais.", "Macrorregiões ou Complexos Regionais."],
+                "alternatives": [
+                    "Macrorregiões ou Cinco Grandes Regiões.",
+                    "Macrorregiões Geoeconômicas ou Cinco Grandes Regiões.",
+                    "Macrorregiões Geoeconômicas ou Complexos Regionais.",
+                    "Macrorregiões ou Complexos Regionais."
+                ],
                 "answer": 2
             },
             {
                 "prompt": "No âmbito econômico mundial, o Brasil é corretamente classificado como um país",
-                "alternatives": ["emergente.", "comunista.", "desenvolvido.", "planificado.", "socialista"],
+                "alternatives": [
+                    "emergente.",
+                    "comunista.",
+                    "desenvolvido.",
+                    "planificado.",
+                    "socialista"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "As alternativas abaixo apresentam alguns dos mais importantes organismos e blocos econômicos mundiais. De qual deles o Brasil faz parte?",
-                "alternatives": ["OCDE.", "G7.", "Asean.", "G8.", "Brics."],
+                "alternatives": [
+                    "OCDE.",
+                    "G7.",
+                    "Asean.",
+                    "G8.",
+                    "Brics."
+                ],
                 "answer": 4
             },
             {
                 "prompt": "Atualmente, o cenário econômico brasileiro é marcado especialmente pela",
-                "alternatives": ["importação de alimentos e minerais.", "estatização das empresas privadas.", "produção de bens de origem primária.", "exportação de eletrônicos e de chips.", "fabricação de bens de alta tecnologia."],
+                "alternatives": [
+                    "importação de alimentos e minerais.",
+                    "estatização das empresas privadas.",
+                    "produção de bens de origem primária.",
+                    "exportação de eletrônicos e de chips.",
+                    "fabricação de bens de alta tecnologia."
+                ],
                 "answer": 2
             },
             {
                 "prompt": "As ilhas de calor representam um dos problemas ambientais urbanos. Esse fenômeno climático acontece devido:",
-                "alternatives": ["ao aumento das queimadas nas zonas rurais.", "a diminuição da densidade demográfica dos centros urbanos.", "ao aumento da inversão térmica nas cidades.", "a elevação das temperaturas em algumas zonas urbanas.", "aos microclimas periféricos que afetam diretamente as cidades."],
+                "alternatives": [
+                    "ao aumento das queimadas nas zonas rurais.",
+                    "a diminuição da densidade demográfica dos centros urbanos.",
+                    "ao aumento da inversão térmica nas cidades.",
+                    "a elevação das temperaturas em algumas zonas urbanas.",
+                    "aos microclimas periféricos que afetam diretamente as cidades."
+                ],
                 "answer": 3
             },
             {
                 "prompt": "No contexto da globalização, uma tendência crescente é a formação de blocos econômicos regionais. Esses blocos apresentam diferentes níveis de integração. Um desses níveis é a zona de livre comércio que se caracteriza pela:",
-                "alternatives": ["criação de uma moeda única a ser adotada pelos países membros.", "livre circulação de mercadorias provenientes dos países membros.", "unificação de políticas de relações internacionais entre os países membros.", "livre circulação de pessoas, serviços e capitais entre os países membros."],
+                "alternatives": [
+                    "criação de uma moeda única a ser adotada pelos países membros.",
+                    "livre circulação de mercadorias provenientes dos países membros.",
+                    "unificação de políticas de relações internacionais entre os países membros.",
+                    "livre circulação de pessoas, serviços e capitais entre os países membros."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "As formas de relevo resultam das grandes alterações que a superfície terrestre sofreu ao longo do tempo. São exemplos de agentes internos responsáveis por essas modificações:",
-                "alternatives": ["intemperismo, vulcanismo, deposição e compactação de sedimentos.", "vulcanismo, tectonismo e abalos sísmicos.", "erosão, sedimentação e intemperismo.", "solidificação do magma, deposição e compactação de sedimentos."],
+                "alternatives": [
+                    "intemperismo, vulcanismo, deposição e compactação de sedimentos.",
+                    "vulcanismo, tectonismo e abalos sísmicos.",
+                    "erosão, sedimentação e intemperismo.",
+                    "solidificação do magma, deposição e compactação de sedimentos."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Embora muitas vezes tempo e clima sejam utilizados como sinônimos, essas palavras possuem significados diferentes pois",
-                "alternatives": ["O clima é influenciado por fatores, como precipitação e radiação solar. Já o tempo é resultado direto da influência das massas de ar.", "O tempo se refere às condições meteorológicas momentâneas e o clima representa um padrão meteorológico observado ao longo dos anos.", "O clima de uma região é resultado de fatores geográficos e o tempo é influenciado pelas condições meteorológicas.", "O tempo se refere à temperatura e a chuva em um local, já o clima reúne informações sobre pressão atmosférica, continentalidade e maritimidade."],
+                "alternatives": [
+                    "O clima é influenciado por fatores, como precipitação e radiação solar. Já o tempo é resultado direto da influência das massas de ar.",
+                    "O tempo se refere às condições meteorológicas momentâneas e o clima representa um padrão meteorológico observado ao longo dos anos.",
+                    "O clima de uma região é resultado de fatores geográficos e o tempo é influenciado pelas condições meteorológicas.",
+                    "O tempo se refere à temperatura e a chuva em um local, já o clima reúne informações sobre pressão atmosférica, continentalidade e maritimidade."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Qual é o movimento da Terra que faz com que tenhamos o dia e a noite?",
-                "alternatives": ["Movimento de rotação", "Movimento de translação", "Movimento de oscilação", "Movimento de rolagem", "Movimento de pulsação"],
+                "alternatives": [
+                    "Movimento de rotação",
+                    "Movimento de translação",
+                    "Movimento de oscilação",
+                    "Movimento de rolagem",
+                    "Movimento de pulsação"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "Essa fonte de energia muito utilizada no Brasil e no mundo é um minério fóssil que, quando processado, dá origem a vários subprodutos, como a gasolina, óleo diesel, querosene, além de gerar eletricidade nas usinas termoelétricas. A que fonte de energia refere-se o fragmento acima?",
-                "alternatives": ["Gás natural", "Cana-de-açúcar", "Carvão mineral", "Petróleo", "Xisto betuminoso"],
+                "alternatives": [
+                    "Gás natural",
+                    "Cana-de-açúcar",
+                    "Carvão mineral",
+                    "Petróleo",
+                    "Xisto betuminoso"
+                ],
                 "answer": 3
             },
             {
                 "prompt": "As fontes não renováveis podem esgotar-se totalmente em prazos variáveis (pequeno, médio e longo prazo) de acordo com a extração, consumo e disponibilidade. Das alternativas abaixo, qual delas lista apenas fontes renováveis de energia?",
-                "alternatives": ["biocombustíveis, petróleo e carvão mineral.", "energia solar, energia eólica e urânio.", "urânio, gás natural e energia hidrelétrica.", "energia hidrelétrica, energia solar e biocombustíveis.", "gás natural, energia eólica e energia solar."],
+                "alternatives": [
+                    "biocombustíveis, petróleo e carvão mineral.",
+                    "energia solar, energia eólica e urânio.",
+                    "urânio, gás natural e energia hidrelétrica.",
+                    "energia hidrelétrica, energia solar e biocombustíveis.",
+                    "gás natural, energia eólica e energia solar."
+                ],
                 "answer": 3
             },
             {
                 "prompt": "A região geográfica brasileira que é a segunda em número de habitantes é o:",
-                "alternatives": ["Sudeste", "Sul", "Nordeste", "Centro-Oeste"],
+                "alternatives": [
+                    "Sudeste",
+                    "Sul",
+                    "Nordeste",
+                    "Centro-Oeste"
+                ],
                 "answer": 2
             },
             {
                 "prompt": "A floresta amazônica oferece serviços ambientais fundamentais, dentre os quais inclui-se a manutenção",
-                "alternatives": ["da emissão de gases; ciclo vital e armazenamento de carbono.", "da fauna e flora; ciclo hidrológico e armazenamento de metano.", "do desmatamento; ciclo hidrológico e armazenamento de carbono.", "da biodiversidade; ciclo hidrológico e armazenamento de carbono.", "da biodegradação; ciclo hidrológico e armazenamento de carbono."],
+                "alternatives": [
+                    "da emissão de gases; ciclo vital e armazenamento de carbono.",
+                    "da fauna e flora; ciclo hidrológico e armazenamento de metano.",
+                    "do desmatamento; ciclo hidrológico e armazenamento de carbono.",
+                    "da biodiversidade; ciclo hidrológico e armazenamento de carbono.",
+                    "da biodegradação; ciclo hidrológico e armazenamento de carbono."
+                ],
                 "answer": 3
             },
             {
                 "prompt": "O espaço geográfico tem sido marcado pela expansão de objetos artificiais no meio. São exemplos desses objetos artificiais:",
-                "alternatives": ["casas, lojas e indústrias", "florestas, lagoas e casas", "montanhas, casas e lagos", "cachoeiras, rios e lagos", "indústrias, rios e animais"],
+                "alternatives": [
+                    "casas, lojas e indústrias",
+                    "florestas, lagoas e casas",
+                    "montanhas, casas e lagos",
+                    "cachoeiras, rios e lagos",
+                    "indústrias, rios e animais"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "Quais são os dois elementos que formam o espaço geográfico?",
-                "alternatives": ["Natureza e sociedade", "Natureza e espaço", "Meio ambiente e lugar", "Paisagem e espaço", "Paisagem e território"],
+                "alternatives": [
+                    "Natureza e sociedade",
+                    "Natureza e espaço",
+                    "Meio ambiente e lugar",
+                    "Paisagem e espaço",
+                    "Paisagem e território"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "A modificação do espaço geográfico provoca diversas mudanças na paisagem. Em contraposição, as paisagens que conservam as suas condições naturais são corretamente chamadas de",
-                "alternatives": ["paisagem espacial", "paisagem natural.", "paisagem cultural.", "paisagem humana.", "paisagem antrópica."],
+                "alternatives": [
+                    "paisagem espacial",
+                    "paisagem natural.",
+                    "paisagem cultural.",
+                    "paisagem humana.",
+                    "paisagem antrópica."
+                ],
                 "answer": 0
             },
             {
                 "prompt": "A ciência natural que contempla os estudos da dinâmica do tempo e do clima, com enfoque na caracterização e distribuição dos tipos climáticos, é corretamente chamada de",
-                "alternatives": ["Astronomia.", "Hidrologia.", "Meteorologia.", "Climatologia.", "Biologia."],
+                "alternatives": [
+                    "Astronomia.",
+                    "Hidrologia.",
+                    "Meteorologia.",
+                    "Climatologia.",
+                    "Biologia."
+                ],
                 "answer": 3
             },
             {
                 "prompt": "A hidrografia brasileira é composta por rios de grande magnitude. Qual o nome do maior rio brasileiro?",
-                "alternatives": ["Rio Solimões.", "Rio Paraguai.", "Rio Amazonas.", "Rio Araguaia.", "Rio Tocantins."],
+                "alternatives": [
+                    "Rio Solimões.",
+                    "Rio Paraguai.",
+                    "Rio Amazonas.",
+                    "Rio Araguaia.",
+                    "Rio Tocantins."
+                ],
                 "answer": 2
             },
             {
                 "prompt": "Qual o nome correto da ciência que estuda os solos?",
-                "alternatives": ["Geologia.", "Pedologia.", "Geomorfologia.", "Hidrografia.", "Cartografia."],
+                "alternatives": [
+                    "Geologia.",
+                    "Pedologia.",
+                    "Geomorfologia.",
+                    "Hidrografia.",
+                    "Cartografia."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "О quе а Віоѕfеrа?",
-                "alternatives": ["Éареnаѕ о соnјuntо dаѕ саmаdаѕ аtmоѕférісаѕ.", "É а еѕfеrа dа vіdа соrrеѕроndеndо ао соnјuntо dе tоdаѕ аѕ fоrmаѕ dе vіdа dо рlаnеtа.", "É а еѕfеrа gаѕоѕа dо рlаnеtа.", "Соrrеѕроndе ао rеlеvо dо рlаnеtа"],
+                "alternatives": [
+                    "Éареnаѕ о соnјuntо dаѕ саmаdаѕ аtmоѕférісаѕ.",
+                    "É а еѕfеrа dа vіdа соrrеѕроndеndо ао соnјuntо dе tоdаѕ аѕ fоrmаѕ dе vіdа dо рlаnеtа.",
+                    "É а еѕfеrа gаѕоѕа dо рlаnеtа.",
+                    "Соrrеѕроndе ао rеlеvо dо рlаnеtа"
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Como é chamada a ciência que elabora e interpreta mapas?",
-                "alternatives": ["Geografia", "Matemática", "Sociologia", "Cartografia"],
+                "alternatives": [
+                    "Geografia",
+                    "Matemática",
+                    "Sociologia",
+                    "Cartografia"
+                ],
                 "answer": 3
             },
             {
                 "prompt": "Quаіѕ ѕãо оѕ quаtrо роntоѕ саrdеаіѕ?",
-                "alternatives": ["Воrеаl, ѕеtеntrіоnаl, nоrtе е роlаr", "Lеѕtе, оеѕtе, norte е ѕul", "Nоrdеѕtе, mеrіdіоnаl, оrіеntаl е ѕul", "Nоrdеѕtе, Ѕul, осіdеntе е оrіеntе"],
+                "alternatives": [
+                    "Воrеаl, ѕеtеntrіоnаl, nоrtе е роlаr",
+                    "Lеѕtе, оеѕtе, norte е ѕul",
+                    "Nоrdеѕtе, mеrіdіоnаl, оrіеntаl е ѕul",
+                    "Nоrdеѕtе, Ѕul, осіdеntе е оrіеntе"
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Qual o significado da palavra Geografia?",
-                "alternatives": ["Estudo da vida", "História da Terra", "Descrição da paisagem", "Estudo da Terra"],
+                "alternatives": [
+                    "Estudo da vida",
+                    "História da Terra",
+                    "Descrição da paisagem",
+                    "Estudo da Terra"
+                ],
                 "answer": 3
             },
             {
                 "prompt": "O instrumento utilizado para medir a quantidade de chuva é:",
-                "alternatives": ["anemógrafo", "heliógrafo", "termômetro", "pluviógrafo", "barômetro"],
+                "alternatives": [
+                    "anemógrafo",
+                    "heliógrafo",
+                    "termômetro",
+                    "pluviógrafo",
+                    "barômetro"
+                ],
                 "answer": 3
             },
             {
                 "prompt": "A Região do Brasil que possui a maior extensão territorial é:",
-                "alternatives": ["Norte", "Sul", "Nordeste", "Centro-Oeste", "Sudeste"],
+                "alternatives": [
+                    "Norte",
+                    "Sul",
+                    "Nordeste",
+                    "Centro-Oeste",
+                    "Sudeste"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "Como se chama a parte explicativa do mapa, que indica as cores, os significados dos símbolos e desenhos usados no mapa?",
-                "alternatives": ["legenda", "abscissa", "escala topográfica", "fonte", "orientação"],
+                "alternatives": [
+                    "legenda",
+                    "abscissa",
+                    "escala topográfica",
+                    "fonte",
+                    "orientação"
+                ],
                 "answer": 0
             },
             {
                 "prompt": "O título é um dos elementos obrigatórios de um mapa. A sua função é",
-                "alternatives": ["estabelecer a relação entre a distância real e a distância do mapa.", "apresentar o assunto que está sendo retratado pelo documento.", "simbolizar os elementos que estão desenhados no mapa.", "informar as fontes consultadas para a confecção do documento.", "mostrar as linhas imaginárias presentes na localidade cartografada."],
+                "alternatives": [
+                    "estabelecer a relação entre a distância real e a distância do mapa.",
+                    "apresentar o assunto que está sendo retratado pelo documento.",
+                    "simbolizar os elementos que estão desenhados no mapa.",
+                    "informar as fontes consultadas para a confecção do documento.",
+                    "mostrar as linhas imaginárias presentes na localidade cartografada."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "A energia solar é um tipo de energia que está em ascensão na atualidade. Um termo que caracteriza corretamente esse tipo de energia é",
-                "alternatives": ["tradicional.", "primária.", "não renovável.", "poluente.", "renovável."],
+                "alternatives": [
+                    "tradicional.",
+                    "primária.",
+                    "não renovável.",
+                    "poluente.",
+                    "renovável."
+                ],
                 "answer": 4
             },
             {
                 "prompt": "O Brasil é o maior país em extensão territorial da América do Sul. Ele faz fronteiras com 10 países da América do Sul, com exceção de",
-                "alternatives": ["Bolívia e Peru.", "Guiana e Chile.", "Chile e Equador.", "Argentina e Peru.", "Equador e Guiana."],
+                "alternatives": [
+                    "Bolívia e Peru.",
+                    "Guiana e Chile.",
+                    "Chile e Equador.",
+                    "Argentina e Peru.",
+                    "Equador e Guiana."
+                ],
                 "answer": 2
             },
             {
                 "prompt": "Todo o planeta Terra é envolvido por uma camada de ar. Essa camada gasosa que envolve a Terra é chamada:",
-                "alternatives": ["hidrosfera.", "atmosfera.", "biosfera.", "litosfera."],
+                "alternatives": [
+                    "hidrosfera.",
+                    "atmosfera.",
+                    "biosfera.",
+                    "litosfera."
+                ],
                 "answer": 1
             },
             {
                 "prompt": "É uma representação em miniatura do planeta Terra, com seu frmato esférico, representa a superfície terrestre de maneira mais fiel que o Planisfério. Sua forma é arredondada, porém, não permite a visualização de toda a superfície ao mesmo tempo.",
-                "alternatives": ["Cartas Topográficas", "Globo Terrestre", "Planisfério", "Planta", "Portulanos"],
+                "alternatives": [
+                    "Cartas Topográficas",
+                    "Globo Terrestre",
+                    "Planisfério",
+                    "Planta",
+                    "Portulanos"
+                ],
                 "answer": 1
             },
             {
                 "prompt": "Região brasileira que possui o maior número de estados:",
-                "alternatives": ["Região Norte", "Região Nordeste", "Região Sul", "Região Sudeste"],
+                "alternatives": [
+                    "Região Norte",
+                    "Região Nordeste",
+                    "Região Sul",
+                    "Região Sudeste"
+                ],
                 "answer": 1
             },
             {
                 "prompt": "A região Norte tem o maior território do Brasil, e é composta por 7 estados. Os estados que compõem a região Norte são",
-                "alternatives": ["Rio Grande do Norte, Amapá, Tocantins, São Paulo, Acre, Tocantins e Ceará.", "Ceará, Piauí, Rondônia, Amapá, Para, Amazonas e Roraima.", "Rondônia, Acre, Amazonas, Roraima, Pará, Amapá e Tocantins.", "Pará, Amazonas, Rio de Janeiro, São Paulo, Paraná, Goiás e Piauí."],
+                "alternatives": [
+                    "Rio Grande do Norte, Amapá, Tocantins, São Paulo, Acre, Tocantins e Ceará.",
+                    "Ceará, Piauí, Rondônia, Amapá, Para, Amazonas e Roraima.",
+                    "Rondônia, Acre, Amazonas, Roraima, Pará, Amapá e Tocantins.",
+                    "Pará, Amazonas, Rio de Janeiro, São Paulo, Paraná, Goiás e Piauí."
+                ],
                 "answer": 2
             }
         ]

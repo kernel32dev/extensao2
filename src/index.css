@@ -31,3 +31,6 @@ body.yellow-inline {
 .yellow-border {
     border: #d6d600 2px solid;
 }
+button {
+    padding: 0.2em 0.4em;
+}
