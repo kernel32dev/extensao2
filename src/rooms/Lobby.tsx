@@ -1,45 +1,51 @@
+import "./Lobby.css";
 import { Derived, Effect, State } from "rubedo";
 import { client } from "../client";
-import { css, Elems, ref } from "rubedo-dom";
+import { Elems, ref } from "rubedo-dom";
 
-export default function Lobby({}: {}): Elems {
+export default function Lobby({ }: {}): Elems {
     return (
         <div class="lobby-page">
-            <div class="lobby-header">
-                {
-                    client.isHost
-                        ? // quando for o professor
-                        <div class="owner-control">
-                            <button onClick={start_game}>Começar o jogo</button>
-                        </div>
-                        : // quando for jogador
-                        <div class="player-config">
-                            <span>Esperando o professor começar o jogo...</span>
-                            <label>
-                                Mudar seu nome:
-                                <input type="text" maxLength={16} value={State.proxy(() => client.me().name, set_name)} />
-                            </label>
-                        </div>
-                }
-                {
-                    client.isHost
-                    ?
-                    <div>
-                        <span class="green-light">Jogadores verdes: {new Derived(() => client.players.filter(x => !x.team).length)}</span> / <span class="yellow-light">Jogadores amarelos: {new Derived(() => client.players.filter(x => x.team).length)}</span>
-                    </div>
-                    :
-                    <div>
-                        <button style={{ fontSize: "x-large", padding: "0.1em 0.4em" }} onClick={change_team}>
-                            Trocar de time
-                        </button>
-                    </div>
-                }
+            <div class="lobby-column">
+                <div class="lobby-header">
+                    {
+                        client.isHost
+                            ? // quando for o professor
+                            <div class="owner-control">
+                                <button onClick={start_game}>Começar o jogo</button>
+                            </div>
+                            : // quando for jogador
+                            <div class="player-config">
+                                <span>Esperando o professor começar o jogo...</span>
+                                <label>
+                                    Mudar seu nome:
+                                    <input type="text" maxLength={16} value={State.proxy(() => client.me().name, set_name)} />
+                                </label>
+                            </div>
+                    }
+                    {
+                        client.isHost
+                            ?
+                            <div>
+                                <span class="green-light">Jogadores verdes: {new Derived(() => client.players.filter(x => !x.team).length)}</span> / <span class="yellow-light">Jogadores amarelos: {new Derived(() => client.players.filter(x => x.team).length)}</span>
+                            </div>
+                            :
+                            <div>
+                                <button style={{ fontSize: "x-large", padding: "0.1em 0.4em" }} onClick={change_team}>
+                                    Trocar de time
+                                </button>
+                            </div>
+                    }
+                </div>
+                <div class="player-arena" onMouseMove={move_to} onTouchStart={move_to} onTouchMove={move_to}>
+                    {Derived.Array.range(Derived.prop(client.players, "length"), i => (
+                        Derived.now(() => render_player(Derived.prop(client.players, i)))
+                    ))}
+                </div>
             </div>
-            <div class="player-arena" onMouseMove={move_to} onTouchStart={move_to} onTouchMove={move_to}>
-                {Derived.Array.range(Derived.prop(client.players, "length"), i => (
-                    Derived.now(() => render_player(Derived.prop(client.players, i)))
-                ))}
-            </div>
+            {client.isHost && (
+                <img class="lobby-qrcode" src="/qrcode" alt="" />
+            )}
         </div>
     )
     function set_name(name: string) {
@@ -93,7 +99,7 @@ export default function Lobby({}: {}): Elems {
 
         update_position(x, y);
     }
-    function render_player(p: Derived<{cid: number, x: number, y: number, name: string, team: boolean}>): Elems {
+    function render_player(p: Derived<{ cid: number, x: number, y: number, name: string, team: boolean }>): Elems {
         const player_images = [
             "/public/among-us-cyan-768x934.webp",
             "/public/among-us-green-768x934.webp",
@@ -205,125 +211,3 @@ function update_position(x: number, y: number) {
         client.send({ cmd: "Player", cid: client.cid, x, y });
     }, pos_update_timeout_ms);
 }
-
-css`
-
-.lobby-page {
-    width: 100%;
-    max-width: 100%;
-    min-height: 100vh;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    overflow: hidden;
-}
-
-.lobby-header {
-    margin: 1em;
-    padding: 1em;
-    border-radius: 1em;
-    box-shadow: inset #000000FF 0 0 30px -3px;
-    background-color: #00000010;
-    display: flex;
-    flex-direction: row;
-}
-
-.player-config {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.lobby-room-id-area {
-    text-align: center;
-}
-
-.lobby-room-id-label {
-    font-size: small;
-}
-
-.lobby-room-id-text {
-    font-size: larger;
-}
-.lobby-leave-room {
-    padding: 0 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.owner-control {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.player-arena {
-    flex-grow: 1;
-    flex-shrink: 1;
-    margin: 1em;
-    padding: 1em;
-    border-radius: 1em;
-    box-shadow: inset #00000080 0 0 30px -3px;
-    background-color: #0000000A;
-    position: relative;
-}
-
-.player-character {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    align-items: center;
-    transform: translate(-50%, -100%);
-    user-select: none;
-
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    transition: left 0.1s ease, top 0.1s ease;
-    z-index: var(--z);
-}
-.player-character-self {
-    transition: none;
-}
-.player-name {
-    background-color: #00000060;
-    padding: 0.1em 0.3em;
-    color: white;
-    white-space: pre;
-}
-.player-img {
-    width: 4em;
-    height: calc(4em * 934 / 768);
-    transform: scaleX(var(--flip));
-    transition: transform 0.1s ease;
-}
-.player-img2 {
-    width: 100%;
-    height: 100%;
-    background-size: 100%;
-    animation: player-img-idle 1.5s linear 0s infinite normal forwards;
-}
-.walking .player-img2 {
-    animation: player-img-walk 0.2s ease 0s 1 normal forwards;
-}
-.player-character-self .walking .player-img2 {
-    animation: player-img-walk 0.2s ease 0s infinite normal forwards;
-}
-
-@keyframes player-img-walk {
-    0% { transform: translate(0%, 0%) rotate(0deg); }
-    25% { transform: translate(-2%, -8%) rotate(-10deg); }
-    50% { transform: translate(0%, 0%) rotate(0deg); }
-    75% { transform: translate(2%, -8%) rotate(10deg); }
-    100% { transform: translate(0%, 0%) rotate(0deg); }
-}
-@keyframes player-img-idle {
-    0% { transform: scaleX(100%) scaleY(100%) translateY(0%); }
-    50% { transform: scaleX(103%) scaleY(97%) translateY(2%); }
-}
-`

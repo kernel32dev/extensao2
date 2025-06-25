@@ -1,0 +1,138 @@
+.lobby-page {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+.lobby-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.lobby-header {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: inset #000000FF 0 0 30px -3px;
+    background-color: #00000010;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.lobby-qrcode {
+    width: 50%;
+}
+
+.lobby-qrcode {
+    object-fit: contain;
+}
+
+.player-config {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lobby-room-id-area {
+    text-align: center;
+}
+
+.lobby-room-id-label {
+    font-size: small;
+}
+
+.lobby-room-id-text {
+    font-size: larger;
+}
+.lobby-leave-room {
+    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.owner-control {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-arena {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: inset #00000080 0 0 30px -3px;
+    background-color: #0000000A;
+    position: relative;
+}
+
+.player-character {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    transform: translate(-50%, -100%);
+    user-select: none;
+
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transition: left 0.1s ease, top 0.1s ease;
+    z-index: var(--z);
+}
+.player-character-self {
+    transition: none;
+}
+.player-name {
+    background-color: #00000060;
+    padding: 0.1em 0.3em;
+    color: white;
+    white-space: pre;
+}
+.player-img {
+    width: 4em;
+    height: calc(4em * 934 / 768);
+    transform: scaleX(var(--flip));
+    transition: transform 0.1s ease;
+}
+.player-img2 {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    animation: player-img-idle 1.5s linear 0s infinite normal forwards;
+}
+.walking .player-img2 {
+    animation: player-img-walk 0.2s ease 0s 1 normal forwards;
+}
+.player-character-self .walking .player-img2 {
+    animation: player-img-walk 0.2s ease 0s infinite normal forwards;
+}
+
+@keyframes player-img-walk {
+    0% { transform: translate(0%, 0%) rotate(0deg); }
+    25% { transform: translate(-2%, -8%) rotate(-10deg); }
+    50% { transform: translate(0%, 0%) rotate(0deg); }
+    75% { transform: translate(2%, -8%) rotate(10deg); }
+    100% { transform: translate(0%, 0%) rotate(0deg); }
+}
+@keyframes player-img-idle {
+    0% { transform: scaleX(100%) scaleY(100%) translateY(0%); }
+    50% { transform: scaleX(103%) scaleY(97%) translateY(2%); }
+}
