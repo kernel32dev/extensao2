@@ -10,8 +10,8 @@ export default function Confetti({ team, count }: { team: Derived<boolean | unde
     new Effect(scoreboard, () => {
         const x = team();
         if (x !== undefined) {
-            scoreboard.style.setProperty("--color-fg", x ? "#00f" : "#f00");
-            scoreboard.style.setProperty("--color-bg", x ? "#008" : "#800");
+            scoreboard.style.setProperty("--color-fg", x ? "#ff0" : "#0f0");
+            scoreboard.style.setProperty("--color-bg", x ? "#880" : "#080");
             scoreboard.style.removeProperty("display");
         } else {
             scoreboard.style.removeProperty("--color-fg");

@@ -35,10 +35,10 @@
     background-color: #F0F0F0;
 }
 .wordhunt-box > span.red-answer {
-    background-color: #FFA0A0;
+    background-color: #A0FFA0;
 }
 .wordhunt-box > span.blue-answer {
-    background-color: #A0A0FF;
+    background-color: #FFFFA0;
 }
 .wordhunt-box > span.wordhunt-error {
     animation: wordhunt-error 1s linear;

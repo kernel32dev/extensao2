@@ -7,3 +7,27 @@
 body {
     font-family: 'Arial', sans-serif;
 }
+body.green-inline {
+    box-shadow: inset 0px 0px 10px 10px #00be00;
+}
+body.yellow-inline {
+    box-shadow: inset 0px 0px 10px 10px #d6d600;
+}
+.green {
+    color: green;
+}
+.yellow {
+    color: #b3b300;
+}
+.green-light {
+    color: green;
+}
+.yellow-light {
+    color: #707000;
+}
+.green-border {
+    border: #00be00 2px solid;
+}
+.yellow-border {
+    border: #d6d600 2px solid;
+}

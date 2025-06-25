@@ -114,6 +114,10 @@ function onmessage(e: MessageEvent) {
             break;
         }
         case "Player": {
+            if (msg.cid === cid) {
+                document.body.classList.toggle("green-inline", !msg.team);
+                document.body.classList.toggle("yellow-inline", msg.team);
+            }
             const player = players.find(x => x.cid == msg.cid);
             if (player) {
                 player.cid = msg.cid;

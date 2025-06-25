@@ -20,7 +20,7 @@ export default function Podium({ }: {}) {
             if (!player.points) break;
             frag.append(
                 <br />,
-                <span class={player.team ? "blue" : "red"}>&#9679;</span>,
+                <span class={player.team ? "yellow" : "green"}>&#9679;</span>,
                 player.name,
             );
         }

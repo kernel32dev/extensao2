@@ -21,6 +21,19 @@ export default function Lobby({}: {}): Elems {
                             </label>
                         </div>
                 }
+                {
+                    client.isHost
+                    ?
+                    <div>
+                        <span class="green-light">Jogadores verdes: {new Derived(() => client.players.filter(x => !x.team).length)}</span> / <span class="yellow-light">Jogadores amarelos: {new Derived(() => client.players.filter(x => x.team).length)}</span>
+                    </div>
+                    :
+                    <div>
+                        <button style={{ fontSize: "x-large", padding: "0.1em 0.4em" }} onClick={change_team}>
+                            Trocar de time
+                        </button>
+                    </div>
+                }
             </div>
             <div class="player-arena" onMouseMove={move_to} onTouchStart={move_to} onTouchMove={move_to}>
                 {Derived.Array.range(Derived.prop(client.players, "length"), i => (
@@ -43,6 +56,13 @@ export default function Lobby({}: {}): Elems {
             cmd: "Room",
             room: "quiz_intro",
         })
+    }
+    function change_team() {
+        client.send({
+            cmd: "Player",
+            cid: client.cid,
+            team: !client.me().team,
+        });
     }
     function move_to(this: HTMLDivElement, e: MouseEvent | TouchEvent) {
         if (client.isHost) return;
@@ -73,7 +93,7 @@ export default function Lobby({}: {}): Elems {
 
         update_position(x, y);
     }
-    function render_player(p: Derived<{cid: number, x: number, y: number, name: string}>): Elems {
+    function render_player(p: Derived<{cid: number, x: number, y: number, name: string, team: boolean}>): Elems {
         const player_images = [
             "/public/among-us-cyan-768x934.webp",
             "/public/among-us-green-768x934.webp",
@@ -88,7 +108,7 @@ export default function Lobby({}: {}): Elems {
 
         const character = (
             <div class="player-character">
-                <div ref={name} class="player-name">{p.prop("name")}</div>
+                <div ref={name} class={p.derive(x => x.team ? "player-name yellow-border" : "player-name green-border")}>{p.prop("name")}</div>
                 <div ref={img} class="player-img">
                     <div class="player-img2" style={{ backgroundImage: `url("${player_images[player_images_index]}")` }} />
                 </div>

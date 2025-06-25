@@ -5,8 +5,8 @@ export default function Points() {
     return (
         <div>
             Pontos:
-            <br /><span class="red">Time vermelho: {Derived.prop(client.points, "0")}</span>
-            <br /><span class="blue">Time azul: {Derived.prop(client.points, "1")}</span>
+            <br /><span class="green">Time verde: {Derived.prop(client.points, "0")}</span>
+            <br /><span class="yellow">Time amarelo: {Derived.prop(client.points, "1")}</span>
         </div>
     );
 }
